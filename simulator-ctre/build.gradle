@@ -17,7 +17,7 @@ repositories {
     }
 }
 
-def ctreVersion="5.17.2"
+def ctreVersion="5.17.6"
 
 dependencies {
     // ctre deps
