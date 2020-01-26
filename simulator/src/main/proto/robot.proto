@@ -1,0 +1,202 @@
+syntax = "proto3";
+import "google/protobuf/empty.proto";
+
+option java_package = "frc.robot.simulator.network.proto";
+option java_outer_classname = "RobotProto";
+option csharp_namespace = "FRCSim";
+
+package FRCSim;
+
+// A service to communicate robot state between the robot and the simulator
+service RobotService {
+
+    // a stream to continuously update joystick values on the server
+    rpc Input (stream InputRequest) returns (google.protobuf.Empty) {}
+
+    // open up a stream to the server to send motor outputs
+    rpc UpdateMotorOutputs (stream MotorOutputs) returns (google.protobuf.Empty) {}
+
+    // RPC to update motor config
+    rpc UpdateMotor (MotorConfig) returns (google.protobuf.Empty) {}
+
+    // RPC to update robot state
+    rpc Robot (RobotState) returns (google.protobuf.Empty) {}
+
+    // Called by the unity client to tell the java robot to re-send motor data to the server.
+    // This is in the case of a unity client being restarted and requiring the robot to reinitialize
+    rpc ConnectToRobot (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+
+}
+
+// The state of the robot
+message RobotState {
+    enum State {
+        Disabled = 0;
+        Autonomous = 1;
+        Test = 2;
+        Teleop = 3;
+    }
+
+    enum AllianceStationId {
+        Red1 = 0;
+        Red2 = 1;
+        Red3 = 2;
+        Blue1 = 3;
+        Blue2 = 4;
+        Blue3 = 5;
+    }
+
+    State state = 1;
+    bool initialized = 2;
+    bool enabled = 3;
+    bool driverStationAttached = 4;
+    bool fieldManagementSystemAttached = 5; // field management system
+}
+
+// The request containing user input
+message InputRequest {
+    int32 id = 1;
+    repeated float axes = 2;
+    repeated int32 povs = 3;
+    repeated bool buttons = 4;
+}
+
+message MotorOutputs {
+    // Output values from a simulated motor
+    message MotorOutput {
+        int32 id = 1;
+        int64 handle = 2;
+        double output = 3;
+        double inputVoltage = 4;
+        double outputCurrent = 5;
+        double velocity = 6;
+        double position = 7;
+        double sensorPosition = 8;
+        double integralState = 9;
+        double lastError = 10;
+    }
+
+    repeated MotorOutput motorOutput = 1;
+}
+
+message MotorConfig {
+    enum Encoder {
+        /**
+         * Quadrature encoder
+         */
+        QuadEncoder = 0;
+        /**
+         * TalonFX supports an integrated sensor.
+         */
+        IntegratedSensor = 1;
+        /**
+         * Analog potentiometer/encoder
+         */
+        Analog = 2;
+        /**
+         * Tachometer
+         */
+        Tachometer = 4;
+        /**
+         * CTRE Mag Encoder in Relative mode or
+         * any other device that uses PWM to encode its output
+         */
+        PulseWidthEncodedPosition = 8;
+
+        /**
+         * Sum0 + Sum1
+         */
+        SensorSum = 9;
+        /**
+         * Diff0 - Diff1
+         */
+        SensorDifference = 10;
+        /**
+         * Sensor configured in RemoteFilter0
+         */
+        RemoteSensor0 = 11;
+        /**
+         * Sensor configured in RemoteFilter1
+         */
+        RemoteSensor1 = 12;
+        /**
+         * Position and velocity will read 0.
+         */
+        None = 14;
+        /**
+         * Motor Controller will fake a sensor based on applied motor output.
+         */
+        SoftwareEmulatedSensor = 15;
+
+        /**
+         * Special enum for FRCSim to define an encoder as not configured yet
+         */
+        NotSet = 99;
+    }
+
+    enum Vendor {
+        CTRE = 0;
+        Rev = 1;
+    }
+
+    enum ControlMode {
+        PercentOutput = 0;
+        Position = 1;
+        Velocity = 2;
+        Current = 3;
+        Voltage = 4;
+        Follower = 5;
+        MotionPosition = 6;
+        MotionVelocity = 7;
+        MotionProfile = 8;
+        MotionProfileArc = 9;
+        Disabled = 10;
+    }
+
+    message FPID {
+        double f = 1;
+        double p = 2;
+        double i = 3;
+        double d = 4;
+        double iZone = 5;
+        int32 allowableClosedLoopError = 6;
+        int32 maxIntegralAccumulator = 7;
+        int32 closedLoopPeakOutput = 8;
+        int32 closedLoopPeriod = 9;
+    }
+
+    int32 id = 1;
+    int64 handle = 2;
+    int32 followingId = 3;
+    bool inverted = 4;
+    bool sensorPhase = 5;
+    Encoder encoder = 6;
+
+    int32 currentPidProfile = 7;
+    repeated FPID fpid = 8;
+
+    double motionMagicAcceleration = 9;
+    double motionMagicCruiseVelocity = 10;
+
+    double selectedSensorPosition = 11;
+    ControlMode controlMode = 12;
+    double targetOutput = 13;
+    double targetVelocity = 14;
+    double targetPosition = 15;
+
+    // description of the motor
+    string name = 16;
+    string model = 17;
+    Vendor vendor = 18;
+    int32 encoderCountsPerRevolution = 19;
+
+}
+
+message ConnectToRobotResponse {
+    RobotState robotState = 1;
+    repeated MotorConfig motorConfigs = 2;
+}
+
+
+
+

@@ -1,0 +1,128 @@
+plugins {
+    // Apply the java plugin to add support for Java
+    id 'java'
+
+    id 'java-library'
+
+    id 'com.google.protobuf' version '0.8.11'
+
+    // for publishing the simulator
+    id "maven-publish"
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.10.0"
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.25.0'
+        }
+    }
+
+    generateProtoTasks {
+        // all() returns the collection of all protoc tasks
+        all().each { task ->
+            // Here you can configure the task
+
+            task.plugins {
+                // Add grpc output without any option.  grpc must have been defined in the
+                // protobuf.plugins block.
+                // This yields
+                // "--grpc_out=/path/to/output" on the protoc commandline.
+                grpc {}
+            }
+        }
+    }
+}
+
+clean {
+    delete protobuf.generatedFilesBaseDir
+}
+
+// Inform IDEs like IntelliJ IDEA, Eclipse or NetBeans about the generated code.
+sourceSets {
+    main {
+        java {
+            srcDirs 'build/generated/source/proto/main/grpc'
+            srcDirs 'build/generated/source/proto/main/java'
+        }
+    }
+}
+
+repositories {
+    jcenter()
+
+    maven {
+        url "https://frcmaven.wpi.edu/artifactory/release"
+    }
+}
+
+def wpiVersion="2020.1.2"
+def opencvVersion="3.4.7-2"
+def ejmlVersion="0.38"
+def jacksonVersion="2.10.0"
+def gdxVersion = "1.9.10"
+
+dependencies {
+    compile "net.bytebuddy:byte-buddy:1.10.6"
+    compile "net.bytebuddy:byte-buddy-agent:1.10.6"
+
+    compile "edu.wpi.first.wpilibj:wpilibj-java:${wpiVersion}"
+    compile "edu.wpi.first.ntcore:ntcore-java:${wpiVersion}"
+    compile "edu.wpi.first.wpiutil:wpiutil-java:${wpiVersion}"
+    compile "edu.wpi.first.thirdparty.frc2020.opencv:opencv-java:${opencvVersion}"
+    compile "edu.wpi.first.cscore:cscore-java:${wpiVersion}"
+    compile "edu.wpi.first.cameraserver:cameraserver-java:${wpiVersion}"
+    compile "edu.wpi.first.hal:hal-java:${wpiVersion}"
+    compile "org.ejml:ejml-simple:${ejmlVersion}"
+    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+
+    compile "org.slf4j:slf4j-simple:1.7.25"
+
+    compileOnly "javax.annotation:javax.annotation-api:1.2"
+    implementation 'io.grpc:grpc-netty-shaded:1.25.0'
+    compile 'io.grpc:grpc-protobuf:1.25.0'
+    implementation 'io.grpc:grpc-stub:1.25.0'
+
+    // for config yaml
+    compile 'org.yaml:snakeyaml:1.21'
+    compile 'com.hubspot.jinjava:jinjava:2.4.15'
+    compile 'commons-io:commons-io:2.6'
+
+    // guice dependency injection
+    compile 'com.google.inject:guice:4.2.2:no_aop'
+
+    // libgdx
+    compile "com.badlogicgames.gdx:gdx-controllers-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+
+
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "${project.groupId}"
+            artifactId "${project.name}"
+            version "${project.version}"
+
+            from(components.java)
+            artifact tasks.sourceJar
+        }
+    }
+}

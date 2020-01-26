@@ -1,0 +1,51 @@
+plugins {
+    id 'java-library'
+
+    // for publishing the simulator
+    id "maven-publish"
+}
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url "http://www.revrobotics.com/content/sw/max/sdk/maven/"
+    }
+
+    maven {
+        url "https://frcmaven.wpi.edu/artifactory/release"
+    }
+
+}
+
+def revVersion="1.5.1"
+
+dependencies {
+    // rev deps
+    compile "com.revrobotics.frc:SparkMax-java:${revVersion}"
+    api project(":simulator")
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "${project.groupId}"
+            artifactId "${project.name}"
+            version "${project.version}"
+
+            from(components.java)
+            artifact tasks.sourceJar
+        }
+    }
+}

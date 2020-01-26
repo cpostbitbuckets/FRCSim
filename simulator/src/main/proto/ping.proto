@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_package = "frc.robot.simulator.network.proto";
+option java_outer_classname = "PingProto";
+option csharp_namespace = "FRCSim";
+
+package FRCSim;
+
+// A service to simulate motors on the server
+service PingService {
+    // simulate a set of motors, returning the motors output
+    rpc Ping (PingMessage) returns (PongResponse) {}
+}
+
+message PingMessage {}
+
+message PongResponse {}

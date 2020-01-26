@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.5</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.8.0" />
+    <PackageReference Include="Grpc" Version="2.23.0" />
+    <PackageReference Include="Grpc.Tools" Version="2.23.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <GrpcOutputDir Include="../UnitySim/Assets/Scripts/proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf 
+      Include="../../src/main/proto/robot.proto" 
+      Link="robot.proto" 
+      OutputDir="../../UnitySim/Assets/Scripts/proto"
+      GrpcOutputDir="../../UnitySim/Assets/Scripts/proto"
+    />
+    <Protobuf 
+      Include="../../src/main/proto/ping.proto" 
+      Link="ping.proto" 
+      OutputDir="../../UnitySim/Assets/Scripts/Proto"
+      GrpcOutputDir="../../UnitySim/Assets/Scripts/Proto"
+    />
+  </ItemGroup>
+
+</Project>

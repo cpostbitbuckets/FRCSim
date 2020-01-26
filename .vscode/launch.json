@@ -1,0 +1,48 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "SimMain - mentor - local",
+      "request": "launch",
+      "mainClass": "frc.robot.simulator.SimMain",
+      "projectName": "mentor-bot",
+      "vmArgs": "-DrobotClass=frc.robot.mentor.Robot -Djava.library.path=build/tmp/jniExtractDir",
+      "env": {
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+      }
+    },
+    {
+      "type": "java",
+      "name": "SimMain - mentor - unity",
+      "request": "launch",
+      "mainClass": "frc.robot.simulator.SimMain",
+      "projectName": "mentor-bot",
+      "vmArgs": "-DrobotClass=frc.robot.mentor.Robot -Djava.library.path=build/tmp/jniExtractDir -Dmode=UnityServer",
+      "env": {
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+      }
+    },
+    {
+      "type": "java",
+      "name": "SimMain - local",
+      "request": "launch",
+      "mainClass": "frc.robot.simulator.SimMain",
+      "projectName": "FRCSim",
+      "vmArgs": "-Djava.library.path=build/tmp/jniExtractDir",
+      "env": {
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+      }
+    },
+    {
+      "type": "java",
+      "name": "SimMain - unity",
+      "request": "launch",
+      "mainClass": "frc.robot.simulator.SimMain",
+      "projectName": "FRCSim",
+      "vmArgs": "-Djava.library.path=build/tmp/jniExtractDir -Dmode=UnityServer",
+      "env": {
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+      }
+    }
+  ]
+}

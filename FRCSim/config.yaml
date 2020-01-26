@@ -1,0 +1,134 @@
+defaults:
+  bag:
+    kt: 0.00819095836320447
+    kv: 0.008398404204492988
+    resistance: 0.22805452519362293
+    inertia: "{{ .5 * .32 * (.0404/2) * (.0404/2 )}}" # .32kg cylinder @ 40.4 diameter... Inertia is I=.5 * m * r^2
+  neo:
+    stallTorque: 2.6
+    stallCurrent: 105
+    voltage: 12
+    maxRPM: 5676
+    mass: .425
+    diameter: .06
+  talonFX:
+    stallTorque: 4.69
+    stallCurrent: 257
+    voltage: 12
+    maxRPM: 6380
+    mass: .5
+    diameter: .06
+  shooterGearing: "{{ .48 / 1 }}"
+  juniorGearing: "{{ 242.0/27.0 }}"
+hideFollowers: true
+driveBase:
+  mass: 39.3051396
+  radius: 0.3145536
+  wheelRadius: 0.07762
+  robotInertia: 2.1621037
+  wheelInertia: 1.0E-4
+  viscousFriction: 0.04666464678901319
+transmissions:
+- motors:
+  - id: 1
+    name: Left Drive Motor (1)
+    model: bag
+    kt: "{{ defaults.bag.kt }}"
+    kv: "{{ defaults.bag.kv }}"
+    resistance: "{{ defaults.bag.resistance }}"
+    inertia: "{{ defaults.bag.inertia }}"
+    encoderCountsPerRevolution: 2048
+    leftDrive: true
+  - id: 2
+    name: Left Drive Follower (2)
+    model: bag
+    kt: "{{ defaults.bag.kt }}"
+    kv: "{{ defaults.bag.kv }}"
+    resistance: "{{ defaults.bag.resistance }}"
+    inertia: "{{ defaults.bag.inertia }}"
+    encoderCountsPerRevolution: 2048
+    leftDrive: true
+  gearRatio: "{{ defaults.juniorGearing }}"
+  efficiency: .8
+- motors:
+  - id: 3
+    name: Right Drive Motor (3)
+    model: bag
+    kt: "{{ defaults.bag.kt }}"
+    kv: "{{ defaults.bag.kv }}"
+    resistance: "{{ defaults.bag.resistance }}"
+    inertia: "{{ defaults.bag.inertia }}"
+    encoderCountsPerRevolution: 2048
+    rightDrive: true
+  - id: 4
+    name: Right Drive Follower (4)
+    model: bag
+    kt: "{{ defaults.bag.kt }}"
+    kv: "{{ defaults.bag.kv }}"
+    resistance: "{{ defaults.bag.resistance }}"
+    inertia: "{{ defaults.bag.inertia }}"
+    encoderCountsPerRevolution: 2048
+    rightDrive: true
+  gearRatio: "{{ defaults.juniorGearing }}"
+  efficiency: .8
+- motors:
+  - id: 5
+    name: Arm Motor (5)
+    model: bag
+    kt: "{{ defaults.bag.kt }}"
+    kv: "{{ defaults.bag.kv }}"
+    resistance: "{{ defaults.bag.resistance }}"
+    inertia: "{{ defaults.bag.inertia }}"
+    encoderCountsPerRevolution: 2048
+  - id: 6
+    name: Arm Follower (6)
+    model: bag
+    kt: "{{ defaults.bag.kt }}"
+    kv: "{{ defaults.bag.kv }}"
+    resistance: "{{ defaults.bag.resistance }}"
+    inertia: "{{ defaults.bag.inertia }}"
+    encoderCountsPerRevolution: 2048
+  gearRatio: "{{ defaults.juniorGearing }}"
+  efficiency: .8
+- motors:
+    - id: 7
+      name: Spark Left Motor (7)
+      model: neo
+      stallTorque: "{{ defaults.neo.stallTorque }}"
+      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+      voltage: "{{ defaults.neo.voltage }}"
+      maxRPM: "{{ defaults.neo.maxRPM }}"
+      mass: "{{ defaults.neo.mass }}"
+      diameter: "{{ defaults.neo.diameter }}"
+    - id: 8
+      name: Spark Left Follower (8)
+      model: neo
+      stallTorque: "{{ defaults.neo.stallTorque }}"
+      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+      voltage: "{{ defaults.neo.voltage }}"
+      maxRPM: "{{ defaults.neo.maxRPM }}"
+      mass: "{{ defaults.neo.mass }}"
+      diameter: "{{ defaults.neo.diameter }}"
+  gearRatio: "{{ defaults.juniorGearing }}"
+  efficiency: 1
+- motors:
+    - id: 9
+      name: Spark Right Motor (9)
+      model: neo
+      stallTorque: "{{ defaults.neo.stallTorque }}"
+      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+      voltage: "{{ defaults.neo.voltage }}"
+      maxRPM: "{{ defaults.neo.maxRPM }}"
+      mass: "{{ defaults.neo.mass }}"
+      diameter: "{{ defaults.neo.diameter }}"
+    - id: 10
+      name: Spark Right Follower (10)
+      model: neo
+      stallTorque: "{{ defaults.neo.stallTorque }}"
+      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+      voltage: "{{ defaults.neo.voltage }}"
+      maxRPM: "{{ defaults.neo.maxRPM }}"
+      mass: "{{ defaults.neo.mass }}"
+      diameter: "{{ defaults.neo.diameter }}"
+  gearRatio: "{{ defaults.juniorGearing }}"
+  efficiency: 1

@@ -1,0 +1,52 @@
+plugins {
+    id 'java-library'
+
+    // for publishing the simulator
+    id "maven-publish"
+}
+
+repositories {
+    jcenter()
+
+    maven {
+        url "https://frcmaven.wpi.edu/artifactory/release"
+    }
+
+    maven {
+        url "http://devsite.ctr-electronics.com/maven/release/"
+    }
+}
+
+def ctreVersion="5.17.2"
+
+dependencies {
+    // ctre deps
+    compile "com.ctre.phoenix:api-java:${ctreVersion}"
+    compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
+
+    api project(":simulator")
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    publications {
+        mavenJava(MavenPublication) {
+            groupId "${project.groupId}"
+            artifactId "${project.name}"
+            version "${project.version}"
+
+            from(components.java)
+            artifact tasks.sourceJar
+        }
+    }
+}

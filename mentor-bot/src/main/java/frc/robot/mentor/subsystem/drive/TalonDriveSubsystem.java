@@ -1,0 +1,94 @@
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2018 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
+
+package frc.robot.mentor.subsystem.drive;
+
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SelectCommand;
+import frc.robot.config.Config;
+import frc.robot.mentor.subsystem.BitBucketSubsystem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Map;
+import java.util.function.DoubleSupplier;
+
+import static java.util.Map.entry;
+
+/**
+ * Add your docs here.
+ */
+public class TalonDriveSubsystem extends BitBucketSubsystem {
+    private static final Logger log = LoggerFactory.getLogger(TalonDriveSubsystem.class);
+
+    final WPI_TalonSRX[] leftMotors;
+    final WPI_TalonSRX[] rightMotors;
+
+    final SendableChooser<DriveStyle> driveStyleChooser = new SendableChooser<>();
+    DriveStyle currentDriveStyle;
+
+    public TalonDriveSubsystem(Config config) {
+        super(config);
+
+        // initialize the motors from config
+        leftMotors = initTalonsFromSettings(config, config.talonDriveConfig.leftMotors);
+        rightMotors = initTalonsFromSettings(config, config.talonDriveConfig.rightMotors);
+
+        /* drive uses velocity FPID */
+        leaderTalonMotors.forEach(m -> m.selectProfileSlot(config.velocitySlotIndex, config.pidIndex));
+
+    }
+
+    @Override
+    public void initSmartDashboard() {
+        super.initSmartDashboard();
+
+        // init the smart dashboard with our drive style chooser
+        driveStyleChooser.addOption("Manual", DriveStyle.Manual);
+        driveStyleChooser.setDefaultOption("Velocity", DriveStyle.Velocity);
+        SmartDashboard.putData(getName() + "/Drive Style", driveStyleChooser);
+
+        currentDriveStyle = driveStyleChooser.getSelected();
+    }
+
+    @Override
+    public void outputTelemetry() {
+        /* Used to build string throughout loop */
+        for (WPI_TalonSRX motor : allTalonMotors) {
+            SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/out", motor.getMotorOutputPercent());
+            SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/vel", motor.getSelectedSensorVelocity());
+            SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/pos", motor.getSelectedSensorPosition());
+            SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/err", motor.getClosedLoopError());
+        }
+    }
+
+    public DriveStyle getSelectedDriveStyle() {
+        return driveStyleChooser.getSelected();
+    }
+
+    @Override
+    public void periodic() {
+
+    }
+
+    public Command velocityDrive(final DoubleSupplier speed, final DoubleSupplier turn) {
+        return new TalonVelocityDriveCommand(this, config.talonDriveConfig.maxVelocity, leftMotors[0], rightMotors[0], speed, turn);
+    }
+
+    public Command manualDrive(final DoubleSupplier speed, final DoubleSupplier turn) {
+        return new ManualDriveCommand(this, leftMotors[0], rightMotors[0], speed, turn);
+
+    }
+
+    public void resetSensorPosition() {
+        allTalonMotors.forEach((m) -> m.setSelectedSensorPosition(0));
+    }
+
+}
