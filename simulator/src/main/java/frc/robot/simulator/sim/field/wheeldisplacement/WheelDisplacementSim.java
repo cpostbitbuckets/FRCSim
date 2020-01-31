@@ -2,9 +2,12 @@ package frc.robot.simulator.sim.field.wheeldisplacement;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import edu.wpi.first.wpilibj.SPI;
 import frc.robot.simulator.sim.RobotPosition;
+import frc.robot.simulator.sim.SimSPI;
 import frc.robot.simulator.sim.config.SimulatorConfig;
 import frc.robot.simulator.sim.field.FieldSim;
+import frc.robot.simulator.sim.ic2.SimNavX;
 import frc.robot.simulator.sim.motors.MotorStore;
 import frc.robot.simulator.sim.motors.SimMotor;
 
@@ -54,6 +57,19 @@ public class WheelDisplacementSim extends FieldSim {
 
         robotPosition.x += deltaLinearPosition * Math.sin(robotPosition.heading);
         robotPosition.y += deltaLinearPosition * Math.cos(robotPosition.heading);
+
+        SimNavX simNavX = SimSPI.getNavX(SPI.Port.kMXP.value);
+        if (simNavX != null) {
+            float degrees = (float)(robotPosition.heading * 360 / (Math.PI * 2));
+
+            // degrees are between 0 and 360
+            if (degrees < 0) {
+                degrees = 360 - (Math.abs(degrees) % 360);
+            } else {
+                degrees = degrees % 360;
+            }
+            simNavX.heading = degrees;
+        }
 
     }
 

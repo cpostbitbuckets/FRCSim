@@ -262,10 +262,14 @@ public class SimHAL {
         return 0;
     }
 
+    /**
+     * This is called for Solenoids to get a port for a solenoid module
+     * @param module
+     * @param channel
+     * @return a handle for this solenoid's channel
+     */
     public static int getPortWithModule(byte module, byte channel) {
-        log.warn("getPortWithModule not implemented yet.");
-
-        return 0;
+        return SimSolenoid.createSolenoidPort(module, channel);
     }
 
     public static int getPort(byte channel) {

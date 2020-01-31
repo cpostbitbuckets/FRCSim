@@ -22,6 +22,7 @@ public class SimColorSensor {
     }
 
     private final int port;
+    // TODO: Make this configurable somehow?
     public byte red = (byte) 0x00;
     public byte green = (byte) 0xFF;
     public byte blue = (byte) 0x00;

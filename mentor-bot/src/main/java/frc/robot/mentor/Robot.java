@@ -7,9 +7,11 @@
 
 package frc.robot.mentor;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.ColorSensorV3;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -58,7 +60,8 @@ public class Robot extends TimedRobot {
     long currentTime = System.currentTimeMillis();
 
     I2C.Port i2cPort = I2C.Port.kOnboard;
-    ColorSensorV3 m_colorSensor;
+    ColorSensorV3 colorSensor;
+    AHRS ahrs;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -69,13 +72,17 @@ public class Robot extends TimedRobot {
         log.info("robotInit starting");
         config = new Config();
 
-         m_colorSensor = new ColorSensorV3(i2cPort);
+        // test a solenoid
+        DoubleSolenoid pivet = new DoubleSolenoid(0, 1);
+        pivet.get();
+        pivet.set(DoubleSolenoid.Value.kForward);
+
+         colorSensor = new ColorSensorV3(i2cPort);
 
         // create some stuff to make sure the sim doesn't crash
         // TODO: this servo constantly calls getPWNPosition to update the live window
 //        Servo servo  = new Servo(0);
-        // TODO: figure out navx json
-//        AHRS ahrs = new AHRS(SPI.Port.kMXP);
+        ahrs = new AHRS(SPI.Port.kMXP);
 
         // init controllers
         driverJoystick = new Joystick(config.oi.driverId);
@@ -145,13 +152,11 @@ public class Robot extends TimedRobot {
         log.info("teleopInit starting");
         super.teleopInit();
 
-        int red = m_colorSensor.getRed();
-        int green = m_colorSensor.getGreen();
-        int blue = m_colorSensor.getBlue();
-        m_colorSensor.getColor();
-        m_colorSensor.getIR();
-        m_colorSensor.getProximity();
-        m_colorSensor.getRawColor();
+        int red = colorSensor.getRed();
+        int green = colorSensor.getGreen();
+        int blue = colorSensor.getBlue();
+        Color color = colorSensor.getColor();
+        ColorSensorV3.RawColor rawColor = colorSensor.getRawColor();
 
         // handle joystick button presses
         moveToPositionZeroButton.whenPressed(armSubsystem::moveToPositionZero, armSubsystem);
@@ -217,6 +222,7 @@ public class Robot extends TimedRobot {
         // set some global settings
         SmartDashboard.putNumber("deltaTime", deltaTime);
         SmartDashboard.putNumber("Loops per second", loopsPerSecond);
+        SmartDashboard.putNumber("Fused Heading", ahrs.getFusedHeading());
     }
 
     public static Robot win() {

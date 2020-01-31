@@ -116,6 +116,7 @@ public class SimMain {
         redefineClass(DIOJNI.class, SimDIOJNI.class);
         redefineClass(PWMJNI.class, SimPWMJNI.class);
         redefineClass(I2CJNI.class, SimI2CJNI.class);
+        redefineClass(SolenoidJNI.class, SimSolenoidJNI.class);
         redefineClass(SimDeviceJNI.class, SimSimDeviceJNI.class);
 
         // CTRE
