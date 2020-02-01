@@ -39,4 +39,12 @@ public abstract class FieldSim {
     public RobotPosition getRobotPosition() {
         return robotPosition;
     }
+
+    public void resetRobot() {
+        robotPosition.x = 181 * Field.metersPerPixelWidth - Field.width / 2;
+        robotPosition.y = Field.height / 2 - 123 * Field.metersPerPixelHeight;
+        robotPosition.velocity = 0;
+        robotPosition.angularVelocity = 0;
+        robotPosition.heading = 0;
+    }
 }

@@ -2,6 +2,8 @@ package frc.robot.simulator.sim.ui;
 
 import frc.robot.simulator.network.proto.RobotProto;
 import frc.robot.simulator.sim.RobotPosition;
+import frc.robot.simulator.sim.events.EventManager;
+import frc.robot.simulator.sim.events.RobotResetEvent;
 import frc.robot.simulator.sim.motors.SimMotor;
 import frc.robot.simulator.sim.motors.Vendor;
 import frc.robot.simulator.sim.utils.ConversionUtils;
@@ -14,6 +16,7 @@ import java.text.DecimalFormat;
 class PositionDisplay extends JPanel {
     private static final DecimalFormat df = new DecimalFormat("#.##");
 
+    JButton resetButton;
     JLabel xLabel;
     JLabel yLabel;
     JLabel velocityLabel;
@@ -26,11 +29,13 @@ class PositionDisplay extends JPanel {
         labelsPanel.setLayout(labelLayout);
         labelsPanel.setBorder(new EmptyBorder(10, 10, 0, 10));
 
+        resetButton = new JButton("Reset");
         xLabel = new JLabel("X: ");
         yLabel = new JLabel("Y: ");
         velocityLabel = new JLabel("Vel: ");
         angularVelocityLabel = new JLabel("AngV: ");
         headingLabel = new JLabel("Heading: ");
+        labelsPanel.add(resetButton);
         labelsPanel.add(xLabel);
         labelsPanel.add(yLabel);
         labelsPanel.add(velocityLabel);
@@ -39,6 +44,8 @@ class PositionDisplay extends JPanel {
 
         setLayout(new BorderLayout());
         add(labelsPanel, BorderLayout.CENTER);
+
+        resetButton.addActionListener(event -> EventManager.publish(new RobotResetEvent()));
     }
 
 

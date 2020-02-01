@@ -36,7 +36,7 @@ public class SimDCMotor extends SimMotor {
     @Override
     public void step(double voltage, int externalTorque, long deltaTime) {
         // TODO: The load is too low, but it makes the sim super quick to stabalize...
-        step(voltage, /*2*inertia*/ 2*1.20348237e-5, externalTorque, deltaTime);
+        step(voltage, 2*inertia, /*2*1.20348237e-5*/ externalTorque, deltaTime);
     }
 
     /**

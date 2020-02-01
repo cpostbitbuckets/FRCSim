@@ -10,6 +10,7 @@ import frc.robot.simulator.network.Client;
 import frc.robot.simulator.network.proto.RobotProto;
 import frc.robot.simulator.sim.events.EventManager;
 import frc.robot.simulator.sim.events.RobotInitializedEvent;
+import frc.robot.simulator.sim.solenoids.SolenoidStore;
 import frc.robot.simulator.sim.ui.XboxConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ public class SimHAL {
     private static final Logger log = LoggerFactory.getLogger(SimHAL.class);
 
     @Inject @Named("Client") static Client client;
+    @Inject static SolenoidStore solenoidStore;
 
     private static DriverStation driverStation = new DriverStation();
 
@@ -269,7 +271,7 @@ public class SimHAL {
      * @return a handle for this solenoid's channel
      */
     public static int getPortWithModule(byte module, byte channel) {
-        return SimSolenoid.createSolenoidPort(module, channel);
+        return solenoidStore.createSolenoidPort(module, channel);
     }
 
     public static int getPort(byte channel) {

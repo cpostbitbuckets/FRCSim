@@ -11,7 +11,7 @@ defaults:
     maxRPM: 5676
     mass: .425
     diameter: .06
-  talonFX:
+  falcon:
     stallTorque: 4.69
     stallCurrent: 257
     voltage: 12
@@ -20,6 +20,8 @@ defaults:
     diameter: .06
   shooterGearing: "{{ .48 / 1 }}"
   juniorGearing: "{{ 242.0/27.0 }}"
+  driveGearing: "{{ 1 }}"
+  driveInertia: "{{ .5 * 0.453592 * (.5 * 0.1524 * .5 * 0.1524) }}"
 hideFollowers: true
 driveBase:
   mass: 39.3051396
@@ -28,48 +30,57 @@ driveBase:
   robotInertia: 2.1621037
   wheelInertia: 1.0E-4
   viscousFriction: 0.04666464678901319
+  gearRatio: "{{ 22 / 25 }}"
 transmissions:
 - motors:
   - id: 1
     name: Left Drive Motor (1)
-    model: bag
-    kt: "{{ defaults.bag.kt }}"
-    kv: "{{ defaults.bag.kv }}"
-    resistance: "{{ defaults.bag.resistance }}"
-    inertia: "{{ defaults.bag.inertia }}"
+    model: falcon
+    stallTorque: "{{ defaults.falcon.stallTorque }}"
+    stallCurrent: "{{ defaults.falcon.stallCurrent }}"
+    voltage: "{{ defaults.falcon.voltage }}"
+    maxRPM: "{{ defaults.falcon.maxRPM }}"
+    mass: "{{ defaults.falcon.mass }}"
+    diameter: "{{ defaults.falcon.diameter }}"
     encoderCountsPerRevolution: 2048
     leftDrive: true
   - id: 2
     name: Left Drive Follower (2)
-    model: bag
-    kt: "{{ defaults.bag.kt }}"
-    kv: "{{ defaults.bag.kv }}"
-    resistance: "{{ defaults.bag.resistance }}"
-    inertia: "{{ defaults.bag.inertia }}"
+    model: falcon
+    stallTorque: "{{ defaults.falcon.stallTorque }}"
+    stallCurrent: "{{ defaults.falcon.stallCurrent }}"
+    voltage: "{{ defaults.falcon.voltage }}"
+    maxRPM: "{{ defaults.falcon.maxRPM }}"
+    mass: "{{ defaults.falcon.mass }}"
+    diameter: "{{ defaults.falcon.diameter }}"
     encoderCountsPerRevolution: 2048
     leftDrive: true
-  gearRatio: "{{ defaults.juniorGearing }}"
+  gearRatio: "{{ defaults.driveGearing }}"
   efficiency: .8
 - motors:
   - id: 3
     name: Right Drive Motor (3)
-    model: bag
-    kt: "{{ defaults.bag.kt }}"
-    kv: "{{ defaults.bag.kv }}"
-    resistance: "{{ defaults.bag.resistance }}"
-    inertia: "{{ defaults.bag.inertia }}"
+    model: falcon
+    stallTorque: "{{ defaults.falcon.stallTorque }}"
+    stallCurrent: "{{ defaults.falcon.stallCurrent }}"
+    voltage: "{{ defaults.falcon.voltage }}"
+    maxRPM: "{{ defaults.falcon.maxRPM }}"
+    mass: "{{ defaults.falcon.mass }}"
+    diameter: "{{ defaults.falcon.diameter }}"
     encoderCountsPerRevolution: 2048
     rightDrive: true
   - id: 4
     name: Right Drive Follower (4)
-    model: bag
-    kt: "{{ defaults.bag.kt }}"
-    kv: "{{ defaults.bag.kv }}"
-    resistance: "{{ defaults.bag.resistance }}"
-    inertia: "{{ defaults.bag.inertia }}"
+    model: falcon
+    stallTorque: "{{ defaults.falcon.stallTorque }}"
+    stallCurrent: "{{ defaults.falcon.stallCurrent }}"
+    voltage: "{{ defaults.falcon.voltage }}"
+    maxRPM: "{{ defaults.falcon.maxRPM }}"
+    mass: "{{ defaults.falcon.mass }}"
+    diameter: "{{ defaults.falcon.diameter }}"
     encoderCountsPerRevolution: 2048
     rightDrive: true
-  gearRatio: "{{ defaults.juniorGearing }}"
+  gearRatio: "{{ defaults.driveGearing }}"
   efficiency: .8
 - motors:
   - id: 5
@@ -132,3 +143,8 @@ transmissions:
       diameter: "{{ defaults.neo.diameter }}"
   gearRatio: "{{ defaults.juniorGearing }}"
   efficiency: 1
+solenoids:
+  - module: 0
+    name: Pivet Double Solenoid (0)
+  - module: 1
+    name: Single Solenoid (1)

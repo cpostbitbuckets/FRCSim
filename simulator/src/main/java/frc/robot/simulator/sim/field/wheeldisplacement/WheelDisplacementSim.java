@@ -38,9 +38,9 @@ public class WheelDisplacementSim extends FieldSim {
         double rightRadians = 0;
         for (SimMotor simMotor : motorStore.getSimMotorsSorted()) {
             if (simMotor.isLeftDriveMotor()) {
-                leftRadians = simMotor.position;
+                leftRadians = simMotor.position / simulatorConfig.driveBase.gearRatio;
             } else if (simMotor.isRightDriveMotor()) {
-                rightRadians = simMotor.position;
+                rightRadians = simMotor.position / simulatorConfig.driveBase.gearRatio;
             }
         }
         double currentLinearRadians = (leftRadians + rightRadians) / 2;
@@ -55,6 +55,7 @@ public class WheelDisplacementSim extends FieldSim {
 
         robotPosition.heading = newHeading;
 
+        robotPosition.velocity = deltaLinearPosition / deltaTime;
         robotPosition.x += deltaLinearPosition * Math.sin(robotPosition.heading);
         robotPosition.y += deltaLinearPosition * Math.cos(robotPosition.heading);
 
@@ -76,5 +77,11 @@ public class WheelDisplacementSim extends FieldSim {
     @Override
     protected RobotPosition supplyRobotPosition() {
         return new RobotPosition(RobotPosition.Type.WheelDisplacement);
+    }
+
+    @Override
+    public void resetRobot() {
+        super.resetRobot();
+        lastLinearRadians = 0;
     }
 }

@@ -17,6 +17,7 @@ public class OI implements SimSupportingConfig {
     public int driveForwardAxis = driver.leftStickY;
     public int driveTurnAxis = driver.leftStickX;
     public int driveResetButton = driver.brandButton;
+    public int driveSolenoidButton = driver.square;
 
     @Override
     public void overrideForSim() {

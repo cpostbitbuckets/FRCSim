@@ -50,6 +50,7 @@ public class Robot extends TimedRobot {
     JoystickButton moveToPositionBackwardButton;
     JoystickButton resetPositionSensorButton;
     JoystickButton resetDriveSensorButton;
+    JoystickButton toggleSolenoidButton;
 
     // subsystems
     private TalonDriveSubsystem talonDriveSubsystem;
@@ -62,6 +63,8 @@ public class Robot extends TimedRobot {
     I2C.Port i2cPort = I2C.Port.kOnboard;
     ColorSensorV3 colorSensor;
     AHRS ahrs;
+    DoubleSolenoid pivetSolenoid;
+    Solenoid singleSolenoid;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -73,9 +76,8 @@ public class Robot extends TimedRobot {
         config = new Config();
 
         // test a solenoid
-        DoubleSolenoid pivet = new DoubleSolenoid(0, 1);
-        pivet.get();
-        pivet.set(DoubleSolenoid.Value.kForward);
+        pivetSolenoid = new DoubleSolenoid(0, 0, 1);
+        singleSolenoid = new Solenoid(1, 0);
 
          colorSensor = new ColorSensorV3(i2cPort);
 
@@ -92,7 +94,7 @@ public class Robot extends TimedRobot {
         moveToPositionBackwardButton = new JoystickButton(operatorJoystick, config.oi.armBackwardButton);
         resetPositionSensorButton = new JoystickButton(operatorJoystick, config.oi.armResetButton);
         resetDriveSensorButton = new JoystickButton(driverJoystick, config.oi.driveResetButton);
-
+        toggleSolenoidButton = new JoystickButton(driverJoystick, config.oi.driveSolenoidButton);
         // init subsystems
         talonDriveSubsystem = new TalonDriveSubsystem(config);
         sparkDriveSubsystem = new SparkDriveSubsystem(config);
@@ -163,6 +165,16 @@ public class Robot extends TimedRobot {
         moveToPositionForwardButton.whenPressed(armSubsystem::moveToPositionForward, armSubsystem);
         moveToPositionBackwardButton.whenPressed(armSubsystem::moveToPositionBackward, armSubsystem);
         resetPositionSensorButton.whenPressed(armSubsystem::resetSensorPosition, armSubsystem);
+
+        // toggle the solenoid as a test
+        toggleSolenoidButton.whenPressed(() -> {
+                pivetSolenoid.set(
+                        (pivetSolenoid.get() == DoubleSolenoid.Value.kOff || pivetSolenoid.get() == DoubleSolenoid.Value.kForward)
+                        ? DoubleSolenoid.Value.kReverse
+                        : DoubleSolenoid.Value.kForward);
+                singleSolenoid.set(!singleSolenoid.get());
+            }
+        );
 
         // reset buttons call into multiple subsystems
         resetDriveSensorButton.whenPressed(new ParallelCommandGroup(

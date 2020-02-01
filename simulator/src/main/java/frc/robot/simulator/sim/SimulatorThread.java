@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import frc.robot.simulator.network.proto.RobotProto;
 import frc.robot.simulator.sim.events.EventManager;
+import frc.robot.simulator.sim.events.RobotResetEvent;
 import frc.robot.simulator.sim.field.FieldSim;
 import frc.robot.simulator.sim.field.box2d.Box2DSim;
 import frc.robot.simulator.sim.field.howard.HowardSim;
@@ -45,6 +46,20 @@ public class SimulatorThread {
         fieldSims.add(this.box2DSim);
         fieldSims.add(this.howardSim);
         fieldSims.add(this.wheelDisplacementSim);
+
+        EventManager.subscribeToRobotResetEvents(this::onRobotReset);
+    }
+
+    private void onRobotReset(RobotResetEvent robotResetEvent) {
+        synchronized (simulatorLock) {
+            RobotProto.MotorOutputs simMotorOutputs = motorSimulator.resetMotors();
+            this.fieldSims.forEach(fs -> fs.resetRobot());
+
+            // publish each RobotPosition
+            this.fieldSims.forEach(fs -> EventManager.publish(fs.getRobotPosition()));
+            EventManager.publish(simMotorOutputs);
+        }
+
     }
 
     /**

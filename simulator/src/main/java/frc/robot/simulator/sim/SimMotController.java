@@ -37,10 +37,10 @@ public class SimMotController {
         // we want 10% power
 
         // first convert this to the output percentage we want for a given number of revolutions
-        double outputPerRevolution = value / ctreVoltageReslution * ConversionUtils.ticksPerRevolution(encoderCountsPerRevolution, encoder);
+        double outputPerRevolution = value * ConversionUtils.ticksPerRevolution(encoderCountsPerRevolution, encoder) / ctreVoltageReslution;
 
         // finally, the simulator deals with radians
-        return outputPerRevolution / (Math.PI * 2);
+        return outputPerRevolution / (2 * Math.PI) / 10;
     }
 
     public static double convertFValueToRadiansPerSecond(double value, int encoderCountsPerRevolution, RobotProto.MotorConfig.Encoder encoder) {

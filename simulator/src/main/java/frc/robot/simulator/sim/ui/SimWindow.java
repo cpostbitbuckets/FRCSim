@@ -6,6 +6,7 @@ import com.google.inject.name.Named;
 import frc.robot.simulator.network.Client;
 import frc.robot.simulator.network.proto.RobotProto;
 import frc.robot.simulator.sim.RobotPosition;
+import frc.robot.simulator.sim.solenoids.SimSolenoidPort;
 import frc.robot.simulator.sim.config.SimulatorConfig;
 import frc.robot.simulator.sim.events.EventManager;
 import frc.robot.simulator.sim.motors.SimMotor;
@@ -13,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -41,6 +41,7 @@ public class SimWindow {
     private PositionDisplay positionDisplay = new PositionDisplay();
 
     Map<Integer, MotorDisplay> motorDisplaysById = new HashMap<>();
+    Map<Integer, SolenoidDisplay> solenoidDisplaysById = new HashMap<>();
 
     long lastOutputUpdateTime = 0;
     long lastPositionUpdateTime = 0;
@@ -52,7 +53,7 @@ public class SimWindow {
         this.inputClient = inputClient;
     }
 
-    public void create(List<SimMotor> motors) throws IOException {
+    public void create(List<SimMotor> motors, List<SimSolenoidPort> solenoids) throws IOException {
 
         if (created) {
             // only create the UI once
@@ -91,7 +92,7 @@ public class SimWindow {
 
         // we want a row for every 3 motors
         if (motors.size() > 0) {
-            int numDisplayedMotors = motors.size();
+            int numDisplayedMotors = motors.size() + solenoids.size();
             if (simulatorConfig.hideFollowers) {
                 numDisplayedMotors = (int) motors.stream().filter(m -> m.getConfig().getFollowingId() == 0).count();
             }
@@ -104,6 +105,10 @@ public class SimWindow {
                 continue;
             }
             createMotorDisplay(motorsPanel, simMotor);
+        }
+        
+        for (SimSolenoidPort solenoid : solenoids) {
+            createSolenoidDisplay(motorsPanel, solenoid);
         }
 
         positionDisplay = new PositionDisplay();
@@ -135,8 +140,20 @@ public class SimWindow {
         EventManager.subscribeToMotorOutputsEvents(this::onMotorOutputsEvent);
         EventManager.subscribeToMotorConfigEvents(this::onMotorConfigEvent);
         EventManager.subscribeToRobotPositionEvents(this::onRobotPositionEvent);
+        EventManager.subscribeToSolenoidEvents(this::onSolenoidEvent);
 
         created = true;
+    }
+
+    private void onSolenoidEvent(SimSolenoidPort solenoidPort) {
+        SolenoidDisplay display = solenoidDisplaysById.get(solenoidPort.handle);
+        if (display != null && display.solenoid.handle == solenoidPort.handle) {
+            java.awt.EventQueue.invokeLater(() -> {
+                display.update(solenoidPort);
+                display.repaint();
+            });
+        }
+
     }
 
     private void onMotorConfigEvent(RobotProto.MotorConfig motorConfig) {
@@ -159,6 +176,14 @@ public class SimWindow {
 
         // add the motor display to the pane
         pane.add(motorDisplay);
+    }
+
+    private void createSolenoidDisplay(Container pane, SimSolenoidPort solenoid) {
+        SolenoidDisplay solenoidDisplay = new SolenoidDisplay(solenoid);
+        solenoidDisplaysById.put(solenoid.handle, solenoidDisplay);
+
+        // add the motor display to the pane
+        pane.add(solenoidDisplay);
     }
 
     /**

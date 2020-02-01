@@ -22,6 +22,21 @@ public class MotorSimulator {
         this.motorStore = motorStore;
     }
 
+    public RobotProto.MotorOutputs resetMotors() {
+        RobotProto.MotorOutputs.Builder reply = RobotProto.MotorOutputs.newBuilder();
+        for (SimMotor motor : motorStore.getSimMotors()) {
+            motor.setPosition(0);
+            motor.setSensorPosition(0);
+            motor.setLastError(0);
+            motor.setIntegralState(0);
+            motor.setVelocity(0);
+            motor.setConfig(motor.getConfig().toBuilder().setSelectedSensorPosition(0).build());
+            reply.addMotorOutput(simulateMotor(motor, motorStore.getSimMotors(), 0));
+        }
+
+        return reply.build();
+    }
+
     /**
      * Simulate each motor based on its motor config
      * @param deltaTime

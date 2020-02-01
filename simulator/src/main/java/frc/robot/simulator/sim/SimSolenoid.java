@@ -1,45 +1,21 @@
 package frc.robot.simulator.sim;
 
+import com.google.inject.Inject;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import frc.robot.simulator.sim.events.EventManager;
+import frc.robot.simulator.sim.solenoids.SimSolenoidPort;
+import frc.robot.simulator.sim.solenoids.SolenoidStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class SimSolenoid {
     private static final Logger log = LoggerFactory.getLogger(SimSolenoid.class);
 
-    private static int nextHandle = 10000;
-
-    public static class SimSolenoidPort {
-        public int handle;
-        public int module;
-        public int channel;
-        public boolean state;
-
-        public SimSolenoidPort(int module, int channel) {
-            this.module = module;
-            this.channel = channel;
-            this.handle = nextHandle++;
-        }
-    }
-
-    private static Map<Integer, SimSolenoidPort> solenoidPortsByHandle = new HashMap<>();
-
-    /**
-     * Create a new Solenoid port, returning the handle
-     * @param module
-     * @param channel
-     * @return
-     */
-    public static int createSolenoidPort(int module, int channel) {
-        SimSolenoidPort simSolenoidPort = new SimSolenoidPort(module, channel);
-        solenoidPortsByHandle.put(simSolenoidPort.handle, simSolenoidPort);
-        return simSolenoidPort.handle;
-    }
+    @Inject
+    static SolenoidStore solenoidStore;
 
     public static int initializeSolenoidPort(int halPortHandle) {
-        SimSolenoidPort solenoidPort = solenoidPortsByHandle.get(halPortHandle);
+        SimSolenoidPort solenoidPort = solenoidStore.get(halPortHandle);
         if (solenoidPort != null) {
             return solenoidPort.handle;
         } else {
@@ -72,13 +48,14 @@ public class SimSolenoid {
     }
 
     public static void setSolenoid(int portHandle, boolean on) {
-        SimSolenoidPort solenoidPort = solenoidPortsByHandle.get(portHandle);
-        solenoidPort.state = on;
+        SimSolenoidPort solenoid = solenoidStore.get(portHandle);
+        solenoid.state = on ? DoubleSolenoid.Value.kForward : DoubleSolenoid.Value.kReverse;
+        EventManager.publish(solenoid);
     }
 
     public static boolean getSolenoid(int portHandle) {
-        SimSolenoidPort solenoidPort = solenoidPortsByHandle.get(portHandle);
-        return solenoidPort.state;
+        SimSolenoidPort solenoidPort = solenoidStore.get(portHandle);
+        return solenoidPort.state == DoubleSolenoid.Value.kForward;
     }
 
     public static int getAllSolenoids(int module) {

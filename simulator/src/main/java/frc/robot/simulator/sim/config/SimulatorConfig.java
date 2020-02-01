@@ -28,6 +28,8 @@ public class SimulatorConfig {
 
         // viscous friction of drive motors
         public double viscousFriction = 0.04666464678901319;
+
+        public double gearRatio = 22. / 25.;
     }
 
     public static class Transmission {
@@ -108,11 +110,18 @@ public class SimulatorConfig {
         }
     }
 
+    public static class Solenoid {
+        public int module = 0;
+        public String name = "Solenoid";
+    }
+
     public boolean hideFollowers = true;
     public DriveBase driveBase = new DriveBase();
     public List<Transmission> transmissions = new ArrayList<>();
+    public List<Solenoid> solenoids = new ArrayList<>();
 
     private final Map<Integer, Motor> motorsById = new HashMap<>();
+    private final Map<Integer, Solenoid> solenoidsByModule = new HashMap<>();
 
     /**
      * Add a new default motor (if not found in config) with a default name
@@ -134,6 +143,13 @@ public class SimulatorConfig {
         return motor;
     }
 
+    public Solenoid addNewDefaultSolenoid(int module) {
+        Solenoid solenoid = new Solenoid();
+        solenoid.module = module;
+        solenoid.name = "Solenoid (" + module + ")";
+        return solenoid;
+    }
+
     /**
      * Initialize this config after being loaded from yaml
      */
@@ -143,9 +159,18 @@ public class SimulatorConfig {
             motorsById.put(m.id, m);
             m.transmission = t;
         }));
+
+        solenoidsByModule.clear();
+        solenoids.stream().forEach(s -> solenoidsByModule.put(s.module, s));
     }
 
     public Motor getConfigForMotor(int id) {
         return motorsById.get(id);
     }
+
+    public Solenoid getConfigForSolenoid(int module) {
+        return solenoidsByModule.get(module);
+    }
+
+
 }

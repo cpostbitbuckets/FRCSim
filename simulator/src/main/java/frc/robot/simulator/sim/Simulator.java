@@ -13,6 +13,7 @@ import frc.robot.simulator.sim.events.RobotInitializedEvent;
 import frc.robot.simulator.sim.motors.MotorSimulator;
 import frc.robot.simulator.sim.motors.MotorStore;
 import frc.robot.simulator.sim.motors.SimMotor;
+import frc.robot.simulator.sim.solenoids.SolenoidStore;
 import frc.robot.simulator.sim.ui.SimWindow;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
@@ -42,8 +43,11 @@ public class Simulator {
      */
     private final SimWindow ui;
 
-    // something to simulate motors
+    // a datastore for motors
     private final MotorStore motorStore;
+
+    // a datastore for solenoids
+    private final SolenoidStore solenoidStore;
 
     // the simulator also writes stuff to the server
     private final Client client;
@@ -56,6 +60,7 @@ public class Simulator {
     public Simulator(SimulatorSettings simulatorSettings,
                      ConfigWriter configWriter,
                      MotorStore motorStore,
+                     SolenoidStore solenoidStore,
                      @Named("Client") Client client,
                      @Named("InputClient") Client inputClient,
                      @Nullable Server server,
@@ -63,6 +68,7 @@ public class Simulator {
         this.simulatorSettings = simulatorSettings;
         this.configWriter = configWriter;
         this.motorStore = motorStore;
+        this.solenoidStore = solenoidStore;
         this.client = client;
         this.inputClient = inputClient;
         this.server = server;
@@ -117,7 +123,7 @@ public class Simulator {
         if (simulatorSettings.isCreateUi()) {
             java.awt.EventQueue.invokeLater(() -> {
                 try {
-                    ui.create(motorStore.getSimMotorsSorted());
+                    ui.create(motorStore.getSimMotorsSorted(), solenoidStore.getSimSolenoidPortsSorted());
                 } catch (IOException e) {
                     log.error("Failed to create UI.", e);
                 }

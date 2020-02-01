@@ -33,6 +33,7 @@ public class SimulatorModule extends AbstractModule {
         }
         requestStaticInjection(SimHAL.class);
         requestStaticInjection(SimCANSparkMax.class);
+        requestStaticInjection(SimSolenoid.class);
     }
 
     /**
