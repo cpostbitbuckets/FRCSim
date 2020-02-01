@@ -5,4 +5,5 @@ public enum SensorType {
     Quadrature,
     Relative,
     Absolute,
+    Integrated,
 }

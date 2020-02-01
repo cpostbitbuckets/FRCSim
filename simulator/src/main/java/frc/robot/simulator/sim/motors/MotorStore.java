@@ -82,7 +82,7 @@ public class MotorStore {
      */
     public static SimDCMotor makeMotor(String model, double stallTorque, double stallCurrent, double voltage, int maxRPM, double mass, double diameter) {
         double kt = stallTorque / stallCurrent; // in nm/A
-        double kv = voltage / (maxRPM * Math.PI / 60); // in volts / (rads/second)
+        double kv = voltage / (maxRPM * 2 * Math.PI / 60); // in volts / (rads/second)
         double resistance = voltage / stallCurrent; // R = V / I
         double inertia = .5 * mass * (.5 * diameter * .5 * diameter); // mass of a cylinder is I = .5 * m * r^2
         // viscousFrictionConstant = 𝑏 = 𝑇 / 𝜔, according to the internet

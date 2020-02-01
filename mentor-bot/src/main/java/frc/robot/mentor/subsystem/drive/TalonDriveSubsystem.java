@@ -7,6 +7,8 @@
 
 package frc.robot.mentor.subsystem.drive;
 
+import com.ctre.phoenix.motorcontrol.can.BaseTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -28,8 +30,8 @@ import static java.util.Map.entry;
 public class TalonDriveSubsystem extends BitBucketSubsystem {
     private static final Logger log = LoggerFactory.getLogger(TalonDriveSubsystem.class);
 
-    final WPI_TalonSRX[] leftMotors;
-    final WPI_TalonSRX[] rightMotors;
+    final WPI_TalonFX[] leftMotors;
+    final WPI_TalonFX[] rightMotors;
 
     final SendableChooser<DriveStyle> driveStyleChooser = new SendableChooser<>();
     DriveStyle currentDriveStyle;
@@ -38,8 +40,8 @@ public class TalonDriveSubsystem extends BitBucketSubsystem {
         super(config);
 
         // initialize the motors from config
-        leftMotors = initTalonsFromSettings(config, config.talonDriveConfig.leftMotors);
-        rightMotors = initTalonsFromSettings(config, config.talonDriveConfig.rightMotors);
+        leftMotors = initTalonsFromSettings(config, config.talonDriveConfig.leftMotors, WPI_TalonFX.class);
+        rightMotors = initTalonsFromSettings(config, config.talonDriveConfig.rightMotors, WPI_TalonFX.class);
 
         /* drive uses velocity FPID */
         leaderTalonMotors.forEach(m -> m.selectProfileSlot(config.velocitySlotIndex, config.pidIndex));
@@ -61,7 +63,7 @@ public class TalonDriveSubsystem extends BitBucketSubsystem {
     @Override
     public void outputTelemetry() {
         /* Used to build string throughout loop */
-        for (WPI_TalonSRX motor : allTalonMotors) {
+        for (BaseTalon motor : allTalonMotors) {
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/out", motor.getMotorOutputPercent());
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/vel", motor.getSelectedSensorVelocity());
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/pos", motor.getSelectedSensorPosition());

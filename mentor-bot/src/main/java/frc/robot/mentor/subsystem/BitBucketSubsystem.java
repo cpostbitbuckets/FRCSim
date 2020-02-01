@@ -9,6 +9,7 @@ package frc.robot.mentor.subsystem;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.revrobotics.*;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -18,6 +19,8 @@ import frc.robot.config.Config;
 import frc.robot.config.settings.MotorSettings;
 import frc.robot.config.settings.SensorType;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +33,8 @@ public abstract class BitBucketSubsystem extends SubsystemBase implements Subsys
 	 */
 	protected final Config config;
 
-	protected final List<WPI_TalonSRX> allTalonMotors = new ArrayList<>();
-	protected final List<WPI_TalonSRX> leaderTalonMotors = new ArrayList<>();
+	protected final List<BaseTalon> allTalonMotors = new ArrayList<>();
+	protected final List<BaseTalon> leaderTalonMotors = new ArrayList<>();
 
 	protected final List<CANSparkMax> allSparkMotors = new ArrayList<>();
 	protected final List<CANSparkMax> leaderSparkMotors = new ArrayList<>();
@@ -63,12 +66,17 @@ public abstract class BitBucketSubsystem extends SubsystemBase implements Subsys
 	 * @param motorsSettings
 	 * @return
 	 */
-	protected WPI_TalonSRX[] initTalonsFromSettings(Config config, MotorSettings[] motorsSettings) {
-		WPI_TalonSRX[] motors = new WPI_TalonSRX[motorsSettings.length];
+	protected <T extends BaseTalon> T[] initTalonsFromSettings(Config config, MotorSettings[] motorsSettings, Class<T> clz) {
+		T[] motors = (T[]) Array.newInstance(clz, motorsSettings.length);
 		int motorNum = 0;
 		for (MotorSettings settings : motorsSettings) {
 			// create the motor and add it to our array of motors
-			var motor = new WPI_TalonSRX(settings.id);
+			T motor = null;
+			try {
+				motor = clz.getDeclaredConstructor(Integer.TYPE).newInstance(settings.id);
+			} catch (Exception e) {
+				throw new RuntimeException("Can't create talong motor of type: " + clz.getSimpleName(), e);
+			}
 
 			// initialize the motor config to defaults
 			motor.configFactoryDefault();
@@ -109,6 +117,17 @@ public abstract class BitBucketSubsystem extends SubsystemBase implements Subsys
 
 						/* Configure Sensor Source for position PID */
 						motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute,
+								config.positionSlotIndex,
+								config.ctreTimeout);
+						break;
+					case Integrated:
+						/* Configure Sensor Source for velocity PID */
+						motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
+								config.velocitySlotIndex,
+								config.ctreTimeout);
+
+						/* Configure Sensor Source for position PID */
+						motor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
 								config.positionSlotIndex,
 								config.ctreTimeout);
 						break;
@@ -163,7 +182,7 @@ public abstract class BitBucketSubsystem extends SubsystemBase implements Subsys
 			}
 			motors[motorNum++] = motor;
 			allTalonMotors.add(motor);
-			allMotors.add(motor);
+			allMotors.add((SpeedController) motor);
 		}
 
 		return motors;

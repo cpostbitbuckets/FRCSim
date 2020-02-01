@@ -8,6 +8,8 @@
 package frc.robot.mentor.subsystem.arm;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseTalon;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -29,7 +31,7 @@ public class ArmSubsystem extends BitBucketSubsystem {
         super(config);
 
         // initialize the motors from config
-        armMotors = initTalonsFromSettings(config, config.armConfig.armMotors);
+        armMotors = initTalonsFromSettings(config, config.armConfig.armMotors, WPI_TalonSRX.class);
 
         /* Arm control uses motion magic FPID */
         leaderTalonMotors.forEach(m -> m.selectProfileSlot(config.positionSlotIndex, config.pidIndex));
@@ -38,7 +40,7 @@ public class ArmSubsystem extends BitBucketSubsystem {
     @Override
     public void outputTelemetry() {
         /* Used to build string throughout loop */
-        for (WPI_TalonSRX motor : allTalonMotors) {
+        for (BaseTalon motor : allTalonMotors) {
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getBaseID() + "/out", motor.getMotorOutputPercent());
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getBaseID() + "/vel", motor.getSelectedSensorVelocity());
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getBaseID() + "/pos", motor.getSelectedSensorPosition());

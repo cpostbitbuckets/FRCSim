@@ -6,7 +6,7 @@ import frc.robot.config.settings.SensorType;
 
 public class TalonDriveConfig implements SimSupportingConfig {
 
-    public final int maxVelocity = 4000;
+    public final int maxVelocity = 21000;
 
     public MotorSettings[] leftMotors = new MotorSettings[] {
             MotorSettings.build(1)
@@ -63,24 +63,24 @@ public class TalonDriveConfig implements SimSupportingConfig {
         // simulator
         leftMotors = new MotorSettings[] {
                 MotorSettings.build(1)
-                        .sensor(SensorType.Absolute)
+                        .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .velocityFPID(velocityFPID),
                 MotorSettings.build(2)
-                        .sensor(SensorType.Quadrature)
+                        .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .follower(true)
         };
 
         rightMotors = new MotorSettings[] {
                 MotorSettings.build(3)
-                        .sensor(SensorType.Quadrature)
+                        .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .velocityFPID(velocityFPID)
                         .inverted(true)
                 ,
                 MotorSettings.build(4)
-                        .sensor(SensorType.Quadrature)
+                        .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .inverted(true)
                         .follower(true)

@@ -1,6 +1,7 @@
 package frc.robot.mentor.subsystem.drive;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -9,13 +10,13 @@ import java.util.function.DoubleSupplier;
 
 public class TalonVelocityDriveCommand extends CommandBase {
 
-    private final WPI_TalonSRX leftMotor;
-    private final WPI_TalonSRX rightMotor;
+    private final BaseTalon leftMotor;
+    private final BaseTalon rightMotor;
     private final int maxSpeed;
     private final DoubleSupplier speed;
     private final DoubleSupplier turn;
 
-    public TalonVelocityDriveCommand(Subsystem subsystem, int maxSpeed, WPI_TalonSRX leftMotor, WPI_TalonSRX rightMotor, DoubleSupplier speed, DoubleSupplier turn) {
+    public TalonVelocityDriveCommand(Subsystem subsystem, int maxSpeed, BaseTalon leftMotor, BaseTalon rightMotor, DoubleSupplier speed, DoubleSupplier turn) {
         addRequirements(subsystem);
         this.maxSpeed = maxSpeed;
         this.leftMotor = leftMotor;
