@@ -6,7 +6,7 @@ import frc.robot.config.settings.SensorType;
 
 public class TalonDriveConfig implements SimSupportingConfig {
 
-    public final int maxVelocity = 21000;
+    public final int maxVelocity = 6000;
 
     public MotorSettings[] leftMotors = new MotorSettings[] {
             MotorSettings.build(1)

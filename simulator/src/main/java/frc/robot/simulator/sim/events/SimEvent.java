@@ -6,6 +6,7 @@ public abstract class SimEvent {
         ConnectRobot,
         MotorOutputsUpdated,
         RobotReset,
+        FieldRender,
     }
 
     public Type type;

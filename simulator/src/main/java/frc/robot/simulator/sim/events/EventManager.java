@@ -20,6 +20,7 @@ public class EventManager {
     private static List<Consumer<RobotProto.MotorConfig>> motorConfigSubscribers = new ArrayList<>();
     private static List<Consumer<RobotPosition>> robotPositionSubscribers = new ArrayList<>();
     private static List<Consumer<SimSolenoidPort>> solenoidSubscribers = new ArrayList<>();
+    private static List<Consumer<FieldRenderEvent>> fieldRenderSubscribers = new ArrayList<>();
 
     public static void subscribeToMotorOutputsEvents(Consumer<RobotProto.MotorOutputs> subscriber) {
         motorOutputsSubscribers.add(subscriber);
@@ -47,6 +48,10 @@ public class EventManager {
 
     public static void subscribeToSolenoidEvents(Consumer<SimSolenoidPort> subscriber) {
         solenoidSubscribers.add(subscriber);
+    }
+
+    public static void subscribeToFieldRenderEvents(Consumer<FieldRenderEvent> subscriber) {
+        fieldRenderSubscribers.add(subscriber);
     }
 
     public static void publish(RobotProto.MotorOutputs motorOutputs) {
@@ -113,6 +118,16 @@ public class EventManager {
         for (var event : solenoidSubscribers) {
             try {
                 event.accept(solenoid);
+            } catch (Exception e) {
+                log.error("Subscriber failed to handle published event.", e);
+            }
+        }
+    }
+
+    public static void publish(FieldRenderEvent fieldRenderEvent) {
+        for (var event : fieldRenderSubscribers) {
+            try {
+                event.accept(fieldRenderEvent);
             } catch (Exception e) {
                 log.error("Subscriber failed to handle published event.", e);
             }

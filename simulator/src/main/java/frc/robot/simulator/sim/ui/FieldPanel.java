@@ -1,6 +1,8 @@
 package frc.robot.simulator.sim.ui;
 
 import frc.robot.simulator.sim.RobotPosition;
+import frc.robot.simulator.sim.events.EventManager;
+import frc.robot.simulator.sim.events.FieldRenderEvent;
 import frc.robot.simulator.sim.field.box2d.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,15 +65,18 @@ public class FieldPanel extends JPanel {
                     int height = (int) (0.3145536 * 2 / Field.metersPerPixelHeight);
                     int x = (int) (robotPosition.x / Field.metersPerPixelWidth) + (int) Field.imageSize.x / 2;
                     int y = (int) Field.imageSize.y / 2 - (int) (robotPosition.y / Field.metersPerPixelHeight);
-                    Rectangle rect2 = new Rectangle(x, y, width, height);
+                    Rectangle robotRect = new Rectangle(x, y, width, height);
 
                     // rotate the graphics instance to draw this rect
-                    g2d.rotate(robotPosition.heading, rect2.x + rect2.width / 2, rect2.y + rect2.height / 2);
-                    g2d.draw(rect2);
-                    g2d.fill(rect2);
+                    g2d.rotate(robotPosition.heading, robotRect.x + robotRect.width / 2, robotRect.y + robotRect.height / 2);
+                    g2d.fill(robotRect);
+                    g2d.setColor(Color.DARK_GRAY);
+                    g2d.draw(robotRect);
 
                     // reset the g2d rotation for the next render
-                    g2d.rotate(-robotPosition.heading, rect2.x + rect2.width / 2, rect2.y + rect2.height / 2);
+                    g2d.rotate(-robotPosition.heading, robotRect.x + robotRect.width / 2, robotRect.y + robotRect.height / 2);
+
+                    EventManager.publish(new FieldRenderEvent(this, g2d, robotRect, robotPosition.heading));
                 }
             }
         }
