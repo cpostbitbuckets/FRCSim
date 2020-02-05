@@ -8,19 +8,20 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
 
 public class EventManager {
     private static final Logger log = LoggerFactory.getLogger(EventManager.class);
 
-    private static List<Consumer<RobotProto.MotorOutputs>> motorOutputsSubscribers = new ArrayList<>();
-    private static List<Consumer<ConnectRobotEvent>> connectRobotSubscribers = new ArrayList<>();
-    private static List<Consumer<RobotInitializedEvent>> robotInitializedSubscribers = new ArrayList<>();
-    private static List<Consumer<RobotResetEvent>> robotResetSubscribers = new ArrayList<>();
-    private static List<Consumer<RobotProto.MotorConfig>> motorConfigSubscribers = new ArrayList<>();
-    private static List<Consumer<RobotPosition>> robotPositionSubscribers = new ArrayList<>();
-    private static List<Consumer<SimSolenoidPort>> solenoidSubscribers = new ArrayList<>();
-    private static List<Consumer<FieldRenderEvent>> fieldRenderSubscribers = new ArrayList<>();
+    private static List<Consumer<RobotProto.MotorOutputs>> motorOutputsSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<ConnectRobotEvent>> connectRobotSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<RobotInitializedEvent>> robotInitializedSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<RobotResetEvent>> robotResetSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<RobotProto.MotorConfig>> motorConfigSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<RobotPosition>> robotPositionSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<SimSolenoidPort>> solenoidSubscribers = new CopyOnWriteArrayList<>();
+    private static List<Consumer<FieldRenderEvent>> fieldRenderSubscribers = new CopyOnWriteArrayList<>();
 
     public static void subscribeToMotorOutputsEvents(Consumer<RobotProto.MotorOutputs> subscriber) {
         motorOutputsSubscribers.add(subscriber);
