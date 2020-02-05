@@ -54,7 +54,7 @@ public class TalonDriveConfig implements SimSupportingConfig {
     public void overrideForSim() {
 
         FPID velocityFPID = new FPID(
-                Constants.ctreVoltageReslution / 21340f, // we can go 20k ticks per 100ms at full (1023) voltage
+                Constants.ctreVoltageReslution / 21740f, // we can go 20k ticks per 100ms at full (1023) voltage
                 0.1 * 1023 / 1000 / 4, //.01 * 1023 / 5000, // error of 5000 ticks
                 0, // .001 our simulated motor is so perfect we don't need i or d
                 0.1 * 1023 / 1000 / 4 * 10 // 10.0 * (0.1 * 1023 / 5000) // set d = 10 * p

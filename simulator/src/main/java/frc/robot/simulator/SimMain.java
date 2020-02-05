@@ -118,6 +118,7 @@ public class SimMain {
         redefineClass(I2CJNI.class, SimI2CJNI.class);
         redefineClass(SolenoidJNI.class, SimSolenoidJNI.class);
         redefineClass(SimDeviceJNI.class, SimSimDeviceJNI.class);
+        redefineClass(CompressorJNI.class, SimCompressorJNI.class);
 
         // CTRE
         if (VendorUtils.isCtreAvailable()) {
