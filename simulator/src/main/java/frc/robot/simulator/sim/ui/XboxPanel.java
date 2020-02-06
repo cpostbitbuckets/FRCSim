@@ -58,7 +58,6 @@ public class XboxPanel extends JPanel {
 
         colorButton(graphics, joystickData.buttons[XboxConstants.BACK_BUTTON.getValue() - 1], 265, 220);
         colorButton(graphics, joystickData.buttons[XboxConstants.START_BUTTON.getValue() - 1], 415, 220);
-        colorButton(graphics, joystickData.buttons[XboxConstants.XBOX_BUTTON.getValue() - 1], 340, 217);
 
         drawJoystick(graphics, joystickData.buttons[XboxConstants.L_STICK.getValue() - 1], joystickData.axes[XboxConstants.LEFT_STICK_X.getValue()],
                 joystickData.axes[XboxConstants.LEFT_STICK_Y.getValue()], 115, 228);

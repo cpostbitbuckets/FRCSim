@@ -12,10 +12,10 @@ public enum XboxConstants
     // Axis
     LEFT_STICK_X(0),
     LEFT_STICK_Y(1),
-    LEFT_TRIGGER(2),
-    RIGHT_TRIGGER(3),
-    RIGHT_STICK_X(4),
-    RIGHT_STICK_Y(5),
+    LEFT_TRIGGER(4),
+    RIGHT_TRIGGER(5),
+    RIGHT_STICK_X(2),
+    RIGHT_STICK_Y(3),
 
     // Buttons
     A_BUTTON(1),
@@ -28,8 +28,6 @@ public enum XboxConstants
     START_BUTTON(8),
     L_STICK(9),
     R_STICK(10),
-    XBOX_BUTTON(11),
-    TRACKPAD(11),
 
     // D-PAD
     D_PAD_UP(0),

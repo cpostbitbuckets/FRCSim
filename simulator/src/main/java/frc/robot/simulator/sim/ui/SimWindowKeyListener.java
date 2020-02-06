@@ -21,7 +21,6 @@ class SimWindowKeyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // ignore for now
     }
 
     @Override
@@ -206,6 +205,12 @@ class SimWindowKeyListener implements KeyListener {
                 joystickData.povs[0] = -1;
                 break;
         }
+
+        // if the spacebar key is released (i.e. pressed) switch joysticks
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            activeJoystickId = (activeJoystickId == 0 ? 1 : 0);
+        }
+
 
         // send a new package for the input
         inputClient.inputUpdate(joystickData);

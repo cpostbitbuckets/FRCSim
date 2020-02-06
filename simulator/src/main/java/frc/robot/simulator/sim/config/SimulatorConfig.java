@@ -116,6 +116,7 @@ public class SimulatorConfig {
     }
 
     public boolean hideFollowers = true;
+    public boolean remapXboxController = true;
     public DriveBase driveBase = new DriveBase();
     public List<Transmission> transmissions = new ArrayList<>();
     public List<Solenoid> solenoids = new ArrayList<>();
