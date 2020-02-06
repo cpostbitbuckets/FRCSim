@@ -7,10 +7,30 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.GLVersion;
 
+import javax.swing.*;
+import java.awt.*;
+import java.lang.reflect.Method;
+
 /**
  * This is a stub for joystick support without a full libgdx app. See LibGDXApplicationStub
  */
 public class LibGDXGraphicsStub implements Graphics {
+
+    private final JPanel panel;
+
+    static private Object invokeMethod (Object object, String methodName) throws Exception {
+        for (Method m : object.getClass().getMethods())
+            if (m.getName().equals(methodName)) return m.invoke(object);
+        throw new RuntimeException("Could not find method '" + methodName + "' on class: " + object.getClass());
+    }
+
+    public LibGDXGraphicsStub(JPanel panel) {
+        this.panel = panel;
+    }
+
+    public long getWindow() throws Exception {
+        return (Long)invokeMethod(invokeMethod(SwingUtilities.windowForComponent(panel), "getPeer"), "getHWnd");
+    }
 
     @Override
     public boolean isGL30Available() {
