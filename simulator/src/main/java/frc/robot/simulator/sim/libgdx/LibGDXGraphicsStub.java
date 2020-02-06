@@ -79,7 +79,7 @@ public class LibGDXGraphicsStub implements Graphics {
 
     @Override
     public GraphicsType getType() {
-        return GraphicsType.LWJGL;
+        return GraphicsType.JGLFW;
     }
 
     @Override
