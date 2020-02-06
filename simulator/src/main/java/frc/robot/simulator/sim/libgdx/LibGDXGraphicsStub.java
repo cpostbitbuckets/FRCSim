@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.glutils.GLVersion;
+import frc.robot.simulator.sim.ui.SimWindowJoystickListener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +18,7 @@ import java.lang.reflect.Method;
  * This is a stub for joystick support without a full libgdx app. See LibGDXApplicationStub
  */
 public class LibGDXGraphicsStub implements Graphics {
+    private static final Logger log = LoggerFactory.getLogger(LibGDXGraphicsStub.class);
 
     private final JPanel panel;
 
@@ -28,8 +32,13 @@ public class LibGDXGraphicsStub implements Graphics {
         this.panel = panel;
     }
 
-    public long getWindow() throws Exception {
-        return (Long)invokeMethod(invokeMethod(SwingUtilities.windowForComponent(panel), "getPeer"), "getHWnd");
+    public Long getWindow() {
+        try {
+            return (Long) invokeMethod(invokeMethod(SwingUtilities.windowForComponent(panel), "getPeer"), "getHWnd");
+        } catch (Exception e) {
+            log.error("Failed to getWindow() handle", e);
+            return 0L;
+        }
     }
 
     @Override
