@@ -12,6 +12,8 @@ import frc.robot.simulator.sim.config.SimulatorConfig;
 import frc.robot.simulator.sim.libgdx.LibGDXApplicationStub;
 import frc.robot.simulator.sim.libgdx.LibGDXGraphicsStub;
 import frc.robot.simulator.sim.utils.ControllerUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 
@@ -20,6 +22,7 @@ import javax.swing.*;
  * map an xbox controller's buttons and axis to a PS4 controller, if configured in the sim
  */
 public class SimWindowJoystickListener extends ControllerAdapter {
+    private static final Logger log = LoggerFactory.getLogger(SimWindowJoystickListener.class);
 
     final Client inputClient;
     final SimulatorConfig simulatorConfig;
@@ -35,11 +38,15 @@ public class SimWindowJoystickListener extends ControllerAdapter {
      * Setup the joystick listener. This just be called in order for the joystick listener to work
      */
     public void setupJoysticks() {
-        // stub out some fake libgdx stuff so we can register a controller listener
-        Gdx.app = new LibGDXApplicationStub();
-        Gdx.graphics = new LibGDXGraphicsStub();
+        try {
+            // stub out some fake libgdx stuff so we can register a controller listener
+            Gdx.app = new LibGDXApplicationStub();
+            Gdx.graphics = new LibGDXGraphicsStub();
 
-        Controllers.addListener(this);
+            Controllers.addListener(this);
+        } catch (Exception e) {
+            log.error("Failed to query for joysticks.", e);
+        }
     }
 
     @Override
