@@ -41,7 +41,7 @@ public class SimWindowJoystickListener extends ControllerAdapter {
         try {
             // stub out some fake libgdx stuff so we can register a controller listener
             Gdx.app = new LibGDXApplicationStub();
-            Gdx.graphics = new LibGDXGraphicsStub();
+            Gdx.graphics = new LibGDXGraphicsStub(this.panel);
 
             Controllers.addListener(this);
         } catch (Exception e) {
