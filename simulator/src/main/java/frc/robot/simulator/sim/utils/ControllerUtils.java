@@ -59,6 +59,9 @@ public class ControllerUtils {
         if (xboxButton == XboxConstants.START_BUTTON.getValue()) {
             return PS4Constants.OPTIONS.getValue();
         }
+        if (xboxButton == XboxConstants.XBOX_BUTTON.getValue()) {
+            return PS4Constants.PS4.getValue();
+        }
 
         return xboxButton;
     }

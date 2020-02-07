@@ -8,6 +8,8 @@ plugins {
 repositories {
     mavenCentral()
 
+    jcenter()
+
     maven {
         url "http://www.revrobotics.com/content/sw/max/sdk/maven/"
     }

@@ -1,16 +1,15 @@
 package frc.robot.simulator.sim.ui;
 
-import com.badlogic.gdx.controllers.desktop.DesktopControllerManager;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import frc.robot.simulator.network.Client;
 import frc.robot.simulator.network.proto.RobotProto;
 import frc.robot.simulator.sim.RobotPosition;
-import frc.robot.simulator.sim.solenoids.SimSolenoidPort;
 import frc.robot.simulator.sim.config.SimulatorConfig;
 import frc.robot.simulator.sim.events.EventManager;
 import frc.robot.simulator.sim.motors.SimMotor;
+import frc.robot.simulator.sim.solenoids.SimSolenoidPort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

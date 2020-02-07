@@ -99,6 +99,7 @@ dependencies {
     compile 'com.google.inject:guice:4.2.2:no_aop'
 
     // libgdx
+    api "uk.co.electronstudio.sdl2gdx:sdl2gdx:1.0.3"
     api "com.badlogicgames.gdx:gdx:$gdxVersion"
     api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
     api "com.badlogicgames.gdx:gdx-controllers:$gdxVersion"

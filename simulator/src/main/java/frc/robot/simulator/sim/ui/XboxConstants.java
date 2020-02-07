@@ -20,20 +20,21 @@ public enum XboxConstants
     // Buttons
     A_BUTTON(1),
     B_BUTTON(2),
-    X_BUTTON(3),
-    Y_BUTTON(4),
-    LB_BUTTON(5),
-    RB_BUTTON(6),
-    BACK_BUTTON(7),
-    START_BUTTON(8),
+    X_BUTTON(5),
+    Y_BUTTON(3),
+    LB_BUTTON(4),
+    RB_BUTTON(5),
+    BACK_BUTTON(10),
+    START_BUTTON(11),
     L_STICK(9),
-    R_STICK(10),
+    R_STICK(7),
+    XBOX_BUTTON(6),
 
     // D-PAD
-    D_PAD_UP(0),
-    D_PAD_RIGHT(90),
-    D_PAD_DOWN(180),
-    D_PAD_LEFT(270),
+    D_PAD_UP(12),
+    D_PAD_RIGHT(14),
+    D_PAD_DOWN(12),
+    D_PAD_LEFT(13),
     D_PAD_NULL(-1);
 
     private int value;

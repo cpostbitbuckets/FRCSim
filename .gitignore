@@ -34,6 +34,9 @@ out/
 build.nosync/
 out.nosync/
 bin.nosync/
+build
+bin
+out
 
 .DS_Store
 
