@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
 public class LibGDXGraphicsStub implements Graphics {
     private static final Logger log = LoggerFactory.getLogger(LibGDXGraphicsStub.class);
 
-    private final JPanel panel;
+    private static JPanel panel;
 
     static private Object invokeMethod (Object object, String methodName) throws Exception {
         for (Method m : object.getClass().getMethods())
@@ -29,10 +29,10 @@ public class LibGDXGraphicsStub implements Graphics {
     }
 
     public LibGDXGraphicsStub(JPanel panel) {
-        this.panel = panel;
+        LibGDXGraphicsStub.panel = panel;
     }
 
-    public Long getWindow() {
+    public static Long getWindow() {
         try {
             return (Long) invokeMethod(invokeMethod(SwingUtilities.windowForComponent(panel), "getPeer"), "getHWnd");
         } catch (Exception e) {
