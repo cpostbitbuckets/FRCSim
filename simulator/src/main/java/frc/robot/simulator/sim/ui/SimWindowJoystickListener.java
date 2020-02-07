@@ -47,17 +47,15 @@ public class SimWindowJoystickListener extends ControllerAdapter {
      * listener to work
      */
     public void setupJoysticks() {
-        try {
-            // stub out some fake libgdx stuff so we can register a controller listener
-            Gdx.app = new LibGDXApplicationStub();
-            Gdx.graphics = new LibGDXGraphicsStub(this.panel);
-            Controllers.addListener(this);
-        } catch (Exception e) {
-            log.error("Failed to query for joysticks using libgdx, using SDL.", e);
+//        try {
+//            // stub out some fake libgdx stuff so we can register a controller listener
+//            Gdx.app = new LibGDXApplicationStub();
+//            Gdx.graphics = new LibGDXGraphicsStub(this.panel);
+//            Controllers.addListener(this);
+//        } catch (Exception e) {
+//            log.error("Failed to query for joysticks using libgdx, using SDL.", e);
 
             try {
-                SDL.SDL_SetHint("SDL_HINT_XINPUT_ENABLED", "0");
-
                 int result = SDL.SDL_GameControllerAddMapping("030000005e040000e002000003096800,Xbox Wireless Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Mac OS X");
                 SDL2ControllerManager controllerManager = new SDL2ControllerManager();
                 if (result == -1) {
@@ -79,7 +77,7 @@ public class SimWindowJoystickListener extends ControllerAdapter {
             } catch (Exception sdlException) {
                 log.error("Failed to query for joysticks.", sdlException);
             }
-        }
+//        }
 
 
     }
