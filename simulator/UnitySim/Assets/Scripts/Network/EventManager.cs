@@ -26,31 +26,21 @@ public class EventManager : MonoBehaviour
 
     public static void PublishMotorConfigUpdateEvent(MotorConfig motorConfig)
     {
-        if (MotorConfigUpdated != null)
-        {
-            MotorConfigUpdated(motorConfig);
-        }
+        MotorConfigUpdated?.Invoke(motorConfig);
     }
 
     public static void PublishRobotStateUpdateEvent(RobotState robotState)
     {
-        if (RobotStateUpdated != null)
-        {
-            RobotStateUpdated(robotState);
-        }
+        RobotStateUpdated?.Invoke(robotState);
     }
 
     public static void PublishSimulatorRunningEvent(bool simulatorRunning) {
-        if (SimulatorRunning != null) {
-            SimulatorRunning(simulatorRunning);
-        }
+        SimulatorRunning?.Invoke(simulatorRunning);
     }
 
     public static void PublishMotorOutputsUpdatedEvent(MotorOutputs motorOutputs) {
-        if (MotorOutputsUpdated != null) {
-            // Debug.Log("Publshing new motor outputs");
-            MotorOutputsUpdated(motorOutputs);
-        }
+        // Debug.Log("Publshing new motor outputs");
+        MotorOutputsUpdated?.Invoke(motorOutputs);
     }
 
 }

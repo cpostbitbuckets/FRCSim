@@ -25,11 +25,8 @@ public class Client : MonoBehaviour
     public bool Connected { get; private set; } = false;
     private bool isConnectionOpen = false;
 
-    internal void SendInput(float xAxis, float yAxis)
+    internal void SendInput(InputRequest inputRequest)
     {
-        var inputRequest = new InputRequest { Id = 0 };
-        inputRequest.Axes.Add(xAxis);
-        inputRequest.Axes.Add(yAxis);
         NextInputRequest = inputRequest;
     }
 

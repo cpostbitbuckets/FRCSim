@@ -39,47 +39,52 @@ namespace FRCSim {
             "bGUYAiABKAMSDgoGb3V0cHV0GAMgASgBEhQKDGlucHV0Vm9sdGFnZRgEIAEo",
             "ARIVCg1vdXRwdXRDdXJyZW50GAUgASgBEhAKCHZlbG9jaXR5GAYgASgBEhAK",
             "CHBvc2l0aW9uGAcgASgBEhYKDnNlbnNvclBvc2l0aW9uGAggASgBEhUKDWlu",
-            "dGVncmFsU3RhdGUYCSABKAESEQoJbGFzdEVycm9yGAogASgBIskHCgtNb3Rv",
+            "dGVncmFsU3RhdGUYCSABKAESEQoJbGFzdEVycm9yGAogASgBIq8JCgtNb3Rv",
             "ckNvbmZpZxIKCgJpZBgBIAEoBRIOCgZoYW5kbGUYAiABKAMSEwoLZm9sbG93",
             "aW5nSWQYAyABKAUSEAoIaW52ZXJ0ZWQYBCABKAgSEwoLc2Vuc29yUGhhc2UY",
-            "BSABKAgSMgoGc2Vuc29yGAYgASgOMiIuRlJDU2ltLk1vdG9yQ29uZmlnLkZl",
-            "ZWRiYWNrRGV2aWNlEhkKEWN1cnJlbnRQaWRQcm9maWxlGAcgASgFEiYKBGZw",
-            "aWQYCCADKAsyGC5GUkNTaW0uTW90b3JDb25maWcuRlBJRBIfChdtb3Rpb25N",
-            "YWdpY0FjY2VsZXJhdGlvbhgJIAEoARIhChltb3Rpb25NYWdpY0NydWlzZVZl",
-            "bG9jaXR5GAogASgBEh4KFnNlbGVjdGVkU2Vuc29yUG9zaXRpb24YCyABKAES",
-            "NAoLY29udHJvbE1vZGUYDCABKA4yHy5GUkNTaW0uTW90b3JDb25maWcuQ29u",
-            "dHJvbE1vZGUSFAoMdGFyZ2V0T3V0cHV0GA0gASgBEhYKDnRhcmdldFZlbG9j",
-            "aXR5GA4gASgBEhYKDnRhcmdldFBvc2l0aW9uGA8gASgBEgwKBG5hbWUYECAB",
-            "KAkSDQoFbW9kZWwYESABKAkSKgoGdmVuZG9yGBIgASgOMhouRlJDU2ltLk1v",
-            "dG9yQ29uZmlnLlZlbmRvchq7AQoERlBJRBIJCgFmGAEgASgBEgkKAXAYAiAB",
-            "KAESCQoBaRgDIAEoARIJCgFkGAQgASgBEg0KBWlab25lGAUgASgBEiAKGGFs",
-            "bG93YWJsZUNsb3NlZExvb3BFcnJvchgGIAEoBRIeChZtYXhJbnRlZ3JhbEFj",
-            "Y3VtdWxhdG9yGAcgASgFEhwKFGNsb3NlZExvb3BQZWFrT3V0cHV0GAggASgF",
-            "EhgKEGNsb3NlZExvb3BQZXJpb2QYCSABKAUiIQoORmVlZGJhY2tEZXZpY2US",
-            "DwoLUXVhZEVuY29kZXIQACIbCgZWZW5kb3ISCAoEQ1RSRRAAEgcKA1JldhAB",
-            "IsMBCgtDb250cm9sTW9kZRIRCg1QZXJjZW50T3V0cHV0EAASDAoIUG9zaXRp",
-            "b24QARIMCghWZWxvY2l0eRACEgsKB0N1cnJlbnQQAxILCgdWb2x0YWdlEAQS",
-            "DAoIRm9sbG93ZXIQBRISCg5Nb3Rpb25Qb3NpdGlvbhAGEhIKDk1vdGlvblZl",
-            "bG9jaXR5EAcSEQoNTW90aW9uUHJvZmlsZRAIEhQKEE1vdGlvblByb2ZpbGVB",
-            "cmMQCRIMCghEaXNhYmxlZBAKImsKFkNvbm5lY3RUb1JvYm90UmVzcG9uc2US",
-            "JgoKcm9ib3RTdGF0ZRgBIAEoCzISLkZSQ1NpbS5Sb2JvdFN0YXRlEikKDG1v",
-            "dG9yQ29uZmlncxgCIAMoCzITLkZSQ1NpbS5Nb3RvckNvbmZpZzLKAgoMUm9i",
-            "b3RTZXJ2aWNlEjkKBUlucHV0EhQuRlJDU2ltLklucHV0UmVxdWVzdBoWLmdv",
-            "b2dsZS5wcm90b2J1Zi5FbXB0eSIAKAESRgoSVXBkYXRlTW90b3JPdXRwdXRz",
-            "EhQuRlJDU2ltLk1vdG9yT3V0cHV0cxoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0",
-            "eSIAKAESPAoLVXBkYXRlTW90b3ISEy5GUkNTaW0uTW90b3JDb25maWcaFi5n",
-            "b29nbGUucHJvdG9idWYuRW1wdHkiABI1CgVSb2JvdBISLkZSQ1NpbS5Sb2Jv",
-            "dFN0YXRlGhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgASQgoOQ29ubmVjdFRv",
-            "Um9ib3QSFi5nb29nbGUucHJvdG9idWYuRW1wdHkaFi5nb29nbGUucHJvdG9i",
-            "dWYuRW1wdHkiAEI4CiFmcmMucm9ib3Quc2ltdWxhdG9yLm5ldHdvcmsucHJv",
-            "dG9CClJvYm90UHJvdG+qAgZGUkNTaW1iBnByb3RvMw=="));
+            "BSABKAgSLAoHZW5jb2RlchgGIAEoDjIbLkZSQ1NpbS5Nb3RvckNvbmZpZy5F",
+            "bmNvZGVyEhkKEWN1cnJlbnRQaWRQcm9maWxlGAcgASgFEiYKBGZwaWQYCCAD",
+            "KAsyGC5GUkNTaW0uTW90b3JDb25maWcuRlBJRBIfChdtb3Rpb25NYWdpY0Fj",
+            "Y2VsZXJhdGlvbhgJIAEoARIhChltb3Rpb25NYWdpY0NydWlzZVZlbG9jaXR5",
+            "GAogASgBEh4KFnNlbGVjdGVkU2Vuc29yUG9zaXRpb24YCyABKAESNAoLY29u",
+            "dHJvbE1vZGUYDCABKA4yHy5GUkNTaW0uTW90b3JDb25maWcuQ29udHJvbE1v",
+            "ZGUSFAoMdGFyZ2V0T3V0cHV0GA0gASgBEhYKDnRhcmdldFZlbG9jaXR5GA4g",
+            "ASgBEhYKDnRhcmdldFBvc2l0aW9uGA8gASgBEgwKBG5hbWUYECABKAkSDQoF",
+            "bW9kZWwYESABKAkSKgoGdmVuZG9yGBIgASgOMhouRlJDU2ltLk1vdG9yQ29u",
+            "ZmlnLlZlbmRvchIiChplbmNvZGVyQ291bnRzUGVyUmV2b2x1dGlvbhgTIAEo",
+            "BRq7AQoERlBJRBIJCgFmGAEgASgBEgkKAXAYAiABKAESCQoBaRgDIAEoARIJ",
+            "CgFkGAQgASgBEg0KBWlab25lGAUgASgBEiAKGGFsbG93YWJsZUNsb3NlZExv",
+            "b3BFcnJvchgGIAEoBRIeChZtYXhJbnRlZ3JhbEFjY3VtdWxhdG9yGAcgASgF",
+            "EhwKFGNsb3NlZExvb3BQZWFrT3V0cHV0GAggASgFEhgKEGNsb3NlZExvb3BQ",
+            "ZXJpb2QYCSABKAUi6AEKB0VuY29kZXISDwoLUXVhZEVuY29kZXIQABIUChBJ",
+            "bnRlZ3JhdGVkU2Vuc29yEAESCgoGQW5hbG9nEAISDgoKVGFjaG9tZXRlchAE",
+            "Eh0KGVB1bHNlV2lkdGhFbmNvZGVkUG9zaXRpb24QCBINCglTZW5zb3JTdW0Q",
+            "CRIUChBTZW5zb3JEaWZmZXJlbmNlEAoSEQoNUmVtb3RlU2Vuc29yMBALEhEK",
+            "DVJlbW90ZVNlbnNvcjEQDBIICgROb25lEA4SGgoWU29mdHdhcmVFbXVsYXRl",
+            "ZFNlbnNvchAPEgoKBk5vdFNldBBjIhsKBlZlbmRvchIICgRDVFJFEAASBwoD",
+            "UmV2EAEiwwEKC0NvbnRyb2xNb2RlEhEKDVBlcmNlbnRPdXRwdXQQABIMCghQ",
+            "b3NpdGlvbhABEgwKCFZlbG9jaXR5EAISCwoHQ3VycmVudBADEgsKB1ZvbHRh",
+            "Z2UQBBIMCghGb2xsb3dlchAFEhIKDk1vdGlvblBvc2l0aW9uEAYSEgoOTW90",
+            "aW9uVmVsb2NpdHkQBxIRCg1Nb3Rpb25Qcm9maWxlEAgSFAoQTW90aW9uUHJv",
+            "ZmlsZUFyYxAJEgwKCERpc2FibGVkEAoiawoWQ29ubmVjdFRvUm9ib3RSZXNw",
+            "b25zZRImCgpyb2JvdFN0YXRlGAEgASgLMhIuRlJDU2ltLlJvYm90U3RhdGUS",
+            "KQoMbW90b3JDb25maWdzGAIgAygLMhMuRlJDU2ltLk1vdG9yQ29uZmlnMsoC",
+            "CgxSb2JvdFNlcnZpY2USOQoFSW5wdXQSFC5GUkNTaW0uSW5wdXRSZXF1ZXN0",
+            "GhYuZ29vZ2xlLnByb3RvYnVmLkVtcHR5IgAoARJGChJVcGRhdGVNb3Rvck91",
+            "dHB1dHMSFC5GUkNTaW0uTW90b3JPdXRwdXRzGhYuZ29vZ2xlLnByb3RvYnVm",
+            "LkVtcHR5IgAoARI8CgtVcGRhdGVNb3RvchITLkZSQ1NpbS5Nb3RvckNvbmZp",
+            "ZxoWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eSIAEjUKBVJvYm90EhIuRlJDU2lt",
+            "LlJvYm90U3RhdGUaFi5nb29nbGUucHJvdG9idWYuRW1wdHkiABJCCg5Db25u",
+            "ZWN0VG9Sb2JvdBIWLmdvb2dsZS5wcm90b2J1Zi5FbXB0eRoWLmdvb2dsZS5w",
+            "cm90b2J1Zi5FbXB0eSIAQjgKIWZyYy5yb2JvdC5zaW11bGF0b3IubmV0d29y",
+            "ay5wcm90b0IKUm9ib3RQcm90b6oCBkZSQ1NpbWIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Google.Protobuf.WellKnownTypes.EmptyReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.RobotState), global::FRCSim.RobotState.Parser, new[]{ "State", "Initialized", "Enabled", "DriverStationAttached", "FieldManagementSystemAttached" }, null, new[]{ typeof(global::FRCSim.RobotState.Types.State), typeof(global::FRCSim.RobotState.Types.AllianceStationId) }, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.InputRequest), global::FRCSim.InputRequest.Parser, new[]{ "Id", "Axes", "Povs", "Buttons" }, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.MotorOutputs), global::FRCSim.MotorOutputs.Parser, new[]{ "MotorOutput" }, null, null, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.MotorOutputs.Types.MotorOutput), global::FRCSim.MotorOutputs.Types.MotorOutput.Parser, new[]{ "Id", "Handle", "Output", "InputVoltage", "OutputCurrent", "Velocity", "Position", "SensorPosition", "IntegralState", "LastError" }, null, null, null)}),
-            new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.MotorConfig), global::FRCSim.MotorConfig.Parser, new[]{ "Id", "Handle", "FollowingId", "Inverted", "SensorPhase", "Sensor", "CurrentPidProfile", "Fpid", "MotionMagicAcceleration", "MotionMagicCruiseVelocity", "SelectedSensorPosition", "ControlMode", "TargetOutput", "TargetVelocity", "TargetPosition", "Name", "Model", "Vendor" }, null, new[]{ typeof(global::FRCSim.MotorConfig.Types.FeedbackDevice), typeof(global::FRCSim.MotorConfig.Types.Vendor), typeof(global::FRCSim.MotorConfig.Types.ControlMode) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.MotorConfig.Types.FPID), global::FRCSim.MotorConfig.Types.FPID.Parser, new[]{ "F", "P", "I", "D", "IZone", "AllowableClosedLoopError", "MaxIntegralAccumulator", "ClosedLoopPeakOutput", "ClosedLoopPeriod" }, null, null, null)}),
+            new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.MotorConfig), global::FRCSim.MotorConfig.Parser, new[]{ "Id", "Handle", "FollowingId", "Inverted", "SensorPhase", "Encoder", "CurrentPidProfile", "Fpid", "MotionMagicAcceleration", "MotionMagicCruiseVelocity", "SelectedSensorPosition", "ControlMode", "TargetOutput", "TargetVelocity", "TargetPosition", "Name", "Model", "Vendor", "EncoderCountsPerRevolution" }, null, new[]{ typeof(global::FRCSim.MotorConfig.Types.Encoder), typeof(global::FRCSim.MotorConfig.Types.Vendor), typeof(global::FRCSim.MotorConfig.Types.ControlMode) }, new pbr::GeneratedClrTypeInfo[] { new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.MotorConfig.Types.FPID), global::FRCSim.MotorConfig.Types.FPID.Parser, new[]{ "F", "P", "I", "D", "IZone", "AllowableClosedLoopError", "MaxIntegralAccumulator", "ClosedLoopPeakOutput", "ClosedLoopPeriod" }, null, null, null)}),
             new pbr::GeneratedClrTypeInfo(typeof(global::FRCSim.ConnectToRobotResponse), global::FRCSim.ConnectToRobotResponse.Parser, new[]{ "RobotState", "MotorConfigs" }, null, null, null)
           }));
     }
@@ -1094,7 +1099,7 @@ namespace FRCSim {
       followingId_ = other.followingId_;
       inverted_ = other.inverted_;
       sensorPhase_ = other.sensorPhase_;
-      sensor_ = other.sensor_;
+      encoder_ = other.encoder_;
       currentPidProfile_ = other.currentPidProfile_;
       fpid_ = other.fpid_.Clone();
       motionMagicAcceleration_ = other.motionMagicAcceleration_;
@@ -1107,6 +1112,7 @@ namespace FRCSim {
       name_ = other.name_;
       model_ = other.model_;
       vendor_ = other.vendor_;
+      encoderCountsPerRevolution_ = other.encoderCountsPerRevolution_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1170,14 +1176,14 @@ namespace FRCSim {
       }
     }
 
-    /// <summary>Field number for the "sensor" field.</summary>
-    public const int SensorFieldNumber = 6;
-    private global::FRCSim.MotorConfig.Types.FeedbackDevice sensor_ = 0;
+    /// <summary>Field number for the "encoder" field.</summary>
+    public const int EncoderFieldNumber = 6;
+    private global::FRCSim.MotorConfig.Types.Encoder encoder_ = 0;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::FRCSim.MotorConfig.Types.FeedbackDevice Sensor {
-      get { return sensor_; }
+    public global::FRCSim.MotorConfig.Types.Encoder Encoder {
+      get { return encoder_; }
       set {
-        sensor_ = value;
+        encoder_ = value;
       }
     }
 
@@ -1315,6 +1321,17 @@ namespace FRCSim {
       }
     }
 
+    /// <summary>Field number for the "encoderCountsPerRevolution" field.</summary>
+    public const int EncoderCountsPerRevolutionFieldNumber = 19;
+    private int encoderCountsPerRevolution_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int EncoderCountsPerRevolution {
+      get { return encoderCountsPerRevolution_; }
+      set {
+        encoderCountsPerRevolution_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MotorConfig);
@@ -1333,7 +1350,7 @@ namespace FRCSim {
       if (FollowingId != other.FollowingId) return false;
       if (Inverted != other.Inverted) return false;
       if (SensorPhase != other.SensorPhase) return false;
-      if (Sensor != other.Sensor) return false;
+      if (Encoder != other.Encoder) return false;
       if (CurrentPidProfile != other.CurrentPidProfile) return false;
       if(!fpid_.Equals(other.fpid_)) return false;
       if (!pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.Equals(MotionMagicAcceleration, other.MotionMagicAcceleration)) return false;
@@ -1346,6 +1363,7 @@ namespace FRCSim {
       if (Name != other.Name) return false;
       if (Model != other.Model) return false;
       if (Vendor != other.Vendor) return false;
+      if (EncoderCountsPerRevolution != other.EncoderCountsPerRevolution) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1357,7 +1375,7 @@ namespace FRCSim {
       if (FollowingId != 0) hash ^= FollowingId.GetHashCode();
       if (Inverted != false) hash ^= Inverted.GetHashCode();
       if (SensorPhase != false) hash ^= SensorPhase.GetHashCode();
-      if (Sensor != 0) hash ^= Sensor.GetHashCode();
+      if (Encoder != 0) hash ^= Encoder.GetHashCode();
       if (CurrentPidProfile != 0) hash ^= CurrentPidProfile.GetHashCode();
       hash ^= fpid_.GetHashCode();
       if (MotionMagicAcceleration != 0D) hash ^= pbc::ProtobufEqualityComparers.BitwiseDoubleEqualityComparer.GetHashCode(MotionMagicAcceleration);
@@ -1370,6 +1388,7 @@ namespace FRCSim {
       if (Name.Length != 0) hash ^= Name.GetHashCode();
       if (Model.Length != 0) hash ^= Model.GetHashCode();
       if (Vendor != 0) hash ^= Vendor.GetHashCode();
+      if (EncoderCountsPerRevolution != 0) hash ^= EncoderCountsPerRevolution.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1403,9 +1422,9 @@ namespace FRCSim {
         output.WriteRawTag(40);
         output.WriteBool(SensorPhase);
       }
-      if (Sensor != 0) {
+      if (Encoder != 0) {
         output.WriteRawTag(48);
-        output.WriteEnum((int) Sensor);
+        output.WriteEnum((int) Encoder);
       }
       if (CurrentPidProfile != 0) {
         output.WriteRawTag(56);
@@ -1452,6 +1471,10 @@ namespace FRCSim {
         output.WriteRawTag(144, 1);
         output.WriteEnum((int) Vendor);
       }
+      if (EncoderCountsPerRevolution != 0) {
+        output.WriteRawTag(152, 1);
+        output.WriteInt32(EncoderCountsPerRevolution);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1475,8 +1498,8 @@ namespace FRCSim {
       if (SensorPhase != false) {
         size += 1 + 1;
       }
-      if (Sensor != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Sensor);
+      if (Encoder != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Encoder);
       }
       if (CurrentPidProfile != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(CurrentPidProfile);
@@ -1512,6 +1535,9 @@ namespace FRCSim {
       if (Vendor != 0) {
         size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) Vendor);
       }
+      if (EncoderCountsPerRevolution != 0) {
+        size += 2 + pb::CodedOutputStream.ComputeInt32Size(EncoderCountsPerRevolution);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1538,8 +1564,8 @@ namespace FRCSim {
       if (other.SensorPhase != false) {
         SensorPhase = other.SensorPhase;
       }
-      if (other.Sensor != 0) {
-        Sensor = other.Sensor;
+      if (other.Encoder != 0) {
+        Encoder = other.Encoder;
       }
       if (other.CurrentPidProfile != 0) {
         CurrentPidProfile = other.CurrentPidProfile;
@@ -1575,6 +1601,9 @@ namespace FRCSim {
       if (other.Vendor != 0) {
         Vendor = other.Vendor;
       }
+      if (other.EncoderCountsPerRevolution != 0) {
+        EncoderCountsPerRevolution = other.EncoderCountsPerRevolution;
+      }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1607,7 +1636,7 @@ namespace FRCSim {
             break;
           }
           case 48: {
-            Sensor = (global::FRCSim.MotorConfig.Types.FeedbackDevice) input.ReadEnum();
+            Encoder = (global::FRCSim.MotorConfig.Types.Encoder) input.ReadEnum();
             break;
           }
           case 56: {
@@ -1658,6 +1687,10 @@ namespace FRCSim {
             Vendor = (global::FRCSim.MotorConfig.Types.Vendor) input.ReadEnum();
             break;
           }
+          case 152: {
+            EncoderCountsPerRevolution = input.ReadInt32();
+            break;
+          }
         }
       }
     }
@@ -1666,8 +1699,68 @@ namespace FRCSim {
     /// <summary>Container for nested types declared in the MotorConfig message type.</summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static partial class Types {
-      public enum FeedbackDevice {
+      public enum Encoder {
+        /// <summary>
+        ///*
+        /// Quadrature encoder
+        /// </summary>
         [pbr::OriginalName("QuadEncoder")] QuadEncoder = 0,
+        /// <summary>
+        ///*
+        /// TalonFX supports an integrated sensor.
+        /// </summary>
+        [pbr::OriginalName("IntegratedSensor")] IntegratedSensor = 1,
+        /// <summary>
+        ///*
+        /// Analog potentiometer/encoder
+        /// </summary>
+        [pbr::OriginalName("Analog")] Analog = 2,
+        /// <summary>
+        ///*
+        /// Tachometer
+        /// </summary>
+        [pbr::OriginalName("Tachometer")] Tachometer = 4,
+        /// <summary>
+        ///*
+        /// CTRE Mag Encoder in Relative mode or
+        /// any other device that uses PWM to encode its output
+        /// </summary>
+        [pbr::OriginalName("PulseWidthEncodedPosition")] PulseWidthEncodedPosition = 8,
+        /// <summary>
+        ///*
+        /// Sum0 + Sum1
+        /// </summary>
+        [pbr::OriginalName("SensorSum")] SensorSum = 9,
+        /// <summary>
+        ///*
+        /// Diff0 - Diff1
+        /// </summary>
+        [pbr::OriginalName("SensorDifference")] SensorDifference = 10,
+        /// <summary>
+        ///*
+        /// Sensor configured in RemoteFilter0
+        /// </summary>
+        [pbr::OriginalName("RemoteSensor0")] RemoteSensor0 = 11,
+        /// <summary>
+        ///*
+        /// Sensor configured in RemoteFilter1
+        /// </summary>
+        [pbr::OriginalName("RemoteSensor1")] RemoteSensor1 = 12,
+        /// <summary>
+        ///*
+        /// Position and velocity will read 0.
+        /// </summary>
+        [pbr::OriginalName("None")] None = 14,
+        /// <summary>
+        ///*
+        /// Motor Controller will fake a sensor based on applied motor output.
+        /// </summary>
+        [pbr::OriginalName("SoftwareEmulatedSensor")] SoftwareEmulatedSensor = 15,
+        /// <summary>
+        ///*
+        /// Special enum for FRCSim to define an encoder as not configured yet
+        /// </summary>
+        [pbr::OriginalName("NotSet")] NotSet = 99,
       }
 
       public enum Vendor {
