@@ -139,7 +139,7 @@ public class PS4Panel extends JPanel {
         graphics.fillRect(x, y, width, height);
 
         int xAxisSpot = (int) (xAxis * width * .5 + width * .5 + x);
-        int yAxisSpot = (int) (-yAxis * height * .5 + height * .5 + y);
+        int yAxisSpot = (int) (yAxis * height * .5 + height * .5 + y);
 
         graphics.setColor(Color.black);
         graphics.fillOval(xAxisSpot, yAxisSpot, 5, 5);

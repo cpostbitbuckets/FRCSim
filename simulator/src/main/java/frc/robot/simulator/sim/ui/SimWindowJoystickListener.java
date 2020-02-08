@@ -100,7 +100,7 @@ public class SimWindowJoystickListener extends ControllerAdapter {
     public boolean buttonDown(Controller controller, int buttonIndex) {
         JoystickData joystickData = getJoystickData();
 
-        log.info("Button " + (buttonIndex) + " down");
+//        log.info("Button " + (buttonIndex) + " down");
         // If this is an xbox controller and we are configured for it, map it to a PS4
         // controller
 
@@ -176,12 +176,12 @@ public class SimWindowJoystickListener extends ControllerAdapter {
             joystickData.axes[ps4Axis] = value;
 
             // The ps4 returns -1 for the joystick up on the y sticks
-            if (ps4Axis == PS4Constants.LEFT_STICK_Y.getValue()) {
-                joystickData.axes[ps4Axis] = -value;
-            }
-            if (ps4Axis == PS4Constants.RIGHT_STICK_Y.getValue()) {
-                joystickData.axes[ps4Axis] = -value;
-            }
+//            if (ps4Axis == PS4Constants.LEFT_STICK_Y.getValue()) {
+//                joystickData.axes[ps4Axis] = -value;
+//            }
+//            if (ps4Axis == PS4Constants.RIGHT_STICK_Y.getValue()) {
+//                joystickData.axes[ps4Axis] = -value;
+//            }
 
             // The ps4 registers an additional button press if the user hits the triggers
             if (ps4Axis == PS4Constants.LEFT_TRIGGER.getValue()) {
@@ -201,9 +201,9 @@ public class SimWindowJoystickListener extends ControllerAdapter {
         } else if (controller.getName().toLowerCase().contains("ps4")) {
             int mappedAxisIndex = ControllerUtils.sdlPs4ToPs4Axis(axisIndex);
             joystickData.axes[mappedAxisIndex] = value;
-            if (mappedAxisIndex == PS4Constants.LEFT_STICK_Y.getValue() || mappedAxisIndex == PS4Constants.RIGHT_STICK_Y.getValue()) {
-                joystickData.axes[mappedAxisIndex] = -value;
-            }
+//            if (mappedAxisIndex == PS4Constants.LEFT_STICK_Y.getValue() || mappedAxisIndex == PS4Constants.RIGHT_STICK_Y.getValue()) {
+//                joystickData.axes[mappedAxisIndex] = -value;
+//            }
 
         } else {
             joystickData.axes[axisIndex] = value;

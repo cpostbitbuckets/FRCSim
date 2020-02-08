@@ -34,25 +34,25 @@ class SimWindowKeyListener implements KeyListener {
         JoystickData joystickData = getJoystickData();
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                joystickData.axes[PS4Constants.LEFT_STICK_Y.getValue()] = 1;
+                joystickData.axes[PS4Constants.LEFT_STICK_Y.getValue()] = -1;
                 break;
             case KeyEvent.VK_A:
                 joystickData.axes[PS4Constants.LEFT_STICK_X.getValue()] = -1;
                 break;
             case KeyEvent.VK_S:
-                joystickData.axes[PS4Constants.LEFT_STICK_Y.getValue()] = -1;
+                joystickData.axes[PS4Constants.LEFT_STICK_Y.getValue()] = 1;
                 break;
             case KeyEvent.VK_D:
                 joystickData.axes[PS4Constants.LEFT_STICK_X.getValue()] = 1;
                 break;
             case KeyEvent.VK_I:
-                joystickData.axes[PS4Constants.RIGHT_STICK_Y.getValue()] = 1;
+                joystickData.axes[PS4Constants.RIGHT_STICK_Y.getValue()] = -1;
                 break;
             case KeyEvent.VK_J:
                 joystickData.axes[PS4Constants.RIGHT_STICK_X.getValue()] = -1;
                 break;
             case KeyEvent.VK_K:
-                joystickData.axes[PS4Constants.RIGHT_STICK_Y.getValue()] = -1;
+                joystickData.axes[PS4Constants.RIGHT_STICK_Y.getValue()] = 1;
                 break;
             case KeyEvent.VK_L:
                 joystickData.axes[PS4Constants.RIGHT_STICK_X.getValue()] = 1;
