@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4">
+  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="FRCSim" externalSystemModuleVersion="2020.1.2-SNAPSHOT" linkedProjectId=":simulator-ctre" linkedProjectPath="$MODULE_DIR$/../../../simulator-ctre" rootProjectPath="$MODULE_DIR$/../../.." />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../simulator-ctre">
+      <excludeFolder url="file://$MODULE_DIR$/../../../simulator-ctre/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../simulator-ctre/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../simulator-ctre/out" />
+    </content>
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FRCSim.iml" filepath="$PROJECT_DIR$/.idea/modules/FRCSim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FRCSim.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FRCSim.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mentor-bot/FRCSim.mentor-bot.iml" filepath="$PROJECT_DIR$/.idea/modules/mentor-bot/FRCSim.mentor-bot.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mentor-bot/FRCSim.mentor-bot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/mentor-bot/FRCSim.mentor-bot.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mentor-bot/FRCSim.mentor-bot.test.iml" filepath="$PROJECT_DIR$/.idea/modules/mentor-bot/FRCSim.mentor-bot.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator/FRCSim.simulator.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator/FRCSim.simulator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator-ctre/FRCSim.simulator-ctre.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator-ctre/FRCSim.simulator-ctre.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator-ctre/FRCSim.simulator-ctre.main.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator-ctre/FRCSim.simulator-ctre.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator-ctre/FRCSim.simulator-ctre.test.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator-ctre/FRCSim.simulator-ctre.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator-rev/FRCSim.simulator-rev.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator-rev/FRCSim.simulator-rev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator-rev/FRCSim.simulator-rev.main.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator-rev/FRCSim.simulator-rev.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator-rev/FRCSim.simulator-rev.test.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator-rev/FRCSim.simulator-rev.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator/FRCSim.simulator.main.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator/FRCSim.simulator.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/simulator/FRCSim.simulator.test.iml" filepath="$PROJECT_DIR$/.idea/modules/simulator/FRCSim.simulator.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FRCSim.test.iml" filepath="$PROJECT_DIR$/.idea/modules/FRCSim.test.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="FRCSim.main" target="11" />
+      <module name="FRCSim.mentor-bot.main" target="11" />
+      <module name="FRCSim.mentor-bot.test" target="11" />
+      <module name="FRCSim.simulator-ctre.main" target="11" />
+      <module name="FRCSim.simulator-ctre.test" target="11" />
+      <module name="FRCSim.simulator-rev.main" target="11" />
+      <module name="FRCSim.simulator-rev.test" target="11" />
+      <module name="FRCSim.simulator.main" target="11" />
+      <module name="FRCSim.simulator.test" target="11" />
+      <module name="FRCSim.test" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
