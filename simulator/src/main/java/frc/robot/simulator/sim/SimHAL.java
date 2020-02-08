@@ -163,11 +163,6 @@ public class SimHAL {
             axesArray[i] = joystickData.axes[i];
         }
 
-        if (axesArray.length > 0) {
-            // driver station reports up on the Y axis as inverted. LAME
-            axesArray[XboxConstants.LEFT_STICK_Y.getValue()] *= -1.;
-            axesArray[XboxConstants.RIGHT_STICK_Y.getValue()] *= -1.;
-        }
         return (short) joystickData.axes.length;
     }
 
