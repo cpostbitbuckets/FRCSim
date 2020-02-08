@@ -1,16 +1,12 @@
 package frc.robot.simulator.sim.ui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.ControllerAdapter;
-import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.controllers.PovDirection;
 import frc.robot.simulator.network.Client;
 import frc.robot.simulator.sim.JoystickData;
 import frc.robot.simulator.sim.SimHAL;
 import frc.robot.simulator.sim.config.SimulatorConfig;
-import frc.robot.simulator.sim.libgdx.LibGDXApplicationStub;
-import frc.robot.simulator.sim.libgdx.LibGDXGraphicsStub;
 import frc.robot.simulator.sim.utils.ControllerUtils;
 import org.libsdl.SDL;
 import org.slf4j.Logger;
@@ -28,6 +24,24 @@ import java.util.concurrent.Executors;
  */
 public class SimWindowJoystickListener extends ControllerAdapter {
     private static final Logger log = LoggerFactory.getLogger(SimWindowJoystickListener.class);
+
+    public enum DPads {
+        D_PAD_UP(0),
+        D_PAD_RIGHT(90),
+        D_PAD_DOWN(180),
+        D_PAD_LEFT(270),
+        D_PAD_NULL(-1);
+        private int value;
+
+        DPads(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+    }
 
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
@@ -55,28 +69,28 @@ public class SimWindowJoystickListener extends ControllerAdapter {
 //        } catch (Exception e) {
 //            log.error("Failed to query for joysticks using libgdx, using SDL.", e);
 
-            try {
-                int result = SDL.SDL_GameControllerAddMapping("030000005e040000e002000003096800,Xbox Wireless Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Mac OS X");
-                SDL2ControllerManager controllerManager = new SDL2ControllerManager();
-                if (result == -1) {
-                    log.error("Failed to add joystick mapping: " + SDL.SDL_GetError());
-                }
-                controllerManager.addListener(this);
-
-                // poll the joysticks
-                executor.execute(() -> {
-                    while (running) {
-                        try {
-                            controllerManager.pollState();
-                        } catch (Exception pollException) {
-                            log.error("Failed to poll controller.", pollException);
-                        }
-                    }
-                });
-
-            } catch (Exception sdlException) {
-                log.error("Failed to query for joysticks.", sdlException);
+        try {
+            int result = SDL.SDL_GameControllerAddMapping("030000005e040000e002000003096800,Xbox Wireless Controller,a:b0,b:b1,back:b6,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b10,leftshoulder:b4,leftstick:b8,lefttrigger:a2,leftx:a0,lefty:a1,rightshoulder:b5,rightstick:b9,righttrigger:a5,rightx:a3,righty:a4,start:b7,x:b2,y:b3,platform:Mac OS X");
+            SDL2ControllerManager controllerManager = new SDL2ControllerManager();
+            if (result == -1) {
+                log.error("Failed to add joystick mapping: " + SDL.SDL_GetError());
             }
+            controllerManager.addListener(this);
+
+            // poll the joysticks
+            executor.execute(() -> {
+                while (running) {
+                    try {
+                        controllerManager.pollState();
+                    } catch (Exception pollException) {
+                        log.error("Failed to poll controller.", pollException);
+                    }
+                }
+            });
+
+        } catch (Exception sdlException) {
+            log.error("Failed to query for joysticks.", sdlException);
+        }
 //        }
 
 
@@ -86,11 +100,27 @@ public class SimWindowJoystickListener extends ControllerAdapter {
     public boolean buttonDown(Controller controller, int buttonIndex) {
         JoystickData joystickData = getJoystickData();
 
-//        log.info("Button " + (buttonIndex) +  " down");
+        log.info("Button " + (buttonIndex) + " down");
         // If this is an xbox controller and we are configured for it, map it to a PS4
         // controller
+
+        // check dpad buttons
         if (simulatorConfig.remapXboxController && controller.getName().toLowerCase().contains("xbox")) {
             joystickData.buttons[ControllerUtils.xboxButtonToPS4Button(buttonIndex + 1) - 1] = true;
+        } else if (controller.getName().toLowerCase().contains("ps4")) {
+            int mappedButtonIndex = ControllerUtils.sdlPs4ButtonToPS4Button(buttonIndex + 1) - 1;
+            if (mappedButtonIndex == PS4Constants.DPAD_UP.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_UP.getValue();
+            } else if (mappedButtonIndex == PS4Constants.DPAD_RIGHT.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_RIGHT.getValue();
+            } else if (mappedButtonIndex == PS4Constants.DPAD_LEFT.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_LEFT.getValue();
+            } else if (mappedButtonIndex == PS4Constants.DPAD_DOWN.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_DOWN.getValue();
+            } else {
+                joystickData.povs[0] = DPads.D_PAD_NULL.getValue();
+                joystickData.buttons[mappedButtonIndex] = true;
+            }
         } else {
             joystickData.buttons[buttonIndex] = true;
         }
@@ -110,6 +140,19 @@ public class SimWindowJoystickListener extends ControllerAdapter {
         // controller
         if (simulatorConfig.remapXboxController && controller.getName().toLowerCase().contains("xbox")) {
             joystickData.buttons[ControllerUtils.xboxButtonToPS4Button(buttonIndex + 1) - 1] = false;
+        } else if (controller.getName().toLowerCase().contains("ps4")) {
+            int mappedButtonIndex = ControllerUtils.sdlPs4ButtonToPS4Button(buttonIndex + 1) - 1;
+            if (mappedButtonIndex == PS4Constants.DPAD_UP.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_NULL.getValue();
+            } else if (mappedButtonIndex == PS4Constants.DPAD_RIGHT.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_NULL.getValue();
+            } else if (mappedButtonIndex == PS4Constants.DPAD_LEFT.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_NULL.getValue();
+            } else if (mappedButtonIndex == PS4Constants.DPAD_DOWN.getValue() - 1) {
+                joystickData.povs[0] = DPads.D_PAD_NULL.getValue();
+            } else {
+                joystickData.buttons[mappedButtonIndex] = false;
+            }
         } else {
             joystickData.buttons[buttonIndex] = false;
         }
@@ -155,6 +198,13 @@ public class SimWindowJoystickListener extends ControllerAdapter {
                     joystickData.buttons[PS4Constants.R2.getValue() - 1] = false;
                 }
             }
+        } else if (controller.getName().toLowerCase().contains("ps4")) {
+            int mappedAxisIndex = ControllerUtils.sdlPs4ToPs4Axis(axisIndex);
+            joystickData.axes[mappedAxisIndex] = value;
+            if (mappedAxisIndex == PS4Constants.LEFT_STICK_Y.getValue() || mappedAxisIndex == PS4Constants.RIGHT_STICK_Y.getValue()) {
+                joystickData.axes[mappedAxisIndex] = -value;
+            }
+
         } else {
             joystickData.axes[axisIndex] = value;
         }
@@ -168,7 +218,7 @@ public class SimWindowJoystickListener extends ControllerAdapter {
 
     /**
      * Note: Not working on an xbox controller on a mac...
-     * 
+     *
      * @param controller
      * @param povIndex
      * @param value
@@ -182,33 +232,33 @@ public class SimWindowJoystickListener extends ControllerAdapter {
 
         switch (value) {
 
-        case center:
-            joystickData.povs[povIndex] = -1;
-            break;
-        case north:
-            joystickData.povs[povIndex] = 0;
-            break;
-        case south:
-            joystickData.povs[povIndex] = 180;
-            break;
-        case east:
-            joystickData.povs[povIndex] = 90;
-            break;
-        case west:
-            joystickData.povs[povIndex] = 270;
-            break;
-        case northEast:
-            joystickData.povs[povIndex] = 45;
-            break;
-        case southEast:
-            joystickData.povs[povIndex] = 135;
-            break;
-        case northWest:
-            joystickData.povs[povIndex] = 315;
-            break;
-        case southWest:
-            joystickData.povs[povIndex] = 225;
-            break;
+            case center:
+                joystickData.povs[povIndex] = -1;
+                break;
+            case north:
+                joystickData.povs[povIndex] = 0;
+                break;
+            case south:
+                joystickData.povs[povIndex] = 180;
+                break;
+            case east:
+                joystickData.povs[povIndex] = 90;
+                break;
+            case west:
+                joystickData.povs[povIndex] = 270;
+                break;
+            case northEast:
+                joystickData.povs[povIndex] = 45;
+                break;
+            case southEast:
+                joystickData.povs[povIndex] = 135;
+                break;
+            case northWest:
+                joystickData.povs[povIndex] = 315;
+                break;
+            case southWest:
+                joystickData.povs[povIndex] = 225;
+                break;
         }
         // send a new package for the input
         inputClient.inputUpdate(joystickData);
@@ -220,7 +270,7 @@ public class SimWindowJoystickListener extends ControllerAdapter {
     /**
      * Get the HAL simulated joystick data so we can update it TODO: Allow support
      * for multiple joysticks somehow...
-     * 
+     *
      * @return
      */
     public JoystickData getJoystickData() {

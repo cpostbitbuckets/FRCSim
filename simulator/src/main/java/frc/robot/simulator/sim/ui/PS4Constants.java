@@ -1,14 +1,7 @@
 package frc.robot.simulator.sim.ui;
 
-/**
- * Button Map for Xbox controller. When calling buttons or axis on an Xbox, use
- * this class.
- *
- * @author ayush_000
- *
- */
-public enum PS4Constants
-{
+public enum PS4Constants {
+
     // Axis
     LEFT_STICK_X(0),
     LEFT_STICK_Y(1),
@@ -31,11 +24,16 @@ public enum PS4Constants
     L_STICK  (11),
     R_STICK  (12),
     PS4      (13),
-    TRACKPAD (14);
+    TRACKPAD (14),
+
+    DPAD_UP(15),
+    DPAD_RIGHT(16),
+    DPAD_DOWN(17),
+    DPAD_LEFT(18);
 
 
     private int value;
-    PS4Constants(int value) {
+    private PS4Constants(int value) {
         this.value = value;
     }
 

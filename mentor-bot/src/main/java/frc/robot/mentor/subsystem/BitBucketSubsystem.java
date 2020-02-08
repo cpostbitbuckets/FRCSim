@@ -75,7 +75,8 @@ public abstract class BitBucketSubsystem extends SubsystemBase implements Subsys
 			try {
 				motor = clz.getDeclaredConstructor(Integer.TYPE).newInstance(settings.id);
 			} catch (Exception e) {
-				throw new RuntimeException("Can't create talong motor of type: " + clz.getSimpleName(), e);
+				e.printStackTrace();
+				throw new RuntimeException("Can't create talon motor of type: " + clz.getSimpleName(), e);
 			}
 
 			// initialize the motor config to defaults
