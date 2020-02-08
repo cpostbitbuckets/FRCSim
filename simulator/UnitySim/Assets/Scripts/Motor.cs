@@ -84,7 +84,7 @@ public class Motor : MonoBehaviour
             {
                 case MotorConfig.Types.ControlMode.PercentOutput:
                     float output = (float)(stallTorque * leader.Config.TargetOutput);
-                    body.AddRelativeTorque(output, output, output);
+                    body.AddRelativeTorque(0, output, 0);
                     break;
                 case MotorConfig.Types.ControlMode.MotionVelocity:
                 case MotorConfig.Types.ControlMode.Velocity:
