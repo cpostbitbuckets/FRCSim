@@ -47,8 +47,8 @@ public class ConversionUtils {
         return revs * (2 * Math.PI);
     }
 
-    public static double radiansPerSecondToTicksPer100ms(double radsPerSecond, int ticksPerRevolution) {
-        return perSecondToPer100ms(radiansToTicks(radsPerSecond, ticksPerRevolution));
+    public static int radiansPerSecondToTicksPer100ms(double radsPerSecond, int ticksPerRevolution) {
+        return (int) perSecondToPer100ms(radiansToTicks(radsPerSecond, ticksPerRevolution));
     }
 
     public static double ticksPer100msToRadiansPerSecond(int ticksPer100ms, int ticksPerRevolution) {

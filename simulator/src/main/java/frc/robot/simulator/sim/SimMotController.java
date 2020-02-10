@@ -362,8 +362,8 @@ public class SimMotController {
     public static int GetSelectedSensorVelocity(long handle, int pidIdx) {
         validateEncoder(handle);
         SimMotor motor = motorStore.get(handle);
-        return ConversionUtils.radiansToTicks(motorStore.getOutput(handle).getVelocity(),
-                ConversionUtils.ticksPerRevolution(motor.getConfig().getEncoderCountsPerRevolution(), motor.getConfig().getEncoder()));
+        int ticksPerRevolution = ConversionUtils.ticksPerRevolution(motor.getConfig().getEncoderCountsPerRevolution(), motor.getConfig().getEncoder());
+        return ConversionUtils.radiansPerSecondToTicksPer100ms(motorStore.getOutput(handle).getVelocity(), ticksPerRevolution);
     }
 
     public static int SetSelectedSensorPosition(long handle, int sensorPos, int pidIdx, int timeoutMs) {
