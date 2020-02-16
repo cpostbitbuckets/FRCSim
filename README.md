@@ -21,6 +21,7 @@ repositories {
     // ...
     // other maven stuff, like mavenCentral()
 
+    jcenter() // required for SDL joystick libraries
     maven {
         // this repo contains the FRCSim
         url 'https://raw.githubusercontent.com/cpostbitbuckets/maven_repo/master'
@@ -35,13 +36,13 @@ dependencies {
 ... other dependencies
     // ADD THIS DEPENDENCY
     // we only use this project at runtime when doing simulations
-    runtimeOnly "org.bitbuckets:simulator:2020.1.2-SNAPSHOT"
+    testImplementation "org.bitbuckets:simulator:2020.1.2-SNAPSHOT"
 
     // If you have Talon motors, use this dependency as well
-    runtimeOnly "org.bitbuckets:simulator-ctre:2020.1.2-SNAPSHOT"
+    testImplementation "org.bitbuckets:simulator-ctre:2020.1.2-SNAPSHOT"
 
     // If you have Spark motors, use this dependency as well
-    runtimeOnly "org.bitbuckets:simulator-rev:2020.1.2-SNAPSHOT"
+    testImplementation "org.bitbuckets:simulator-rev:2020.1.2-SNAPSHOT"
 
 }
 ```
@@ -49,15 +50,35 @@ dependencies {
 **Note**: Make sure you have the nativeDesktopZip dependency and includeDesktopSupport to true. This will 
 ensure you can use shuffleboard and outline viewer to view any network table entries
 
+### Add a test Sim class
+The launch the sim, create a new Sim.java file in src/test/java/frc/robot/Sim.java
+
+```java
+
+package frc.robot;
+
+import frc.robot.simulator.SimMain;
+
+import java.io.IOException;
+
+public class Sim {
+    public static void main(String[] args) throws InterruptedException, IOException {
+        // start the sim
+        SimMain.main(args);
+    }
+}
+
+```
+
 ### vscode launch.json changes
 Finally, you'll need to update your launch.json to add an additional simulator configuration:
 
 ```json
     {
       "type": "java",
-      "name": "SimMain - local",
+      "name": "Sim - local",
       "request": "launch",
-      "mainClass": "frc.robot.simulator.SimMain",
+      "mainClass": "frc.robot.Sim",
       "vmArgs": "-Djava.library.path=build/tmp/jniExtractDir",
       "env": {
         "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"

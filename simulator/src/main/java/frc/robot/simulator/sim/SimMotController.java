@@ -997,6 +997,9 @@ public class SimMotController {
         SimMotor motor = motorStore.get(handle);
         int ticksPerRevolution = ConversionUtils.ticksPerRevolution(motor.getConfig().getEncoderCountsPerRevolution(), motor.getConfig().getEncoder());
         switch (motor.getConfig().getControlMode()) {
+            case PercentOutput:
+                // ignore this, but don't log it
+                return 0;
             case Velocity:
             case MotionVelocity:
                 return ConversionUtils.radiansPerSecondToTicksPer100ms(motor.getConfig().getTargetVelocity(), ticksPerRevolution);
