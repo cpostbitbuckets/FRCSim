@@ -994,7 +994,19 @@ public class SimMotController {
     }
 
     public static int GetClosedLoopTarget(long handle, int pidIdx) {
-        log.warn("GetClosedLoopTarget not implemented yet.");
+        SimMotor motor = motorStore.get(handle);
+        int ticksPerRevolution = ConversionUtils.ticksPerRevolution(motor.getConfig().getEncoderCountsPerRevolution(), motor.getConfig().getEncoder());
+        switch (motor.getConfig().getControlMode()) {
+            case Velocity:
+            case MotionVelocity:
+                return ConversionUtils.radiansPerSecondToTicksPer100ms(motor.getConfig().getTargetVelocity(), ticksPerRevolution);
+            case Position:
+            case MotionPosition:
+                return ConversionUtils.radiansToTicks(motor.getConfig().getTargetPosition(), ticksPerRevolution);
+            default:
+                log.warn("GetClosedLoopTarget for ControlMode " + motor.getConfig().getControlMode().toString() + " not implemented yet.");
+                break;
+        }
 
         return 0;
     }
