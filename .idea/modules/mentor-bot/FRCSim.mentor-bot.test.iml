@@ -27,7 +27,7 @@
     <orderEntry type="library" name="Gradle: com.ctre.phoenix:api-java:5.18.1" level="project" />
     <orderEntry type="library" name="Gradle: com.ctre.phoenix:wpiapi-java:5.18.1" level="project" />
     <orderEntry type="library" name="Gradle: com.revrobotics.frc:SparkMax-java:1.5.1" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:2020.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:2020.3.2" level="project" />
     <orderEntry type="library" name="Gradle: com.revrobotics.frc:ColorSensorV3-java:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.25" level="project" />

@@ -39,8 +39,8 @@
     <orderEntry type="library" name="Gradle: com.google.inject:guice:no_aop:4.2.2" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.gdx:gdx-jnigen:1.9.9" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.3" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-netty-shaded:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.3" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-netty-shaded:1.25.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-stub:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: com.badlogicgames.jlayer:jlayer:1.0.1-gdx" level="project" />
     <orderEntry type="library" name="Gradle: org.jcraft:jorbis:0.0.17" level="project" />
@@ -59,8 +59,8 @@
     <orderEntry type="library" name="Gradle: com.google.protobuf:protobuf-java:3.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.api.grpc:proto-google-common-protos:1.12.0" level="project" />
     <orderEntry type="library" name="Gradle: org.javassist:javassist:3.22.0-GA" level="project" />
-    <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.10.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.perfmark:perfmark-api:0.19.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.jsoup:jsoup:1.10.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.re2j:re2j:1.2" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.4" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:annotations:3.0.1" level="project" />
@@ -71,8 +71,8 @@
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.3" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-context:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.3" level="project" />
-    <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
     <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.18" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
@@ -83,9 +83,9 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.android:annotations:4.1.1.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-linux:2.0.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-contrib-grpc-metrics:0.21.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-api:0.21.0" level="project" />
-    <orderEntry type="module" module-name="FRCSim.simulator.main" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-windows:2.0.5" level="project" />
+    <orderEntry type="module" module-name="FRCSim.simulator.main" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-api:0.21.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-osx:2.0.5" level="project" />
   </component>
 </module>

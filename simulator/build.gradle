@@ -58,7 +58,7 @@ repositories {
     }
 }
 
-def wpiVersion="2020.2.2"
+def wpiVersion="2020.3.2"
 def opencvVersion="3.4.7-2"
 def ejmlVersion="0.38"
 def jacksonVersion="2.10.0"
