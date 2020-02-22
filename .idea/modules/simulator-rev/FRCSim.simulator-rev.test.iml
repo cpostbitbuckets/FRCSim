@@ -20,13 +20,13 @@
     <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy:1.10.6" level="project" />
     <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy-agent:1.10.6" level="project" />
     <orderEntry type="library" name="Gradle: com.kauailabs.navx.frc:navx-java:3.1.400" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibj:wpilibj-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.ntcore:ntcore-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.wpiutil:wpiutil-java:2020.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibj:wpilibj-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.ntcore:ntcore-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.wpiutil:wpiutil-java:2020.3.2" level="project" />
     <orderEntry type="library" name="Gradle: edu.wpi.first.thirdparty.frc2020.opencv:opencv-java:3.4.7-2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.cscore:cscore-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.cameraserver:cameraserver-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.hal:hal-java:2020.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.cscore:cscore-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.cameraserver:cameraserver-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.hal:hal-java:2020.3.2" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-simple:0.38" level="project" />
     <orderEntry type="library" name="Gradle: com.hubspot.jinjava:jinjava:2.4.15" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.10.0" level="project" />
@@ -70,10 +70,10 @@
     <orderEntry type="library" name="Gradle: com.github.javaparser:javaparser-core:2.3.0" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.3" level="project" />
     <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.3" level="project" />
-    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.3" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-context:1.25.0" level="project" />
-    <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.3" level="project" />
     <orderEntry type="library" name="Gradle: com.google.errorprone:error_prone_annotations:2.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.5" level="project" />
     <orderEntry type="library" name="Gradle: org.codehaus.mojo:animal-sniffer-annotations:1.18" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
@@ -82,11 +82,11 @@
     <orderEntry type="library" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.gson:gson:2.8.5" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.android:annotations:4.1.1.4" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-contrib-grpc-metrics:0.21.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-linux:2.0.5" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-api:0.21.0" level="project" />
-    <orderEntry type="module" module-name="FRCSim.simulator.main" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-contrib-grpc-metrics:0.21.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-windows:2.0.5" level="project" />
+    <orderEntry type="module" module-name="FRCSim.simulator.main" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opencensus:opencensus-api:0.21.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-osx:2.0.5" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="FRCSim.simulator-rev.main" />

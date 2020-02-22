@@ -4,8 +4,6 @@ public class RobotPosition {
 
     public enum Type {
         WheelDisplacement,
-        Box2d,
-        HowardPhysics
     }
 
     public final Type type;

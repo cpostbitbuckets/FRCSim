@@ -101,48 +101,48 @@ transmissions:
     encoderCountsPerRevolution: 2048
   gearRatio: "{{ defaults.juniorGearing }}"
   efficiency: .8
-- motors:
-    - id: 7
-      name: Spark Left Motor (7)
-      model: neo
-      stallTorque: "{{ defaults.neo.stallTorque }}"
-      stallCurrent: "{{ defaults.neo.stallCurrent }}"
-      voltage: "{{ defaults.neo.voltage }}"
-      maxRPM: "{{ defaults.neo.maxRPM }}"
-      mass: "{{ defaults.neo.mass }}"
-      diameter: "{{ defaults.neo.diameter }}"
-    - id: 8
-      name: Spark Left Follower (8)
-      model: neo
-      stallTorque: "{{ defaults.neo.stallTorque }}"
-      stallCurrent: "{{ defaults.neo.stallCurrent }}"
-      voltage: "{{ defaults.neo.voltage }}"
-      maxRPM: "{{ defaults.neo.maxRPM }}"
-      mass: "{{ defaults.neo.mass }}"
-      diameter: "{{ defaults.neo.diameter }}"
-  gearRatio: "{{ defaults.juniorGearing }}"
-  efficiency: 1
-- motors:
-    - id: 9
-      name: Spark Right Motor (9)
-      model: neo
-      stallTorque: "{{ defaults.neo.stallTorque }}"
-      stallCurrent: "{{ defaults.neo.stallCurrent }}"
-      voltage: "{{ defaults.neo.voltage }}"
-      maxRPM: "{{ defaults.neo.maxRPM }}"
-      mass: "{{ defaults.neo.mass }}"
-      diameter: "{{ defaults.neo.diameter }}"
-    - id: 10
-      name: Spark Right Follower (10)
-      model: neo
-      stallTorque: "{{ defaults.neo.stallTorque }}"
-      stallCurrent: "{{ defaults.neo.stallCurrent }}"
-      voltage: "{{ defaults.neo.voltage }}"
-      maxRPM: "{{ defaults.neo.maxRPM }}"
-      mass: "{{ defaults.neo.mass }}"
-      diameter: "{{ defaults.neo.diameter }}"
-  gearRatio: "{{ defaults.juniorGearing }}"
-  efficiency: 1
+#- motors:
+#    - id: 7
+#      name: Spark Left Motor (7)
+#      model: neo
+#      stallTorque: "{{ defaults.neo.stallTorque }}"
+#      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+#      voltage: "{{ defaults.neo.voltage }}"
+#      maxRPM: "{{ defaults.neo.maxRPM }}"
+#      mass: "{{ defaults.neo.mass }}"
+#      diameter: "{{ defaults.neo.diameter }}"
+#    - id: 8
+#      name: Spark Left Follower (8)
+#      model: neo
+#      stallTorque: "{{ defaults.neo.stallTorque }}"
+#      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+#      voltage: "{{ defaults.neo.voltage }}"
+#      maxRPM: "{{ defaults.neo.maxRPM }}"
+#      mass: "{{ defaults.neo.mass }}"
+#      diameter: "{{ defaults.neo.diameter }}"
+#  gearRatio: "{{ defaults.juniorGearing }}"
+#  efficiency: 1
+#- motors:
+#    - id: 9
+#      name: Spark Right Motor (9)
+#      model: neo
+#      stallTorque: "{{ defaults.neo.stallTorque }}"
+#      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+#      voltage: "{{ defaults.neo.voltage }}"
+#      maxRPM: "{{ defaults.neo.maxRPM }}"
+#      mass: "{{ defaults.neo.mass }}"
+#      diameter: "{{ defaults.neo.diameter }}"
+#    - id: 10
+#      name: Spark Right Follower (10)
+#      model: neo
+#      stallTorque: "{{ defaults.neo.stallTorque }}"
+#      stallCurrent: "{{ defaults.neo.stallCurrent }}"
+#      voltage: "{{ defaults.neo.voltage }}"
+#      maxRPM: "{{ defaults.neo.maxRPM }}"
+#      mass: "{{ defaults.neo.mass }}"
+#      diameter: "{{ defaults.neo.diameter }}"
+#  gearRatio: "{{ defaults.juniorGearing }}"
+#  efficiency: 1
 solenoids:
   - module: 0
     name: Pivet Double Solenoid (0)

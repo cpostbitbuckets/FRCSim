@@ -259,6 +259,11 @@ public class SimHAL {
         return 0;
     }
 
+    public static int sendConsoleLine(String line) {
+        log.warn("sendConsoleLine not implemented yet.");
+        return 0;
+    }
+
     /**
      * This is called for Solenoids to get a port for a solenoid module
      * @param module

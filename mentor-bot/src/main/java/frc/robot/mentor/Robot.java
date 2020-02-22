@@ -54,7 +54,7 @@ public class Robot extends TimedRobot {
 
     // subsystems
     private TalonDriveSubsystem talonDriveSubsystem;
-    private SparkDriveSubsystem sparkDriveSubsystem;
+//    private SparkDriveSubsystem sparkDriveSubsystem;
     private ArmSubsystem armSubsystem;
     private List<BitBucketSubsystem> subsystems = new ArrayList<>();
 
@@ -97,9 +97,9 @@ public class Robot extends TimedRobot {
         toggleSolenoidButton = new JoystickButton(driverJoystick, config.oi.driveSolenoidButton);
         // init subsystems
         talonDriveSubsystem = new TalonDriveSubsystem(config);
-        sparkDriveSubsystem = new SparkDriveSubsystem(config);
+//        sparkDriveSubsystem = new SparkDriveSubsystem(config);
         armSubsystem = new ArmSubsystem(config);
-        subsystems.addAll(List.of(talonDriveSubsystem, sparkDriveSubsystem, armSubsystem));
+        subsystems.addAll(List.of(talonDriveSubsystem, /*sparkDriveSubsystem,*/ armSubsystem));
 
         // initialize the global and subsystem dashboards
         initSmartDashboard();
@@ -178,8 +178,8 @@ public class Robot extends TimedRobot {
 
         // reset buttons call into multiple subsystems
         resetDriveSensorButton.whenPressed(new ParallelCommandGroup(
-                new InstantCommand(talonDriveSubsystem::resetSensorPosition, talonDriveSubsystem),
-                new InstantCommand(sparkDriveSubsystem::resetSensorPosition, sparkDriveSubsystem)
+                new InstantCommand(talonDriveSubsystem::resetSensorPosition, talonDriveSubsystem)
+//                new InstantCommand(sparkDriveSubsystem::resetSensorPosition, sparkDriveSubsystem)
         ));
 
         // handle joystick axis
@@ -203,11 +203,11 @@ public class Robot extends TimedRobot {
                 , true);
 
         // spark drive is just for testing, velocity only
-        sparkDriveSubsystem.setDefaultCommand(sparkDriveSubsystem
-                .drive(
-                        () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
-                        () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis))
-        );
+//        sparkDriveSubsystem.setDefaultCommand(sparkDriveSubsystem
+//                .drive(
+//                        () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
+//                        () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis))
+//        );
 
         log.info("teleopInit complete");
     }

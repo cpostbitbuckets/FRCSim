@@ -26,13 +26,13 @@
     <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy:1.10.6" level="project" />
     <orderEntry type="library" name="Gradle: net.bytebuddy:byte-buddy-agent:1.10.6" level="project" />
     <orderEntry type="library" name="Gradle: com.kauailabs.navx.frc:navx-java:3.1.400" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibj:wpilibj-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.ntcore:ntcore-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.wpiutil:wpiutil-java:2020.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibj:wpilibj-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.ntcore:ntcore-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.wpiutil:wpiutil-java:2020.3.2" level="project" />
     <orderEntry type="library" name="Gradle: edu.wpi.first.thirdparty.frc2020.opencv:opencv-java:3.4.7-2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.cscore:cscore-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.cameraserver:cameraserver-java:2020.2.2" level="project" />
-    <orderEntry type="library" name="Gradle: edu.wpi.first.hal:hal-java:2020.2.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.cscore:cscore-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.cameraserver:cameraserver-java:2020.3.2" level="project" />
+    <orderEntry type="library" name="Gradle: edu.wpi.first.hal:hal-java:2020.3.2" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-simple:0.38" level="project" />
     <orderEntry type="library" name="Gradle: com.hubspot.jinjava:jinjava:2.4.15" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.10.0" level="project" />

@@ -3,7 +3,7 @@ package frc.robot.simulator.sim.ui;
 import frc.robot.simulator.sim.RobotPosition;
 import frc.robot.simulator.sim.events.EventManager;
 import frc.robot.simulator.sim.events.FieldRenderEvent;
-import frc.robot.simulator.sim.field.box2d.Field;
+import frc.robot.simulator.sim.field.wheeldisplacement.Field;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,12 +51,6 @@ public class FieldPanel extends JPanel {
 
                         case WheelDisplacement:
                             g2d.setColor(Color.GREEN);
-                            break;
-                        case Box2d:
-                            g2d.setColor(Color.RED);
-                            break;
-                        case HowardPhysics:
-                            g2d.setColor(Color.BLUE);
                             break;
                     }
 

@@ -63,6 +63,7 @@ public class MotorSimulator {
         RobotProto.MotorOutputs.MotorOutput.Builder outputBuilder = RobotProto.MotorOutputs.MotorOutput.newBuilder();
 
         RobotProto.MotorConfig.ControlMode controlMode = motor.getConfig().getControlMode();
+        boolean inverted = motor.getConfig().getInverted();
         double output = 0;
         if (motor.getConfig().getFollowingId() != 0) {
             for (SimMotor otherMotor : motors) {
@@ -72,27 +73,30 @@ public class MotorSimulator {
                 }
             }
         } else {
+            double target = 0;
             switch (controlMode) {
 
                 case PercentOutput:
                     output = motor.getConfig().getTargetOutput();
                     break;
                 case Position:
+                case MotionPosition:
                     // compute position based on our target
-                    output = runPID(motor, motor.getConfig().getTargetPosition(), motor.getSensorPosition());
+                    target = motor.getConfig().getTargetPosition();
+                    target = inverted ? -target : target;
+                    output = runPID(motor, target, motor.getSensorPosition());
                     break;
                 case Velocity:
                     // compute position based on our target
-                    output = runPID(motor, motor.getConfig().getTargetVelocity(), motor.getVelocity());
+                    target = motor.getConfig().getTargetVelocity();
+                    target = inverted ? -target : target;
+                    output = runPID(motor, target, motor.getVelocity());
                     break;
                 case Current:
                     break;
                 case Follower:
                     break;
                 case MotionProfile:
-                    break;
-                case MotionPosition:
-                    output = runPID(motor, motor.getConfig().getTargetPosition(), motor.getSensorPosition());
                     break;
                 case MotionProfileArc:
                     break;

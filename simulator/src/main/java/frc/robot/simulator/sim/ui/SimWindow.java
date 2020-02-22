@@ -93,10 +93,12 @@ public class SimWindow {
 
         // we want a row for every 3 motors
         if (motors.size() > 0) {
-            int numDisplayedMotors = motors.size() + solenoids.size();
+            int numDisplayedMotors = motors.size();
             if (simulatorConfig.hideFollowers) {
                 numDisplayedMotors = (int) motors.stream().filter(m -> m.getConfig().getFollowingId() == 0).count();
             }
+            // add in solenoids and the positional display
+            numDisplayedMotors += solenoids.size() + 1;
             motorGridLayout.setRows(numDisplayedMotors / 4 + 1);
         }
 

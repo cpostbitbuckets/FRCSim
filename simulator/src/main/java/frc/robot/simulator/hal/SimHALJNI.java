@@ -199,6 +199,10 @@ public final class SimHALJNI extends JNIWrapper {
         return SimHAL.sendError(isError, errorCode, isLVCode, details, location, callStack, printMsg);
     }
 
+    public static int sendConsoleLine(String line) {
+        return SimHAL.sendConsoleLine(line);
+    }
+
     public static int getPortWithModule(byte module, byte channel) {
         return SimHAL.getPortWithModule(module, channel);
     }

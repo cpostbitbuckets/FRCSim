@@ -43,6 +43,10 @@ public class WheelDisplacementSim extends FieldSim {
                 rightRadians = simMotor.position / simulatorConfig.driveBase.gearRatio;
             }
         }
+
+        // invert the left side because forward motor movements mean backwards wheel movements
+        leftRadians = -leftRadians;
+
         double currentLinearRadians = (leftRadians + rightRadians) / 2;
 
         double deltaRadians = currentLinearRadians - lastLinearRadians;

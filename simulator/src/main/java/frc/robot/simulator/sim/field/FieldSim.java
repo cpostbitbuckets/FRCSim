@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import frc.robot.simulator.sim.RobotPosition;
 import frc.robot.simulator.sim.config.SimulatorConfig;
-import frc.robot.simulator.sim.field.box2d.Field;
+import frc.robot.simulator.sim.field.wheeldisplacement.Field;
 import frc.robot.simulator.sim.motors.MotorStore;
 
 @Singleton
