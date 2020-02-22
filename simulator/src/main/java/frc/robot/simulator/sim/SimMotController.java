@@ -325,7 +325,7 @@ public class SimMotController {
     }
 
     public static double GetTemperature(long handle) {
-        log.warn("GetTemperature not implemented yet.");
+//        log.warn("GetTemperature not implemented yet.");
 
         return 0;
     }

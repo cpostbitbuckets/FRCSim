@@ -22,8 +22,8 @@
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-databind:2.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.10.0" level="project" />
     <orderEntry type="library" name="Gradle: com.fasterxml.jackson.core:jackson-core:2.10.0" level="project" />
-    <orderEntry type="library" name="Gradle: com.ctre.phoenix:api-java:5.18.1" level="project" />
-    <orderEntry type="library" name="Gradle: com.ctre.phoenix:wpiapi-java:5.18.1" level="project" />
+    <orderEntry type="library" name="Gradle: com.ctre.phoenix:api-java:5.18.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.ctre.phoenix:wpiapi-java:5.18.2" level="project" />
     <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibOldCommands:wpilibOldCommands-java:2020.3.2" level="project" />
     <orderEntry type="library" name="Gradle: com.revrobotics.frc:SparkMax-java:1.5.1" level="project" />
     <orderEntry type="library" name="Gradle: edu.wpi.first.wpilibNewCommands:wpilibNewCommands-java:2020.3.2" level="project" />
@@ -39,8 +39,8 @@
     <orderEntry type="library" name="Gradle: io.grpc:grpc-protobuf:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-protobuf-lite:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-api:1.25.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-stub:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.inject:guice:no_aop:4.2.2" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-stub:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:28.1-android" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-netty-shaded:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.code.findbugs:jsr305:3.0.2" level="project" />
