@@ -159,6 +159,9 @@ public class Robot extends TimedRobot {
         int blue = colorSensor.getBlue();
         Color color = colorSensor.getColor();
         ColorSensorV3.RawColor rawColor = colorSensor.getRawColor();
+        colorSensor.getIR();
+        colorSensor.getProximity();
+
 
         // handle joystick button presses
         moveToPositionZeroButton.whenPressed(armSubsystem::moveToPositionZero, armSubsystem);

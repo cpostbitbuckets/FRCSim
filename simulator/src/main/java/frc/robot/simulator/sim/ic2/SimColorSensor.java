@@ -2,6 +2,7 @@ package frc.robot.simulator.sim.ic2;
 
 public class SimColorSensor {
     public static final byte partId = (byte) 0xC2;
+
     public enum Register {
         kMainCtrl(0x00),
         kProximitySensorLED(0x01),
@@ -26,6 +27,8 @@ public class SimColorSensor {
     public byte red = (byte) 0x00;
     public byte green = (byte) 0xFF;
     public byte blue = (byte) 0x00;
+    public byte infrared = (byte) 0x00;
+    public byte proximity = (byte) 0x00;
 
     public SimColorSensor(int port) {
         this.port = port;

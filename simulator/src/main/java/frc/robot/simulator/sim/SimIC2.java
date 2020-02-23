@@ -39,6 +39,10 @@ public class SimIC2 {
                     dataReceived[0] = colorSensor.red;
                 } else if (request == SimColorSensor.Register.kDataBlue.bVal) {
                     dataReceived[0] = colorSensor.blue;
+                } else if (request == SimColorSensor.Register.kDataInfrared.bVal) {
+                    dataReceived[0] = colorSensor.infrared;
+                } else if (request == SimColorSensor.Register.kProximityData.bVal) {
+                    dataReceived[0] = colorSensor.proximity;
                 } else {
                     log.warn(String.format("IC2 device on port %s making unsupported request: %02X", port, dataToSend[0]));
                 }
