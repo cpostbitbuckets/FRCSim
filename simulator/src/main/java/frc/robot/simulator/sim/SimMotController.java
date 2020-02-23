@@ -313,9 +313,8 @@ public class SimMotController {
     }
 
     public static double GetSupplyCurrent(long handle) {
-        log.warn("GetSupplyCurrent not implemented yet.");
-
-        return 0;
+        // TODO: Is this close enough for sim purposes?
+        return motorStore.getOutput(handle).getOutputCurrent();
     }
 
     public static double GetStatorCurrent(long handle) {
