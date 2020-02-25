@@ -12,6 +12,7 @@ public abstract class FieldSim {
     protected final RobotPosition robotPosition = supplyRobotPosition();
     protected MotorStore motorStore;
     protected SimulatorConfig simulatorConfig;
+    protected double startHeading = 0;
 
     protected abstract RobotPosition supplyRobotPosition();
 
@@ -28,6 +29,7 @@ public abstract class FieldSim {
         // set the robot position based on the field image we are using
         robotPosition.x = 181 * Field.metersPerPixelWidth - Field.width / 2;
         robotPosition.y = Field.height / 2 - 123 * Field.metersPerPixelHeight;
+        robotPosition.heading = 0;
     }
 
     /**

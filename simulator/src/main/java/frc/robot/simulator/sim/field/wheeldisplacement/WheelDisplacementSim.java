@@ -45,7 +45,7 @@ public class WheelDisplacementSim extends FieldSim {
         }
 
         // invert the left side because forward motor movements mean backwards wheel movements
-        leftRadians = -leftRadians;
+        rightRadians = -rightRadians;
 
         double currentLinearRadians = (leftRadians + rightRadians) / 2;
 
@@ -57,7 +57,7 @@ public class WheelDisplacementSim extends FieldSim {
         // for next loop
         lastLinearRadians = currentLinearRadians;
 
-        robotPosition.heading = newHeading;
+        robotPosition.heading = newHeading + startHeading;
 
         robotPosition.velocity = deltaLinearPosition / deltaTime;
         robotPosition.x += deltaLinearPosition * Math.sin(robotPosition.heading);
