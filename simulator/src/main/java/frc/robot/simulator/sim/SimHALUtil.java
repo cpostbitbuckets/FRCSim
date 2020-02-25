@@ -25,6 +25,7 @@ public class SimHALUtil {
     }
 
     public static long getFPGATime() {
+        //         return System.nanoTime() / 1000;
         return ChronoUnit.MICROS.between(Instant.EPOCH, Instant.now());
     }
 

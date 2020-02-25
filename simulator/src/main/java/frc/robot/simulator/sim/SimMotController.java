@@ -808,15 +808,24 @@ public class SimMotController {
     }
 
     public static int ConfigSetCustomParam(long handle, int newValue, int paramIndex, int timeoutMs) {
-        log.warn("ConfigSetCustomParam not implemented yet.");
+        SimMotor motor = motorStore.get(handle);
+        RobotProto.MotorConfig.Builder builder = motor.getConfig().toBuilder();
 
-        return 0;
+        builder.setCustomParams(paramIndex, newValue);
+
+        motor.setConfig(builder.build());
+        client.updateMotor(motor.getConfig());
+        return SUCCESS;
     }
 
     public static int ConfigGetCustomParam(long handle, int paramIndex, int timoutMs) {
-        log.warn("ConfigGetCustomParam not implemented yet.");
+        SimMotor motor = motorStore.get(handle);
 
-        return 0;
+        if (motor.getConfig().getCustomParamsCount() > paramIndex) {
+            return motor.getConfig().getCustomParams(paramIndex);
+        } else {
+            return 0;
+        }
     }
 
     public static int ConfigSetParameter(long handle, int param, double value, int subValue, int ordinal,

@@ -55,6 +55,8 @@ public class SimMotor {
                 .addFpid(RobotProto.MotorConfig.FPID.newBuilder().build())
                 .addFpid(RobotProto.MotorConfig.FPID.newBuilder().build())
                 .addFpid(RobotProto.MotorConfig.FPID.newBuilder().build())
+                .addCustomParams(0)
+                .addCustomParams(0)
                 .setEncoder(RobotProto.MotorConfig.Encoder.NotSet)
                 .setEncoderCountsPerRevolution(encoderTicksPerRevolution)
                 .build();

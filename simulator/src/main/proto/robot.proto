@@ -189,7 +189,7 @@ message MotorConfig {
     string model = 17;
     Vendor vendor = 18;
     int32 encoderCountsPerRevolution = 19;
-
+    repeated int32 customParams = 20;
 }
 
 message ConnectToRobotResponse {
