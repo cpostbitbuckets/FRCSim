@@ -116,8 +116,8 @@ public class SimSPI {
                         // write the heading to heading and yaw, we never have pitch in our 2d world
                         encodeProtocolSignedHundredthsFloat(simNavX.heading, dataReceived, IMURegisters.NAVX_REG_FUSED_HEADING_L - port);
                         encodeProtocolSignedHundredthsFloat(simNavX.heading, dataReceived, IMURegisters.NAVX_REG_HEADING_L - port);
-                        encodeProtocolSignedHundredthsFloat(180 - simNavX.heading, dataReceived, IMURegisters.NAVX_REG_YAW_L - port);
-                        encodeProtocolSignedHundredthsFloat(180 - simNavX.heading, dataReceived, IMURegisters.NAVX_REG_YAW_OFFSET_L - port);
+                        encodeProtocolSignedHundredthsFloat(simNavX.heading, dataReceived, IMURegisters.NAVX_REG_YAW_L - port);
+                        encodeProtocolSignedHundredthsFloat(simNavX.heading, dataReceived, IMURegisters.NAVX_REG_YAW_OFFSET_L - port);
 
                         // this is a read, tell the caller we can return a big buffer of info
                         byte crc = AHRSProtocol.getCRC(dataReceived, dataReceived.length - 1);
