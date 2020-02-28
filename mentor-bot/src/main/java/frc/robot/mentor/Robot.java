@@ -75,6 +75,11 @@ public class Robot extends TimedRobot {
         log.info("robotInit starting");
         config = new Config();
 
+        // Make sure our preferences test works
+        Preferences preferences = Preferences.getInstance();
+        preferences.getString("testKey", "");
+        preferences.putString("testKey", "testValue");
+
         // test a solenoid
         pivetSolenoid = new DoubleSolenoid(0, 0, 1);
         singleSolenoid = new Solenoid(1, 0);

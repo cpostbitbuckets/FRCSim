@@ -5,11 +5,13 @@ import com.google.inject.Injector;
 import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.first.hal.*;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.simulator.hal.*;
 import frc.robot.simulator.sim.Simulator;
 import frc.robot.simulator.sim.SimulatorModule;
 import frc.robot.simulator.sim.SimulatorSettings;
+import frc.robot.simulator.sim.preferences.SimPreferences;
 import frc.robot.simulator.sim.utils.VendorUtils;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
@@ -17,6 +19,7 @@ import net.bytebuddy.dynamic.ClassFileLocator;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
 import net.bytebuddy.dynamic.scaffold.TypeValidation;
 import net.bytebuddy.implementation.FixedValue;
+import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.pool.TypePool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +27,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 
-import static net.bytebuddy.matcher.ElementMatchers.named;
+import static net.bytebuddy.matcher.ElementMatchers.*;
 
 public class SimMain {
     private static final Logger log = LoggerFactory.getLogger(SimMain.class);
@@ -120,6 +123,9 @@ public class SimMain {
         redefineClass(SimDeviceJNI.class, SimSimDeviceJNI.class);
         redefineClass(CompressorJNI.class, SimCompressorJNI.class);
 
+        // this tries to get the network tables to write files constantly, which is annoying
+        redefineClass(Preferences.class, SimPreferences.class);
+
         // CTRE
         if (VendorUtils.isCtreAvailable()) {
             redefineClass(VendorUtils.ctreControllerClass, VendorUtils.simCTREControllerClass);
@@ -148,18 +154,23 @@ public class SimMain {
         new ByteBuddy()
                 .redefine(typePool.describe("edu.wpi.cscore.CameraServerJNI").resolve(), // do not use 'Bar.class'
                         ClassFileLocator.ForClassLoader.ofSystemLoader())
-                .method(named("enumerateSinks")).intercept(FixedValue.value(new int[] {}))
+                .method(named("enumerateSinks")).intercept(MethodDelegation.to(SimCameraServerJNI.class))
                 .make()
                 .load(ClassLoader.getSystemClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
     }
 
     static void redefineClass(Class clz, Class simClz) {
-        new ByteBuddy()
-                .with(TypeValidation.DISABLED)
-            .redefine(simClz)
-            .name(clz.getName())
-            .make()
-            .load(clz.getClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
+        try {
+            new ByteBuddy()
+                    .with(TypeValidation.DISABLED)
+                    .redefine(simClz)
+                    .name(clz.getName())
+                    .make()
+                    .load(clz.getClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
+        } catch (Exception e) {
+            log.error("Failed to redefine class " + clz.getName());
+            throw e;
+        }
     }
 
 }

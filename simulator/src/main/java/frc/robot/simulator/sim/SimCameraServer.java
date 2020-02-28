@@ -519,9 +519,7 @@ public class SimCameraServer {
     }
 
     public static int[] enumerateSinks() {
-        log.warn("enumerateSinks not implemented yet.");
-
-        return null;
+        return new int[] {};
     }
 
     public static String getHostname() {
