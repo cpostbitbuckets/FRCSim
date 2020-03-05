@@ -8,6 +8,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.simulator.hal.*;
+import frc.robot.simulator.sim.SimPower;
 import frc.robot.simulator.sim.Simulator;
 import frc.robot.simulator.sim.SimulatorModule;
 import frc.robot.simulator.sim.SimulatorSettings;
@@ -122,6 +123,7 @@ public class SimMain {
         redefineClass(SolenoidJNI.class, SimSolenoidJNI.class);
         redefineClass(SimDeviceJNI.class, SimSimDeviceJNI.class);
         redefineClass(CompressorJNI.class, SimCompressorJNI.class);
+        redefineClass(PowerJNI.class, SimPowerJNI.class);
 
         // this tries to get the network tables to write files constantly, which is annoying
         redefineClass(Preferences.class, SimPreferences.class);
