@@ -121,6 +121,14 @@ public class SimulatorConfig {
     public List<Transmission> transmissions = new ArrayList<>();
     public List<Solenoid> solenoids = new ArrayList<>();
 
+    public static class StartPosition {
+        public double x = 1.54;
+        public double y = 5.43;
+        public double heading = 180;
+    }
+
+    public StartPosition startPosition = new StartPosition();
+
     private final Map<Integer, Motor> motorsById = new HashMap<>();
     private final Map<Integer, Solenoid> solenoidsByModule = new HashMap<>();
 

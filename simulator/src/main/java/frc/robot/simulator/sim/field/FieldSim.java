@@ -27,9 +27,10 @@ public abstract class FieldSim {
      */
     public void create() {
         // set the robot position based on the field image we are using
-        robotPosition.x = 181 * Field.metersPerPixelWidth - Field.width / 2;
-        robotPosition.y = Field.height / 2 - 123 * Field.metersPerPixelHeight;
-        robotPosition.heading = 0;
+        robotPosition.x = simulatorConfig.startPosition.x;
+        robotPosition.y = simulatorConfig.startPosition.y;
+        robotPosition.heading = simulatorConfig.startPosition.heading;
+        startHeading = simulatorConfig.startPosition.heading;
     }
 
     /**
@@ -43,10 +44,11 @@ public abstract class FieldSim {
     }
 
     public void resetRobot() {
-        robotPosition.x = 181 * Field.metersPerPixelWidth - Field.width / 2;
-        robotPosition.y = Field.height / 2 - 123 * Field.metersPerPixelHeight;
+        robotPosition.x = simulatorConfig.startPosition.x;
+        robotPosition.y = simulatorConfig.startPosition.y;
         robotPosition.velocity = 0;
         robotPosition.angularVelocity = 0;
-        robotPosition.heading = 0;
+        robotPosition.heading = simulatorConfig.startPosition.heading;
+        startHeading = simulatorConfig.startPosition.heading;
     }
 }
