@@ -8,7 +8,8 @@
       "projectName": "mentor-bot",
       "vmArgs": "-DrobotClass=frc.robot.mentor.Robot -Djava.library.path=build/tmp/jniExtractDir",
       "env": {
-        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir",
+        "Path": "${env:Path};${workspaceFolder}\\build\\tmp/jniExtractDir"
       }
     },
     {
@@ -19,7 +20,8 @@
       "projectName": "mentor-bot",
       "vmArgs": "-DrobotClass=frc.robot.mentor.Robot -Djava.library.path=build/tmp/jniExtractDir -Dmode=UnityServer",
       "env": {
-        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir",
+        "Path": "${env:Path};${workspaceFolder}\\build\\tmp/jniExtractDir"
       }
     },
     {
@@ -30,7 +32,8 @@
       "projectName": "FRCSim",
       "vmArgs": "-Djava.library.path=build/tmp/jniExtractDir",
       "env": {
-        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir",
+        "Path": "${env:Path};${workspaceFolder}\\build\\tmp/jniExtractDir"
       }
     },
     {
@@ -41,7 +44,8 @@
       "projectName": "FRCSim",
       "vmArgs": "-Djava.library.path=build/tmp/jniExtractDir -Dmode=UnityServer",
       "env": {
-        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir"
+        "DYLD_LIBRARY_PATH": "build/tmp/jniExtractDir",
+        "Path": "${env:Path};${workspaceFolder}\\build\\tmp/jniExtractDir"
       }
     }
   ]

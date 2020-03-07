@@ -65,7 +65,7 @@ public class WheelDisplacementSim extends FieldSim {
 
         SimNavX simNavX = SimSPI.getNavX(SPI.Port.kMXP.value);
         if (simNavX != null) {
-            float degrees = (float)(robotPosition.heading * 360 / (Math.PI * 2));
+            float degrees = (float)((robotPosition.heading - simulatorConfig.startPosition.heading) * 360 / (Math.PI * 2));
 
             // degrees are between 0 and 360
             if (degrees < 0) {
