@@ -122,9 +122,9 @@ public class SimulatorConfig {
     public List<Solenoid> solenoids = new ArrayList<>();
 
     public static class StartPosition {
-        public double x = 1.54;
-        public double y = 5.43;
-        public double heading = 180;
+        public double x = 1.54; // meters from center
+        public double y = 5.43; // meters from center
+        public double heading = 0.0; // radians, 0 = up
     }
 
     public StartPosition startPosition = new StartPosition();
