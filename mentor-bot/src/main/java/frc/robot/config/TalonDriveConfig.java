@@ -66,11 +66,11 @@ public class TalonDriveConfig implements SimSupportingConfig {
                         .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .velocityFPID(velocityFPID)
-                        .inverted(true),
+                        .inverted(false),
                 MotorSettings.build(2)
                         .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
-                        .inverted(true)
+                        .inverted(false)
                         .follower(true)
         };
 
@@ -79,11 +79,13 @@ public class TalonDriveConfig implements SimSupportingConfig {
                         .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .velocityFPID(velocityFPID)
+                        .inverted(true)
                 ,
                 MotorSettings.build(4)
                         .sensor(SensorType.Integrated)
                         .encoderTicks(2048)
                         .follower(true)
+                        .inverted(true)
 
         };
 
