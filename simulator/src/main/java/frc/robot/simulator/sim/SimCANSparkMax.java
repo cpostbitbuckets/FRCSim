@@ -38,6 +38,9 @@ public class SimCANSparkMax {
         // so kF is 1/316, so if 316 RPM is requested, we should respond with 1 (full) output
         // we need to convert this to 1 / radsPerSecond
 
+        if (value == 0) {
+            return 0;
+        }
         return 1 / ConversionUtils.rpmToRadiansPerSecond(1. / value);
     }
 
