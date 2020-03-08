@@ -35,10 +35,10 @@ public class WheelDisplacementSim extends FieldSim {
     @Override
     public void resetRobot() {
         super.resetRobot();
-        Rotation2d rotation = new Rotation2d(robotPosition.heading);
+        Rotation2d rotation = new Rotation2d(simulatorConfig.startPosition.heading);
         odometry = new DifferentialDriveOdometry(
                 rotation,
-                new Pose2d(robotPosition.x, robotPosition.y, rotation)
+                new Pose2d(simulatorConfig.startPosition.y, simulatorConfig.startPosition.x, rotation)
         );
     }
 
@@ -71,8 +71,8 @@ public class WheelDisplacementSim extends FieldSim {
         odometry.update(new Rotation2d(newHeading + startHeading), leftRadians * metersPerRadian, rightRadians * metersPerRadian);
 
         robotPosition.heading = odometry.getPoseMeters().getRotation().getRadians();
-        robotPosition.x = odometry.getPoseMeters().getTranslation().getX();
-        robotPosition.y = odometry.getPoseMeters().getTranslation().getY();
+        robotPosition.x = odometry.getPoseMeters().getTranslation().getY();
+        robotPosition.y = odometry.getPoseMeters().getTranslation().getX();
 
         SimNavX simNavX = SimSPI.getNavX(SPI.Port.kMXP.value);
         if (simNavX != null) {
