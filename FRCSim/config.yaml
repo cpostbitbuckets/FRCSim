@@ -31,6 +31,10 @@ driveBase:
   wheelInertia: 1.0E-4
   viscousFriction: 0.04666464678901319
   gearRatio: "{{ 10 +  22 / 25 }}"
+startPosition:
+  x: 1.54
+  y: 5.33
+  heading: 0 #"{{ -3.14159 / 2 }}"
 transmissions:
 - motors:
   - id: 1

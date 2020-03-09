@@ -27,10 +27,7 @@ public abstract class FieldSim {
      */
     public void create() {
         // set the robot position based on the field image we are using
-        robotPosition.x = simulatorConfig.startPosition.x;
-        robotPosition.y = simulatorConfig.startPosition.y;
-        robotPosition.heading = simulatorConfig.startPosition.heading;
-        startHeading = simulatorConfig.startPosition.heading;
+        resetRobot();
     }
 
     /**
