@@ -23,6 +23,7 @@ import frc.robot.mentor.subsystem.arm.ArmSubsystem;
 import frc.robot.mentor.subsystem.drive.DriveStyle;
 import frc.robot.mentor.subsystem.drive.SparkDriveSubsystem;
 import frc.robot.mentor.subsystem.drive.TalonDriveSubsystem;
+import frc.robot.mentor.subsystem.shooter.ShooterSubsystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,20 +52,17 @@ public class Robot extends TimedRobot {
     JoystickButton resetPositionSensorButton;
     JoystickButton resetDriveSensorButton;
     JoystickButton toggleSolenoidButton;
+    JoystickButton spinUpShooterButton;
 
     // subsystems
     private TalonDriveSubsystem talonDriveSubsystem;
-//    private SparkDriveSubsystem sparkDriveSubsystem;
+    private SparkDriveSubsystem sparkDriveSubsystem;
     private ArmSubsystem armSubsystem;
+    private ShooterSubsystem shooterSubsystem;
     private List<BitBucketSubsystem> subsystems = new ArrayList<>();
 
     long currentTime = System.currentTimeMillis();
 
-    I2C.Port i2cPort = I2C.Port.kOnboard;
-    ColorSensorV3 colorSensor;
-    AHRS ahrs;
-    DoubleSolenoid pivetSolenoid;
-    Solenoid singleSolenoid;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -80,16 +78,10 @@ public class Robot extends TimedRobot {
         preferences.getString("testKey", "");
         preferences.putString("testKey", "testValue");
 
-        // test a solenoid
-        pivetSolenoid = new DoubleSolenoid(0, 0, 1);
-        singleSolenoid = new Solenoid(1, 0);
-
-         colorSensor = new ColorSensorV3(i2cPort);
 
         // create some stuff to make sure the sim doesn't crash
         // TODO: this servo constantly calls getPWNPosition to update the live window
 //        Servo servo  = new Servo(0);
-        ahrs = new AHRS(SPI.Port.kMXP);
 
         // init controllers
         driverJoystick = new Joystick(config.oi.driverId);
@@ -100,11 +92,26 @@ public class Robot extends TimedRobot {
         resetPositionSensorButton = new JoystickButton(operatorJoystick, config.oi.armResetButton);
         resetDriveSensorButton = new JoystickButton(driverJoystick, config.oi.driveResetButton);
         toggleSolenoidButton = new JoystickButton(driverJoystick, config.oi.driveSolenoidButton);
+        spinUpShooterButton = new JoystickButton(operatorJoystick, config.oi.shooterSpinUpButton);
+
+
         // init subsystems
-        talonDriveSubsystem = new TalonDriveSubsystem(config);
-//        sparkDriveSubsystem = new SparkDriveSubsystem(config);
-        armSubsystem = new ArmSubsystem(config);
-        subsystems.addAll(List.of(talonDriveSubsystem, /*sparkDriveSubsystem,*/ armSubsystem));
+        if (config.talonDriveConfig.enabled) {
+            talonDriveSubsystem = new TalonDriveSubsystem(config);
+            subsystems.add(talonDriveSubsystem);
+        }
+        if (config.sparkDriveConfig.enabled) {
+            sparkDriveSubsystem = new SparkDriveSubsystem(config);
+            subsystems.add(sparkDriveSubsystem);
+        }
+        if (config.armConfig.enabled) {
+            armSubsystem = new ArmSubsystem(config);
+            subsystems.add(armSubsystem);
+        }
+        if (config.shooterConfig.enabled) {
+            shooterSubsystem = new ShooterSubsystem(config);
+            subsystems.add(shooterSubsystem);
+        }
 
         // initialize the global and subsystem dashboards
         initSmartDashboard();
@@ -159,64 +166,77 @@ public class Robot extends TimedRobot {
         log.info("teleopInit starting");
         super.teleopInit();
 
-        int red = colorSensor.getRed();
-        int green = colorSensor.getGreen();
-        int blue = colorSensor.getBlue();
-        Color color = colorSensor.getColor();
-        ColorSensorV3.RawColor rawColor = colorSensor.getRawColor();
-        colorSensor.getIR();
-        colorSensor.getProximity();
+        //
+        // Positional Arm test
+        //
+        if (config.armConfig.enabled) {
+            // handle joystick button presses
+            moveToPositionZeroButton.whenPressed(armSubsystem::moveToPositionZero, armSubsystem);
+            moveToPositionForwardButton.whenPressed(armSubsystem::moveToPositionForward, armSubsystem);
+            moveToPositionBackwardButton.whenPressed(armSubsystem::moveToPositionBackward, armSubsystem);
+            resetPositionSensorButton.whenPressed(armSubsystem::resetSensorPosition, armSubsystem);
 
+            // toggle the solenoid as a test
+            toggleSolenoidButton.whenPressed(armSubsystem::toggleSolenoids, armSubsystem);
+        }
 
-        // handle joystick button presses
-        moveToPositionZeroButton.whenPressed(armSubsystem::moveToPositionZero, armSubsystem);
-        moveToPositionForwardButton.whenPressed(armSubsystem::moveToPositionForward, armSubsystem);
-        moveToPositionBackwardButton.whenPressed(armSubsystem::moveToPositionBackward, armSubsystem);
-        resetPositionSensorButton.whenPressed(armSubsystem::resetSensorPosition, armSubsystem);
+        //
+        // Inverted Velocity TalonFX Shooter test
+        //
+        if (config.shooterConfig.enabled) {
+            // when the button is held, set the velocity
+            // and set it to 0 when released
+            spinUpShooterButton
+                    .whenHeld(new InstantCommand(shooterSubsystem::spinUp, shooterSubsystem))
+                    .whenReleased(shooterSubsystem::stopSpinningUp, shooterSubsystem);
 
-        // toggle the solenoid as a test
-        toggleSolenoidButton.whenPressed(() -> {
-                pivetSolenoid.set(
-                        (pivetSolenoid.get() == DoubleSolenoid.Value.kOff || pivetSolenoid.get() == DoubleSolenoid.Value.kForward)
-                        ? DoubleSolenoid.Value.kReverse
-                        : DoubleSolenoid.Value.kForward);
-                singleSolenoid.set(!singleSolenoid.get());
-            }
-        );
+            // continuously check the feeder while the button is held
+            spinUpShooterButton
+                    .whileHeld(shooterSubsystem::feedIfReady, shooterSubsystem)
+                    .whenReleased(shooterSubsystem::stopFeeding, shooterSubsystem);
+        }
 
-        // reset buttons call into multiple subsystems
-        resetDriveSensorButton.whenPressed(new ParallelCommandGroup(
-                new InstantCommand(talonDriveSubsystem::resetSensorPosition, talonDriveSubsystem)
-//                new InstantCommand(sparkDriveSubsystem::resetSensorPosition, sparkDriveSubsystem)
-        ));
+        //
+        // TalonFX Drive test
+        //
+        if (config.talonDriveConfig.enabled) {
+            // reset position
+            resetDriveSensorButton.whenPressed(talonDriveSubsystem::resetSensorPosition, talonDriveSubsystem);
 
-        // handle joystick axis
-        talonDriveSubsystem.setDefaultCommand(talonDriveSubsystem.velocityDrive(
-                () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
-                () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis)
-        ));
+            // handle joystick axis
+            talonDriveSubsystem.setDefaultCommand(talonDriveSubsystem.velocityDrive(
+                    () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
+                    () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis)
+            ));
 
-        Trigger velocityDriveStyleTrigger = new Trigger(() -> talonDriveSubsystem.getSelectedDriveStyle() == DriveStyle.Velocity);
-        Trigger manualDriveStyleTrigger = new Trigger(() -> talonDriveSubsystem.getSelectedDriveStyle() == DriveStyle.Manual);
+            Trigger velocityDriveStyleTrigger = new Trigger(() -> talonDriveSubsystem.getSelectedDriveStyle() == DriveStyle.Velocity);
+            Trigger manualDriveStyleTrigger = new Trigger(() -> talonDriveSubsystem.getSelectedDriveStyle() == DriveStyle.Manual);
 
-        // Velocity drive is the default, use it when the trigger is active
-        velocityDriveStyleTrigger.whenActive(talonDriveSubsystem.getDefaultCommand(), true);
+            // Velocity drive is the default, use it when the trigger is active
+            velocityDriveStyleTrigger.whenActive(talonDriveSubsystem.getDefaultCommand(), true);
 
-        // if manual drive style is selected, switch the drive subsystem to use manual control
-        manualDriveStyleTrigger.whenActive(
-                talonDriveSubsystem
-                        .manualDrive(
-                                () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
-                                () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis))
-                , true);
+            // if manual drive style is selected, switch the drive subsystem to use manual control
+            manualDriveStyleTrigger.whenActive(
+                    talonDriveSubsystem
+                            .manualDrive(
+                                    () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
+                                    () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis))
+                    , true);
 
-        // spark drive is just for testing, velocity only
-//        sparkDriveSubsystem.setDefaultCommand(sparkDriveSubsystem
-//                .drive(
-//                        () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
-//                        () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis))
-//        );
+        }
 
+        //
+        // NEO Motor Drive test
+        //
+        if (config.sparkDriveConfig.enabled) {
+            // spark drive is just for testing, velocity only
+            sparkDriveSubsystem.setDefaultCommand(sparkDriveSubsystem
+                    .drive(
+                            () -> -driverJoystick.getRawAxis(config.oi.driveForwardAxis),
+                            () -> driverJoystick.getRawAxis(config.oi.driveTurnAxis))
+            );
+            resetDriveSensorButton.whenPressed(sparkDriveSubsystem::resetSensorPosition, sparkDriveSubsystem);
+        }
         log.info("teleopInit complete");
     }
 
@@ -242,7 +262,6 @@ public class Robot extends TimedRobot {
         // set some global settings
         SmartDashboard.putNumber("deltaTime", deltaTime);
         SmartDashboard.putNumber("Loops per second", loopsPerSecond);
-        SmartDashboard.putNumber("Fused Heading", ahrs.getFusedHeading());
     }
 
     public static Robot win() {

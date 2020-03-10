@@ -10,11 +10,14 @@ package frc.robot.mentor.subsystem.drive;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SelectCommand;
 import frc.robot.config.Config;
+import frc.robot.config.SubsystemConfig;
 import frc.robot.mentor.subsystem.BitBucketSubsystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +32,8 @@ import static java.util.Map.entry;
  */
 public class TalonDriveSubsystem extends BitBucketSubsystem {
     private static final Logger log = LoggerFactory.getLogger(TalonDriveSubsystem.class);
+
+    AHRS ahrs;
 
     final WPI_TalonFX[] leftMotors;
     final WPI_TalonFX[] rightMotors;
@@ -46,6 +51,7 @@ public class TalonDriveSubsystem extends BitBucketSubsystem {
         /* drive uses velocity FPID */
         leaderTalonMotors.forEach(m -> m.selectProfileSlot(config.velocitySlotIndex, config.pidIndex));
 
+        ahrs = new AHRS(SPI.Port.kMXP);
     }
 
     @Override
@@ -69,6 +75,7 @@ public class TalonDriveSubsystem extends BitBucketSubsystem {
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/pos", motor.getSelectedSensorPosition());
             SmartDashboard.putNumber(getName() + "/Motor " + motor.getDeviceID() + "/err", motor.getClosedLoopError());
         }
+        SmartDashboard.putNumber("Fused Heading", ahrs.getFusedHeading());
     }
 
     public DriveStyle getSelectedDriveStyle() {
