@@ -6,9 +6,9 @@
 # ./gensimwrapper.py gen-sim-class -src-file ../java/frc/robot/simulator/hal/SimHALJNI.java -sim-name SimHALJNI -print
 
 # for vendor versions
-# ./gensimwrapper.py replace-native-methods -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimPowerJNI.java -sim-name SimPower -print
+# ./gensimwrapper.py replace-native-methods -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimCameraServerJNI.java -sim-name SimCameraServer -print
 # generate the Sim* static class
-# ./gensimwrapper.py gen-sim-class -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimPowerJNI.java -sim-name SimPower -print
+# ./gensimwrapper.py gen-sim-class -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimCameraServerJNI.java -sim-name SimCameraServer -print
 
 import argparse
 import os

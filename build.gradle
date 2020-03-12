@@ -61,7 +61,8 @@ dependencies {
     // upon debugging
     simulation wpi.deps.sim.gui(wpi.platforms.desktop, false)
 
-    compile "org.slf4j:slf4j-simple:1.7.25"
+    compile group: 'ch.qos.logback', name:'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name:'logback-core', version: '1.2.3'
 
     testImplementation project(":simulator")
     testImplementation project(":simulator-ctre")

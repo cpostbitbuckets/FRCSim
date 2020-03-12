@@ -15,9 +15,12 @@ public class PS4Panel extends JPanel {
     private static final Logger log = LoggerFactory.getLogger(PS4Panel.class);
     private static final Color PRESSED_BTN_COLOR = new Color(0, 255, 0, 180);
     private static final Color JOYSTICK_BACKGROUND = new Color(204, 204, 204, 225);
+    private static final float imageScale = .5f;
 
     private final Image controllerImage1;
     private final Image controllerImage2;
+    private final int imageWidth;
+    private final int imageHeight;
 
     public PS4Panel() throws IOException {
         // load in the xbox controller image to display on the background
@@ -28,7 +31,9 @@ public class PS4Panel extends JPanel {
         try (InputStream stream = PS4Panel.class.getResourceAsStream("/ps4_controller2.png")) {
             controllerImage2 = ImageIO.read(stream);
         }
-        setPreferredSize(new Dimension(controllerImage1.getWidth(null), controllerImage1.getHeight(null)));
+        imageWidth = (int)(controllerImage1.getWidth(null) * imageScale);
+        imageHeight = (int)(controllerImage1.getHeight(null) * imageScale);
+        setPreferredSize(new Dimension(imageWidth, imageHeight));
     }
 
     @Override
@@ -44,9 +49,9 @@ public class PS4Panel extends JPanel {
         graphics.setColor(getBackground());
         graphics.fillRect(0, 0, getWidth(), getHeight());
         if (activeJoystickId == 1) {
-            graphics.drawImage(controllerImage2, 0, 0, null);
+            graphics.drawImage(controllerImage2, 0, 0, imageWidth, imageHeight, null);
         } else {
-            graphics.drawImage(controllerImage1, 0, 0, null);
+            graphics.drawImage(controllerImage1, 0, 0, imageWidth, imageHeight, null);
         }
 
         colorButton(graphics, joystickData.buttons[PS4Constants.SQUARE.getValue() - 1], 440, 112);
@@ -117,29 +122,29 @@ public class PS4Panel extends JPanel {
 
     private void drawPOV(Graphics graphics, int x, int y) {
         graphics.setColor(Color.red);
-        graphics.fillRect(x, y, 40, 40);
+        graphics.fillRect((int) (x * imageScale), (int) (y * imageScale), (int) (40 * imageScale), (int) (40 * imageScale));
     }
 
     private void drawTrigger(Graphics graphics, double value, int x, int y) {
         Color color = UIUtils.alphaColor(UIUtils.colorGetShadedColor(value, 1, -1), 40);
 
         graphics.setColor(color);
-        graphics.fillRect(x, y, 80, 20);
+        graphics.fillRect((int) (x * imageScale), (int) (y * imageScale), (int) (80 * imageScale), (int) (20 * imageScale));
     }
 
     private void drawJoystick(Graphics graphics, boolean pressed, double xAxis, double yAxis, int x, int y) {
-        int width = 75;
-        int height = 75;
+        int width = (int) (75 * imageScale);
+        int height = (int) (75 * imageScale);
 
         if (pressed) {
             graphics.setColor(PRESSED_BTN_COLOR);
         } else {
             graphics.setColor(JOYSTICK_BACKGROUND);
         }
-        graphics.fillRect(x, y, width, height);
+        graphics.fillRect((int) (x * imageScale), (int) (y * imageScale), width, height);
 
-        int xAxisSpot = (int) (xAxis * width * .5 + width * .5 + x);
-        int yAxisSpot = (int) (yAxis * height * .5 + height * .5 + y);
+        int xAxisSpot = (int) (xAxis * width * .5 + width * .5 + x * imageScale);
+        int yAxisSpot = (int) (yAxis * height * .5 + height * .5 + y * imageScale);
 
         graphics.setColor(Color.black);
         graphics.fillOval(xAxisSpot, yAxisSpot, 5, 5);
@@ -149,14 +154,14 @@ public class PS4Panel extends JPanel {
     private void colorBumper(Graphics graphics, boolean pressed, int x, int y) {
         if (pressed) {
             graphics.setColor(PRESSED_BTN_COLOR);
-            graphics.fillRect(x, y, 80, 20);
+            graphics.fillRect((int) (x * imageScale), (int) (y * imageScale), (int) (80 * imageScale), (int) (20 * imageScale));
         }
     }
 
     private void colorButton(Graphics graphics, boolean pressed, int x, int y) {
         if (pressed) {
             graphics.setColor(PRESSED_BTN_COLOR);
-            graphics.fillOval(x, y, 40, 40);
+            graphics.fillOval((int) (x * imageScale), (int) (y * imageScale), (int) (40 * imageScale), (int) (40 * imageScale));
         }
     }
 }
