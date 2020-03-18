@@ -8,7 +8,7 @@
     <option name="VM_PARAMETERS" value="-DrobotClass=frc.robot.mentor.Robot -Djava.library.path=build/tmp/jniExtractDir" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="frc.robot.mentor.*" />
+        <option name="PATTERN" value="frc.robot.utils.dashboard.annotations.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

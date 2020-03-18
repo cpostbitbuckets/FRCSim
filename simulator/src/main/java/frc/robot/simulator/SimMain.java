@@ -138,6 +138,7 @@ public class SimMain {
         redefineClass(PDPJNI.class, SimPDPJNI.class);
         redefineClass(EncoderJNI.class, SimEncoderJNI.class);
         redefineClass(SerialPortJNI.class, SimSerialPortJNI.class);
+        redefineClass("edu.wpi.first.hal.AddressableLEDJNI", SimAddressableLED.class);
 
         // this tries to get the network tables to write files constantly, which is annoying
         redefineClass(Preferences.class, SimPreferences.class);
@@ -189,6 +190,16 @@ public class SimMain {
         new ByteBuddy()
                 .redefine(typeDescription, ClassFileLocator.ForClassLoader.ofSystemLoader())
                 .method(isDeclaredBy(typeDescription)).intercept(MethodDelegation.to(SimAnalog.class))
+                .make()
+                .load(ClassLoader.getSystemClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
+    }
+
+    static void redefineClass(String className, Class simClz) {
+        TypePool typePool = TypePool.Default.ofSystemLoader();
+        TypeDescription typeDescription = typePool.describe(className).resolve();
+        new ByteBuddy()
+                .redefine(typeDescription, ClassFileLocator.ForClassLoader.ofSystemLoader())
+                .method(isDeclaredBy(typeDescription)).intercept(MethodDelegation.to(simClz))
                 .make()
                 .load(ClassLoader.getSystemClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
     }
