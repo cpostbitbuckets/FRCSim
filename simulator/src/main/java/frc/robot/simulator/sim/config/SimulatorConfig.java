@@ -19,8 +19,8 @@ public class SimulatorConfig {
         public double mass = 39.3051396;
 
         // radius of the robot and wheels in meters
-        public double radius = 0.3145536;
-        public double wheelRadius = 0.07762;
+        public double radius = 0.30353879642132;
+        public double wheelRadius = 0.0762;
 
         // moments of inertia
         public double robotInertia = 2.1621037;
@@ -29,7 +29,19 @@ public class SimulatorConfig {
         // viscous friction of drive motors
         public double viscousFriction = 0.04666464678901319;
 
-        public double gearRatio = 22. / 25.;
+        public double gearRatio = (10 + 8.0 / 9);
+
+
+
+        public double[][] ssAc = new double[][] {
+            new double[] {-7.087195478354283, 0.413285738104402},
+            new double[] {0.339280393075371,  -6.832080740045777}
+        };
+
+        public double[][] ssBc = new double[][] {
+            new double[] {2.702895517197959, -0.241632861263366},
+            new double[] {-0.126961060623545, 2.551095849721741}
+        };
     }
 
     public static class Transmission {

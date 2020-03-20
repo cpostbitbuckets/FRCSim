@@ -44,7 +44,7 @@ public class WheelDisplacementSim extends FieldSim {
             }
         }
 
-        // invert the left side because forward motor movements mean backwards wheel movements
+        // invert the right side because forward motor movements mean backwards wheel movements
         rightRadians = -rightRadians;
 
         double currentLinearRadians = (leftRadians + rightRadians) / 2;
