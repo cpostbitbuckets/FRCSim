@@ -169,6 +169,10 @@ public class SimMotor {
         return voltage;
     }
 
+    public void setVoltage(double voltage) {
+        this.voltage = voltage;
+    }
+
     public double getCurrent() {
         return current;
     }

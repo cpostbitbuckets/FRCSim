@@ -41,6 +41,9 @@ public class PhysicsSim extends FieldSim {
     private double VL = 0;
     private double VR = 0;
 
+    private double vL = 0;
+    private double vR = 0;
+
 
 
     @Inject
@@ -151,7 +154,7 @@ public class PhysicsSim extends FieldSim {
         }
 
         for (int i = 0; i < rightMotors.size(); i++) {
-            VR += rightMotors.get(i).getVoltage();
+            VR -= rightMotors.get(i).getVoltage();
         }
 
         VL /= leftMotors.size();
@@ -170,8 +173,8 @@ public class PhysicsSim extends FieldSim {
             robotPosition.x,
             robotPosition.y,
             -robotPosition.heading, // different coordinate system
-            vL0,
-            vR0,
+            vL,
+            vR,
             // changes in position to use for every left and right motor
             // could do position but they should all move by the same amount
             // and I don't want more states
@@ -201,19 +204,22 @@ public class PhysicsSim extends FieldSim {
             simNavX.heading = degrees;
         }
 
-        // update left and right velocities and positions with new info
-        for (int i = 0; i < leftMotors.size(); i++) {
-            leftMotors.get(i).setVelocity(state[3] / f); // convert to rad/s
-            // convert to rad, add initial position bc it returns a change
-            leftMotors.get(i).setPosition(leftMotors.get(i).getPosition() + state[5] / f);
-        }
+        vL = state[3];
+        vR = state[4];
 
-        for (int i = 0; i < rightMotors.size(); i++) {
-            // invert signal because it's a differential drive so right motor is backward
-            rightMotors.get(i).setVelocity(-state[4] / f); // convert to rad/s
-            // convert to rad, add initial position bc it returns a change
-            rightMotors.get(i).setPosition(rightMotors.get(i).getPosition() - state[6] / f);
-        }
+        // // update left and right velocities and positions with new info
+        // for (int i = 0; i < leftMotors.size(); i++) {
+        //     leftMotors.get(i).setVelocity(state[3] / f); // convert to rad/s
+        //     // convert to rad, add initial position bc it returns a change
+        //     leftMotors.get(i).setPosition(leftMotors.get(i).getPosition() + state[5] / f);
+        // }
+
+        // for (int i = 0; i < rightMotors.size(); i++) {
+        //     // invert signal because it's a differential drive so right motor is backward
+        //     rightMotors.get(i).setVelocity(-state[4] / f); // convert to rad/s
+        //     // convert to rad, add initial position bc it returns a change
+        //     rightMotors.get(i).setPosition(rightMotors.get(i).getPosition() - state[6] / f);
+        // }
     }
     
 }
