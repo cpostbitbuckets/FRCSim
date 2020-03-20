@@ -10,6 +10,8 @@ import frc.robot.simulator.sim.motors.SimMotor;
 
 import java.util.ArrayList;
 
+import com.google.inject.Inject;
+
 import org.apache.commons.math3.exception.DimensionMismatchException;
 import org.apache.commons.math3.exception.MaxCountExceededException;
 import org.apache.commons.math3.ode.FirstOrderDifferentialEquations;
@@ -33,25 +35,20 @@ public class PhysicsSim extends FieldSim {
     // keep track of motors on both sides... will need an average voltage
     private final ArrayList<SimMotor> leftMotors;
     private final ArrayList<SimMotor> rightMotors;
+    private boolean createdMotors = false;
 
     // average voltage applies to motors on left and right sides
     private double VL = 0;
     private double VR = 0;
 
+
+
+    @Inject
     public PhysicsSim(MotorStore motorStore, SimulatorConfig simulatorConfig) {
         super(motorStore, simulatorConfig);
 
         leftMotors = new ArrayList<SimMotor>();
         rightMotors = new ArrayList<SimMotor>();
-
-        // add to the left and right motors
-        for (SimMotor simMotor : motorStore.getSimMotorsSorted()) {
-            if (simMotor.isLeftDriveMotor()) {
-                leftMotors.add(simMotor);
-            } else if (simMotor.isRightDriveMotor()) {
-                rightMotors.add(simMotor);
-            }
-        }
 
         // first order but using a state space representation so you can do whatever you want
         // keeps track of:
@@ -119,6 +116,23 @@ public class PhysicsSim extends FieldSim {
         );
     }
 
+
+
+    private void createMotors() {
+        if (createdMotors) {
+            return;
+        }
+
+        // add to the left and right motors
+        for (SimMotor simMotor : motorStore.getSimMotorsSorted()) {
+            if (simMotor.isLeftDriveMotor()) {
+                leftMotors.add(simMotor);
+            } else if (simMotor.isRightDriveMotor()) {
+                rightMotors.add(simMotor);
+            }
+        }
+    }
+
     @Override
     protected RobotPosition supplyRobotPosition() {
         return new RobotPosition(RobotPosition.Type.Physics);
@@ -129,6 +143,8 @@ public class PhysicsSim extends FieldSim {
         // calculate average voltage across left and right motors
         VL = 0;
         VR = 0;
+
+        createMotors();
 
         for (int i = 0; i < leftMotors.size(); i++) {
             VL += leftMotors.get(i).getVoltage();
