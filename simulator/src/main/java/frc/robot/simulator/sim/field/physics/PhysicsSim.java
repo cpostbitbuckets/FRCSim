@@ -134,6 +134,8 @@ public class PhysicsSim extends FieldSim {
                 rightMotors.add(simMotor);
             }
         }
+
+        createdMotors = true;
     }
 
     @Override
