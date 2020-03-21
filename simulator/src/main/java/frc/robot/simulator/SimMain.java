@@ -8,14 +8,12 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotBase;
 import frc.robot.simulator.hal.*;
-import frc.robot.simulator.sim.SimPower;
-import frc.robot.simulator.sim.Simulator;
-import frc.robot.simulator.sim.SimulatorModule;
-import frc.robot.simulator.sim.SimulatorSettings;
+import frc.robot.simulator.sim.*;
 import frc.robot.simulator.sim.preferences.SimPreferences;
 import frc.robot.simulator.sim.utils.VendorUtils;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.agent.ByteBuddyAgent;
+import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.ClassFileLocator;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
 import net.bytebuddy.dynamic.scaffold.TypeValidation;
@@ -25,6 +23,7 @@ import net.bytebuddy.pool.TypePool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.*;
 import java.io.IOException;
 import java.lang.instrument.Instrumentation;
 
@@ -32,6 +31,8 @@ import static net.bytebuddy.matcher.ElementMatchers.*;
 
 public class SimMain {
     private static final Logger log = LoggerFactory.getLogger(SimMain.class);
+
+    private static RobotBase robot;
 
     public static void main(String[] args) throws InterruptedException, IOException {
         // map all the existing JNIs onto simulator versions
@@ -54,7 +55,8 @@ public class SimMain {
             // call the RobotBase.startRobot like we do in the normal Robot Main.main()
             RobotBase.startRobot(() -> {
                 try {
-                    return (RobotBase) Class.forName(simulatorSettings.getRobotClass()).getDeclaredConstructor().newInstance();
+                    robot = (RobotBase) Class.forName(simulatorSettings.getRobotClass()).getDeclaredConstructor().newInstance();
+                    return robot;
                 } catch (Exception e) {
                     log.error("Failed to instantiate robot class: " + simulatorSettings.getRobotClass(), e);
                 }
@@ -64,6 +66,14 @@ public class SimMain {
             // shut down after the robot finishes, though it should just run until we cancel out
             simulator.stop();
         }
+    }
+
+    /**
+     * Get a reference to the running robot
+     * @return
+     */
+    public static RobotBase getRobot() {
+        return robot;
     }
 
     /**
@@ -110,6 +120,7 @@ public class SimMain {
 
         // the camera server is special, because of the Helper nested class
         redefineCameraServerJNI();
+        redefineAnalogJNI();
 
         // we actually want the NetworkTablesJNI so we can write output to Shuffleboard
         // in the simulator and view it
@@ -124,6 +135,10 @@ public class SimMain {
         redefineClass(SimDeviceJNI.class, SimSimDeviceJNI.class);
         redefineClass(CompressorJNI.class, SimCompressorJNI.class);
         redefineClass(PowerJNI.class, SimPowerJNI.class);
+        redefineClass(PDPJNI.class, SimPDPJNI.class);
+        redefineClass(EncoderJNI.class, SimEncoderJNI.class);
+        redefineClass(SerialPortJNI.class, SimSerialPortJNI.class);
+        redefineClass("edu.wpi.first.hal.AddressableLEDJNI", SimAddressableLED.class);
 
         // this tries to get the network tables to write files constantly, which is annoying
         redefineClass(Preferences.class, SimPreferences.class);
@@ -153,10 +168,38 @@ public class SimMain {
 
         CameraServerJNI.Helper.setExtractOnStaticLoad(false);
         TypePool typePool = TypePool.Default.ofSystemLoader();
+        TypeDescription typeDescription = typePool.describe("edu.wpi.cscore.CameraServerJNI").resolve();
         new ByteBuddy()
-                .redefine(typePool.describe("edu.wpi.cscore.CameraServerJNI").resolve(), // do not use 'Bar.class'
-                        ClassFileLocator.ForClassLoader.ofSystemLoader())
-                .method(named("enumerateSinks")).intercept(MethodDelegation.to(SimCameraServerJNI.class))
+                .redefine(typeDescription, ClassFileLocator.ForClassLoader.ofSystemLoader())
+                .method(isDeclaredBy(typeDescription)).intercept(MethodDelegation.to(SimCameraServer.class))
+                .make()
+                .load(ClassLoader.getSystemClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
+    }
+
+    /**
+     * We don't fully redefine the CameraServerJNI yet, we just
+     * force the enumerateSinks function to return an empty array
+     * so the robot will run.
+     */
+    private static void redefineAnalogJNI() {
+        // CameraServerJNI.Helper.setExtractOnStaticLoad(false);
+        // redefineClass(CameraServerJNI.class, SimCaEnmeraServerJNI.class);
+
+        TypePool typePool = TypePool.Default.ofSystemLoader();
+        TypeDescription typeDescription = typePool.describe("edu.wpi.first.hal.AnalogJNI").resolve();
+        new ByteBuddy()
+                .redefine(typeDescription, ClassFileLocator.ForClassLoader.ofSystemLoader())
+                .method(isDeclaredBy(typeDescription)).intercept(MethodDelegation.to(SimAnalog.class))
+                .make()
+                .load(ClassLoader.getSystemClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
+    }
+
+    static void redefineClass(String className, Class simClz) {
+        TypePool typePool = TypePool.Default.ofSystemLoader();
+        TypeDescription typeDescription = typePool.describe(className).resolve();
+        new ByteBuddy()
+                .redefine(typeDescription, ClassFileLocator.ForClassLoader.ofSystemLoader())
+                .method(isDeclaredBy(typeDescription)).intercept(MethodDelegation.to(simClz))
                 .make()
                 .load(ClassLoader.getSystemClassLoader(), ClassReloadingStrategy.fromInstalledAgent());
     }

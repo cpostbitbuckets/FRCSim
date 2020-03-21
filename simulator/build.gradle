@@ -83,7 +83,8 @@ dependencies {
     // navx
     compile "com.kauailabs.navx.frc:navx-java:3.1.400"
 
-    compile "org.slf4j:slf4j-simple:1.7.25"
+    compile group: 'ch.qos.logback', name:'logback-classic', version: '1.2.3'
+    compile group: 'ch.qos.logback', name:'logback-core', version: '1.2.3'
 
     compileOnly "javax.annotation:javax.annotation-api:1.2"
     implementation 'io.grpc:grpc-netty-shaded:1.25.0'

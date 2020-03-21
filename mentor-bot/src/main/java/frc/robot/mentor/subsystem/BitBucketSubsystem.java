@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.config.Config;
+import frc.robot.config.SubsystemConfig;
 import frc.robot.config.settings.MotorSettings;
 import frc.robot.config.settings.SensorType;
 

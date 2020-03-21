@@ -3,6 +3,9 @@ package frc.robot.simulator.sim.field.wheeldisplacement;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import frc.robot.simulator.sim.RobotPosition;
 import frc.robot.simulator.sim.SimSPI;
 import frc.robot.simulator.sim.config.SimulatorConfig;
@@ -17,11 +20,26 @@ import frc.robot.simulator.sim.motors.SimMotor;
 @Singleton
 public class WheelDisplacementSim extends FieldSim {
 
-    private double lastLinearRadians = 0;
+    private DifferentialDriveOdometry odometry;
 
     @Inject
     public WheelDisplacementSim(MotorStore motorStore, SimulatorConfig simulatorConfig) {
         super(motorStore, simulatorConfig);
+    }
+
+    @Override
+    public void create() {
+        super.create();
+    }
+
+    @Override
+    public void resetRobot() {
+        super.resetRobot();
+        Rotation2d rotation = new Rotation2d(simulatorConfig.startPosition.heading);
+        odometry = new DifferentialDriveOdometry(
+                rotation,
+                new Pose2d(simulatorConfig.startPosition.y, simulatorConfig.startPosition.x, rotation)
+        );
     }
 
     /**
@@ -47,21 +65,14 @@ public class WheelDisplacementSim extends FieldSim {
         // invert the right side because forward motor movements mean backwards wheel movements
         rightRadians = -rightRadians;
 
-        double currentLinearRadians = (leftRadians + rightRadians) / 2;
-
-        double deltaRadians = currentLinearRadians - lastLinearRadians;
         double metersPerRadian = wheelCircumference / (Math.PI * 2);
-        double deltaLinearPosition = deltaRadians * metersPerRadian;
         double newHeading = ((leftRadians - rightRadians) * metersPerRadian / simulatorConfig.driveBase.radius);
 
-        // for next loop
-        lastLinearRadians = currentLinearRadians;
+        odometry.update(new Rotation2d(newHeading + startHeading), leftRadians * metersPerRadian, rightRadians * metersPerRadian);
 
-        robotPosition.heading = newHeading + startHeading;
-
-        robotPosition.velocity = deltaLinearPosition / deltaTime;
-        robotPosition.x += deltaLinearPosition * Math.sin(robotPosition.heading);
-        robotPosition.y += deltaLinearPosition * Math.cos(robotPosition.heading);
+        robotPosition.heading = odometry.getPoseMeters().getRotation().getRadians();
+        robotPosition.x = odometry.getPoseMeters().getTranslation().getY();
+        robotPosition.y = odometry.getPoseMeters().getTranslation().getX();
 
         SimNavX simNavX = SimSPI.getNavX(SPI.Port.kMXP.value);
         if (simNavX != null) {
@@ -83,9 +94,4 @@ public class WheelDisplacementSim extends FieldSim {
         return new RobotPosition(RobotPosition.Type.WheelDisplacement);
     }
 
-    @Override
-    public void resetRobot() {
-        super.resetRobot();
-        lastLinearRadians = 0;
-    }
 }

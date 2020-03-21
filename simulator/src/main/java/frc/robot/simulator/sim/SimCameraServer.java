@@ -5,17 +5,28 @@ import edu.wpi.cscore.CameraServerJNI;
 import edu.wpi.cscore.UsbCameraInfo;
 import edu.wpi.cscore.VideoEvent;
 import edu.wpi.cscore.VideoMode;
+import edu.wpi.cscore.raw.RawFrame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.ByteBuffer;
 import java.util.function.Consumer;
 
 public class SimCameraServer {
     private static final Logger log = LoggerFactory.getLogger(SimCameraServer.class);
 
-
     public static void forceLoad() {
         log.warn("forceLoad not implemented yet.");
+    }
+
+    public static boolean getExtractOnStaticLoad() {
+        log.warn("getExtractOnStaticLoad not implemented yet.");
+
+        return false;
+    }
+
+    public static void setExtractOnStaticLoad(boolean load) {
+        log.warn("setExtractOnStaticLoad not implemented yet.");
 
     }
 
@@ -107,8 +118,8 @@ public class SimCameraServer {
         return 0;
     }
 
-    public static int createCvSource(String name, int pixelFormat, int width, int height, int fps) {
-        log.warn("createCvSource not implemented yet.");
+    public static int createRawSource(String name, int pixelFormat, int width, int height, int fps) {
+        log.warn("createRawSource not implemented yet.");
 
         return 0;
     }
@@ -301,8 +312,18 @@ public class SimCameraServer {
         return null;
     }
 
-    public static void putSourceFrame(int source, long imageNativeObj) {
-        log.warn("putSourceFrame not implemented yet.");
+    public static void putRawSourceFrameBB(int source, ByteBuffer data, int width, int height, int pixelFormat, int totalData) {
+        log.warn("putRawSourceFrameBB not implemented yet.");
+
+    }
+
+    public static void putRawSourceFrame(int source, long data, int width, int height, int pixelFormat, int totalData) {
+        log.warn("putRawSourceFrame not implemented yet.");
+
+    }
+
+    public static void putRawSourceFrame(int source, RawFrame raw) {
+        log.warn("putRawSourceFrame not implemented yet.");
 
     }
 
@@ -338,8 +359,8 @@ public class SimCameraServer {
         return 0;
     }
 
-    public static int createCvSink(String name) {
-        log.warn("createCvSink not implemented yet.");
+    public static int createRawSink(String name) {
+        log.warn("createRawSink not implemented yet.");
 
         return 0;
     }
@@ -431,13 +452,13 @@ public class SimCameraServer {
 
     }
 
-    public static long grabSinkFrame(int sink, long imageNativeObj) {
+    public static long grabSinkFrame(int sink, RawFrame rawFrame) {
         log.warn("grabSinkFrame not implemented yet.");
 
         return 0;
     }
 
-    public static long grabSinkFrameTimeout(int sink, long imageNativeObj, double timeout) {
+    public static long grabSinkFrameTimeout(int sink, RawFrame rawFrame, double timeout) {
         log.warn("grabSinkFrameTimeout not implemented yet.");
 
         return 0;
@@ -532,6 +553,17 @@ public class SimCameraServer {
         log.warn("getNetworkInterfaces not implemented yet.");
 
         return null;
+    }
+
+    public static long allocateRawFrame() {
+        log.warn("allocateRawFrame not implemented yet.");
+
+        return 0;
+    }
+
+    public static void freeRawFrame(long frame) {
+        log.warn("freeRawFrame not implemented yet.");
+
     }
 
 }

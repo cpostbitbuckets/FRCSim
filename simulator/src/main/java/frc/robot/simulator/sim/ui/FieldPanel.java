@@ -62,7 +62,7 @@ public class FieldPanel extends JPanel {
                     int height = (int) (0.3145536 * 2 / Field.metersPerPixelHeight);
                     int x = (int) (robotPosition.x / Field.metersPerPixelWidth) + (int) Field.imageSize.x / 2;
                     int y = (int) Field.imageSize.y / 2 - (int) (robotPosition.y / Field.metersPerPixelHeight);
-                    Rectangle robotRect = new Rectangle(x, y, width, height);
+                    Rectangle robotRect = new Rectangle(x - width / 2, y - height / 2, width, height);
 
                     // rotate the graphics instance to draw this rect
                     g2d.rotate(robotPosition.heading, robotRect.x + robotRect.width / 2, robotRect.y + robotRect.height / 2);

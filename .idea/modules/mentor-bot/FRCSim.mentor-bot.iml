@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module version="4">
-  <component name="ExternalSystem" externalSystem="GRADLE" externalSystemModuleGroup="FRCSim" externalSystemModuleVersion="2020.1.2-SNAPSHOT" linkedProjectId=":mentor-bot" linkedProjectPath="$MODULE_DIR$/../../../mentor-bot" rootProjectPath="$MODULE_DIR$/../../.." />
+<module external.linked.project.id=":mentor-bot" external.linked.project.path="$MODULE_DIR$/../../../mentor-bot" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="FRCSim" external.system.module.version="2020.1.2-SNAPSHOT" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../mentor-bot">
       <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/bin" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/bin.nosync" />
       <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/build.nosync" />
       <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/out" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../mentor-bot/out.nosync" />
     </content>
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
