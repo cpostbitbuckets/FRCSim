@@ -78,9 +78,13 @@ public class PhysicsSim extends FieldSim {
 
                 // v = (vL + vR) / 2, linear velocity
                 // vx = v cos theta, so that's x derivative
-                stateDot[0] = (vL + vR) / 2 * Math.cos(theta);
+                // but the sim defines 0 deg as up, so add pi/2
+                // cos(x + pi/2) = -sinx
+                stateDot[0] = -(vL + vR) / 2 * Math.sin(theta);
                 // vy = v sin theta, so that's y derivative
-                stateDot[1] = (vL + vR) / 2 * Math.sin(theta);
+                // again, shift by pi/2
+                // sin(x + pi/2) = cos x
+                stateDot[1] = (vL + vR) / 2 * Math.cos(theta);
                 // differential drive
                 stateDot[2] = (vR - vL) / (2 * simulatorConfig.driveBase.radius);
                 // fancy derived physics equations
