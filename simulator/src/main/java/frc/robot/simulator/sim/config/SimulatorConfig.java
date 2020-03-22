@@ -1,5 +1,6 @@
 package frc.robot.simulator.sim.config;
 
+import frc.robot.simulator.sim.RobotPosition;
 import frc.robot.simulator.sim.motors.Vendor;
 
 import java.util.ArrayList;
@@ -15,23 +16,15 @@ import java.util.Map;
 public class SimulatorConfig {
 
     public static class DriveBase {
-        // the mass of a test robot in kg
-        public double mass = 39.3051396;
+        // Default to HowardPhysics™ because it's better
+        // TODO: Delete the WheelDisplacementSim?
+        public RobotPosition.Type positionalSimType = RobotPosition.Type.Physics;
+        public boolean showAllSims = false;
 
         // radius of the robot and wheels in meters
         public double radius = 0.30353879642132;
         public double wheelRadius = 0.0762;
-
-        // moments of inertia
-        public double robotInertia = 2.1621037;
-        public double wheelInertia = .0001;
-
-        // viscous friction of drive motors
-        public double viscousFriction = 0.04666464678901319;
-
         public double gearRatio = (10 + 8.0 / 9);
-
-
 
         public double[][] ssAc = new double[][] {
             new double[] {-7.087195478354283, 0.413285738104402},

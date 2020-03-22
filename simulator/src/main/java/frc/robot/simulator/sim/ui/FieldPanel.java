@@ -1,6 +1,7 @@
 package frc.robot.simulator.sim.ui;
 
 import frc.robot.simulator.sim.RobotPosition;
+import frc.robot.simulator.sim.config.SimulatorConfig;
 import frc.robot.simulator.sim.events.EventManager;
 import frc.robot.simulator.sim.events.FieldRenderEvent;
 import frc.robot.simulator.sim.field.wheeldisplacement.Field;
@@ -18,11 +19,13 @@ import java.util.Map;
 public class FieldPanel extends JPanel {
     private static final Logger log = LoggerFactory.getLogger(FieldPanel.class);
 
+    private final SimulatorConfig simulatorConfig;
     private final Image fieldImage;
     private Map<RobotPosition.Type, RobotPosition> robotPositionsByType = new HashMap();
 
 
-    public FieldPanel() throws IOException {
+    public FieldPanel(SimulatorConfig simulatorConfig) throws IOException {
+        this.simulatorConfig = simulatorConfig;
         try (InputStream stream = FieldPanel.class.getResourceAsStream("/2020-Field.png")) {
             fieldImage = ImageIO.read(stream);
         };
@@ -47,13 +50,16 @@ public class FieldPanel extends JPanel {
             for (RobotPosition robotPosition : robotPositionsByType.values()) {
                 if (robotPosition != null) {
                     Graphics2D g2d = (Graphics2D) graphics;
-                    switch (robotPosition.type) {
+                    switch (robotPosition.color) {
 
-                        case WheelDisplacement:
+                        case Green:
                             g2d.setColor(Color.GREEN);
                             break;
-                        case Physics:
+                        case Red:
                             g2d.setColor(Color.RED);
+                            break;
+                        case Blue:
+                            g2d.setColor(Color.BLUE);
                             break;
                     }
 
@@ -79,9 +85,17 @@ public class FieldPanel extends JPanel {
         }
     }
 
+    /**
+     * This event is triggered whenever we have a RobotPosition update.
+     * @param robotPosition
+     */
     public void update(RobotPosition robotPosition) {
         synchronized (this.robotPositionsByType) {
-            this.robotPositionsByType.put(robotPosition.type, robotPosition);
+            // Only update our robotPositionsByType map if we are configured to either show all the positional sims,
+            // or we are configured to show this positional sim.
+            if (simulatorConfig.driveBase.showAllSims || simulatorConfig.driveBase.positionalSimType == robotPosition.type) {
+                this.robotPositionsByType.put(robotPosition.type, robotPosition);
+            }
         }
     }
 }

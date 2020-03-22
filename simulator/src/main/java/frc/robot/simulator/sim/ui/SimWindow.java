@@ -87,7 +87,7 @@ public class SimWindow {
         controllerWrapper.setBorder(new MatteBorder(1, 0, 0, 0, Color.darkGray));
 
         JPanel fieldWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        fieldPanel = new FieldPanel();
+        fieldPanel = new FieldPanel(simulatorConfig);
         fieldWrapper.add(fieldPanel);
         fieldWrapper.setBorder(new MatteBorder(0, 1, 0, 0, Color.darkGray));
 

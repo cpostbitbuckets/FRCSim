@@ -19,8 +19,6 @@ import org.apache.commons.math3.ode.nonstiff.DormandPrince853Integrator;
 
 import edu.wpi.first.wpilibj.SPI;
 
-
-
 /**
  * Uses a more complete description of the underlying physics to calculate the
  * position of the robot, and solves the robot's position differential equation
@@ -50,8 +48,8 @@ public class PhysicsSim extends FieldSim {
     public PhysicsSim(MotorStore motorStore, SimulatorConfig simulatorConfig) {
         super(motorStore, simulatorConfig);
 
-        leftMotors = new ArrayList<SimMotor>();
-        rightMotors = new ArrayList<SimMotor>();
+        leftMotors = new ArrayList<>();
+        rightMotors = new ArrayList<>();
 
         // first order but using a state space representation so you can do whatever you want
         // keeps track of:
@@ -144,7 +142,7 @@ public class PhysicsSim extends FieldSim {
 
     @Override
     protected RobotPosition supplyRobotPosition() {
-        return new RobotPosition(RobotPosition.Type.Physics);
+        return new RobotPosition(RobotPosition.Type.Physics, RobotPosition.Color.Green);
     }
 
     @Override

@@ -91,7 +91,7 @@ public class WheelDisplacementSim extends FieldSim {
 
     @Override
     protected RobotPosition supplyRobotPosition() {
-        return new RobotPosition(RobotPosition.Type.WheelDisplacement);
+        return new RobotPosition(RobotPosition.Type.WheelDisplacement, RobotPosition.Color.Red);
     }
 
 }

@@ -34,12 +34,8 @@ defaults:
   driveInertia: "{{ .5 * 0.453592 * (.5 * 0.1524 * .5 * 0.1524) }}"
 hideFollowers: true
 driveBase:
-  mass: 39.3051396
   radius: 0.3145536
   wheelRadius: 0.07762
-  robotInertia: 2.1621037
-  wheelInertia: 1.0E-4
-  viscousFriction: 0.04666464678901319
   gearRatio: "{{ 10 +  22 / 25 }}"
 startPosition:
   x: 1.54
