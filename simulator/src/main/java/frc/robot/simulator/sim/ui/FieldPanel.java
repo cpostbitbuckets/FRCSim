@@ -52,6 +52,9 @@ public class FieldPanel extends JPanel {
                         case WheelDisplacement:
                             g2d.setColor(Color.GREEN);
                             break;
+                        case Physics:
+                            g2d.setColor(Color.RED);
+                            break;
                     }
 
                     // figure out where this RobotPosition goes on our Field image
@@ -78,10 +81,7 @@ public class FieldPanel extends JPanel {
 
     public void update(RobotPosition robotPosition) {
         synchronized (this.robotPositionsByType) {
-            // for now, only show the wheel displacement sim
-            if (robotPosition.type == RobotPosition.Type.WheelDisplacement) {
-                this.robotPositionsByType.put(robotPosition.type, robotPosition);
-            }
+            this.robotPositionsByType.put(robotPosition.type, robotPosition);
         }
     }
 }

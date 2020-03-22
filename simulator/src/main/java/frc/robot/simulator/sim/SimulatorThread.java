@@ -6,6 +6,7 @@ import frc.robot.simulator.network.proto.RobotProto;
 import frc.robot.simulator.sim.events.EventManager;
 import frc.robot.simulator.sim.events.RobotResetEvent;
 import frc.robot.simulator.sim.field.FieldSim;
+import frc.robot.simulator.sim.field.physics.PhysicsSim;
 import frc.robot.simulator.sim.field.wheeldisplacement.WheelDisplacementSim;
 import frc.robot.simulator.sim.motors.MotorSimulator;
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class SimulatorThread {
 
     private MotorSimulator motorSimulator;
     private WheelDisplacementSim wheelDisplacementSim;
+    private PhysicsSim physicsSim;
 
     private final List<FieldSim> fieldSims = new ArrayList<>();
 
@@ -32,12 +34,14 @@ public class SimulatorThread {
     private Object simulatorLock = new Object();
 
     @Inject
-    public SimulatorThread(MotorSimulator motorSimulator, WheelDisplacementSim wheelDisplacementSim) {
+    public SimulatorThread(MotorSimulator motorSimulator, WheelDisplacementSim wheelDisplacementSim, PhysicsSim physicsSim) {
         this.motorSimulator = motorSimulator;
         this.wheelDisplacementSim = wheelDisplacementSim;
+        this.physicsSim = physicsSim;
 
         // add all these sims to a list for easy iterating
         fieldSims.add(this.wheelDisplacementSim);
+        fieldSims.add(this.physicsSim);
 
         EventManager.subscribeToRobotResetEvents(this::onRobotReset);
     }
