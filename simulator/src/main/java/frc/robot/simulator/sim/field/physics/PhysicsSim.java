@@ -164,15 +164,6 @@ public class PhysicsSim extends FieldSim {
         VL /= leftMotors.size();
         VR /= rightMotors.size();
 
-
-
-        // conversion Factor from rad/s to m/s
-        double f = simulatorConfig.driveBase.wheelRadius * 2 * Math.PI / simulatorConfig.driveBase.gearRatio;
-
-        // convert from rad/s to m/s
-        double vL0 = leftMotors.get(0).getVelocity() * f;
-        double vR0 = -rightMotors.get(0).getVelocity() * f; // flip because differential drive
-
         double[] state = new double[] {
             robotPosition.x,
             robotPosition.y,
@@ -186,8 +177,11 @@ public class PhysicsSim extends FieldSim {
             0
         };
 
-        // integrate for deltaTime seconds
-        integrator.integrate(ode, 0, state, deltaTime, state);
+        // don't integration with no motors, this just hangs forever
+        if (leftMotors.size() > 0 && rightMotors.size() > 0) {
+            // integrate for deltaTime seconds
+            integrator.integrate(ode, 0, state, deltaTime, state);
+        }
 
         // update position and heading with new info
         robotPosition.x = state[0];
@@ -210,20 +204,6 @@ public class PhysicsSim extends FieldSim {
 
         vL = state[3];
         vR = state[4];
-
-        // // update left and right velocities and positions with new info
-        // for (int i = 0; i < leftMotors.size(); i++) {
-        //     leftMotors.get(i).setVelocity(state[3] / f); // convert to rad/s
-        //     // convert to rad, add initial position bc it returns a change
-        //     leftMotors.get(i).setPosition(leftMotors.get(i).getPosition() + state[5] / f);
-        // }
-
-        // for (int i = 0; i < rightMotors.size(); i++) {
-        //     // invert signal because it's a differential drive so right motor is backward
-        //     rightMotors.get(i).setVelocity(-state[4] / f); // convert to rad/s
-        //     // convert to rad, add initial position bc it returns a change
-        //     rightMotors.get(i).setPosition(rightMotors.get(i).getPosition() - state[6] / f);
-        // }
     }
     
 }
