@@ -6,9 +6,9 @@
 # ./gensimwrapper.py gen-sim-class -src-file ../java/frc/robot/simulator/hal/SimHALJNI.java -sim-name SimHALJNI -print
 
 # for vendor versions
-# ./gensimwrapper.py replace-native-methods -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimAddressableLEDJNI.java -sim-name SimAddressableLED -print
+# ./gensimwrapper.py replace-native-methods -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimCounterJNI.java -sim-name SimCounter -print
 # generate the Sim* static class
-# ./gensimwrapper.py gen-sim-class -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimAddressableLEDJNI.java -sim-name SimAddressableLED -print
+# ./gensimwrapper.py gen-sim-class -src-file ../../../../simulator/src/main/java/frc/robot/simulator/hal/SimCounterJNI.java -sim-name SimCounter -print
 
 import argparse
 import os

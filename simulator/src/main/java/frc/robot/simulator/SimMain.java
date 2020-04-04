@@ -139,6 +139,7 @@ public class SimMain {
         redefineClass(EncoderJNI.class, SimEncoderJNI.class);
         redefineClass(SerialPortJNI.class, SimSerialPortJNI.class);
         redefineClass("edu.wpi.first.hal.AddressableLEDJNI", SimAddressableLED.class);
+        redefineClass("edu.wpi.first.hal.CounterJNI", SimCounter.class);
 
         // this tries to get the network tables to write files constantly, which is annoying
         redefineClass(Preferences.class, SimPreferences.class);

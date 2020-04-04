@@ -38,8 +38,8 @@
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-lang3:3.9" level="project" />
     <orderEntry type="library" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-netty-shaded:1.25.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-core:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-fdense:0.38" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: io.grpc:grpc-core:1.25.0" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-dsparse:0.38" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-ddense:0.38" level="project" />
     <orderEntry type="library" name="Gradle: org.ejml:ejml-cdense:0.38" level="project" />
