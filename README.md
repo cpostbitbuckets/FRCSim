@@ -55,7 +55,6 @@ repositories {
     // ...
     // other maven stuff, like mavenCentral()
 
-    jcenter() // required for SDL joystick libraries
     maven {
         // this repo contains the FRCSim
         url 'https://raw.githubusercontent.com/cpostbitbuckets/maven_repo/master'

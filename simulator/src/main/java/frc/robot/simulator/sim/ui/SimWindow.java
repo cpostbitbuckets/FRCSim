@@ -37,7 +37,6 @@ public class SimWindow {
     private PS4Panel ps4Panel;
     private FieldPanel fieldPanel;
     private SimWindowKeyListener keyListener;
-    private SimWindowJoystickListener joystickListener;
     private RobotStatePanel robotStatePanel;
     private PositionDisplay positionDisplay = new PositionDisplay();
 
@@ -135,8 +134,6 @@ public class SimWindow {
 
         // create a key listener to listen for keyboard events
         keyListener = new SimWindowKeyListener(inputClient, ps4Panel);
-        joystickListener = new SimWindowJoystickListener(inputClient, simulatorConfig, ps4Panel);
-        joystickListener.setupJoysticks();
         frame.addKeyListener(keyListener);
         frame.setFocusable(true);
         frame.setFocusTraversalKeysEnabled(false);
