@@ -4,7 +4,7 @@ plugins {
 
     id 'java-library'
 
-    id 'com.google.protobuf' version '0.8.11'
+    id 'com.google.protobuf' version '0.8.12'
 
     // for publishing the simulator
     id "maven-publish"
@@ -12,11 +12,11 @@ plugins {
 
 protobuf {
     protoc {
-        artifact = "com.google.protobuf:protoc:3.10.0"
+        artifact = "com.google.protobuf:protoc:3.11.4"
     }
     plugins {
         grpc {
-            artifact = 'io.grpc:protoc-gen-grpc-java:1.25.0'
+            artifact = 'io.grpc:protoc-gen-grpc-java:1.29.0'
         }
     }
 
@@ -86,9 +86,9 @@ dependencies {
     compile group: 'ch.qos.logback', name:'logback-core', version: '1.2.3'
 
     compileOnly "javax.annotation:javax.annotation-api:1.2"
-    implementation 'io.grpc:grpc-netty-shaded:1.25.0'
-    compile 'io.grpc:grpc-protobuf:1.25.0'
-    implementation 'io.grpc:grpc-stub:1.25.0'
+    implementation 'io.grpc:grpc-netty-shaded:1.29.0'
+    compile 'io.grpc:grpc-protobuf:1.29.0'
+    implementation 'io.grpc:grpc-stub:1.29.0'
 
     // for config yaml
     compile 'org.yaml:snakeyaml:1.21'
