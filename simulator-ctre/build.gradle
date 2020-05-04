@@ -1,8 +1,5 @@
 plugins {
     id 'java-library'
-
-    // for publishing the simulator
-    id "maven-publish"
 }
 
 repositories {
@@ -25,28 +22,4 @@ dependencies {
     compile "com.ctre.phoenix:wpiapi-java:${ctreVersion}"
 
     api project(":simulator")
-
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-}
-
-task sourceJar(type: Jar) {
-    classifier 'sources'
-    from sourceSets.main.allJava
-}
-
-publishing {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-    }
-    publications {
-        mavenJava(MavenPublication) {
-            groupId "${project.groupId}"
-            artifactId "${project.name}"
-            version "${project.version}"
-
-            from(components.java)
-            artifact tasks.sourceJar
-        }
-    }
 }

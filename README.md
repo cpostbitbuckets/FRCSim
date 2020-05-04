@@ -17,11 +17,10 @@ could break the sim. I have a fix for this, but haven't finished updating all JN
 
 ## Code Modules
 ### Robot Test Code
-There are two Robot projects, one for students to learn on and one for testing simulator code.
+There is a mentor-bot Robot project for testing simulator code.
 
 Path | Module
 --- | ---
-**/** | The root module containing a teaching robot for students to modify
 **/mentor-bot** | A bot for mentors to test with, because mentors need to learn to robot as well
 
 ### Simulator Modules
