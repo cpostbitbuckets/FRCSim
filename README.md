@@ -48,16 +48,10 @@ bulk of the work has been on the java simulator.
 To configure a robot to use the simulator, add a couple lines to your build.gradle:
 
 ### build.gradle changes 
-First update the repositories {} section to include this hacky github maven repo
+First update the repositories {} section to include jitpack
 ```gradle
 repositories {
-    // ...
-    // other maven stuff, like mavenCentral()
-
-    maven {
-        // this repo contains the FRCSim
-        url 'https://raw.githubusercontent.com/cpostbitbuckets/maven_repo/master'
-    }
+    maven { url 'https://jitpack.io' }
 }
 ```
 
@@ -65,17 +59,8 @@ Next, update the dependencies section to include a test dependency on FRCSim:
 ```gradle
 
 dependencies {
-... other dependencies
-    // ADD THIS DEPENDENCY
-    // we only use this project at runtime when doing simulations
-    testImplementation "org.bitbuckets:simulator:2020.1.2-SNAPSHOT"
-
-    // If you have Talon motors, use this dependency as well
-    testImplementation "org.bitbuckets:simulator-ctre:2020.1.2-SNAPSHOT"
-
-    // If you have Spark motors, use this dependency as well
-    testImplementation "org.bitbuckets:simulator-rev:2020.1.2-SNAPSHOT"
-
+    // we only use this project during tests, not on the actual robot
+    testImplementation 'com.github.cpostbitbuckets:FRCSim:jitpack-SNAPSHOT'
 }
 ```
 
