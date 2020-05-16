@@ -60,7 +60,7 @@ Next, update the dependencies section to include a test dependency on FRCSim:
 
 dependencies {
     // we only use this project during tests, not on the actual robot
-    testImplementation 'com.github.cpostbitbuckets:FRCSim:jitpack-SNAPSHOT'
+    testImplementation 'com.github.cpostbitbuckets:FRCSim:master-SNAPSHOT'
 }
 ```
 
