@@ -29,5 +29,8 @@ pluginManagement {
 include "simulator"
 include 'simulator-ctre'
 include 'simulator-rev'
-include 'mentor-bot'
+
+// Don't deploy the mentor-bot
+if (!System.env.JITPACK)
+    include 'mentor-bot'
 
